@@ -8,19 +8,27 @@ public class AmmoHudController : MonoBehaviour
 {
     PlayerCombat player => FindObjectOfType<PlayerCombat>();
 
-    [SerializeField] TextMeshProUGUI ammoCount, magCount;
+    [SerializeField] TextMeshProUGUI magText, ammoText;
     [SerializeField] Slider ammoSlider;
+    [SerializeField] Slider reloadSlider;
+    private bool reloading;
 
     private void Update()
     {
-        int magLeft = player.GetMagLeft();
+        int ammoLeft = player.GetCurAmmo();
         int magCap = player.GetMagCapacity();
 
-        magCount.text = magLeft + "/" + magCap;
-        ammoCount.text = player.GetAmmo().ToString();
-        ammoSlider.value = (float) magLeft / magCap;
+        ammoText.text = ammoLeft + "/" + magCap;
+        magText.text = player.GetMagsLeft().ToString();
+        ammoSlider.value = (float) ammoLeft / magCap;
 
-        magCount.color = magLeft == 0 ? Color.red : Color.white;
-        ammoCount.color = player.GetAmmo() > 0 ? Color.white : Color.red;
+        ammoText.color = ammoLeft == 0 ? Color.red : Color.white;
+        magText.color = player.GetMagsLeft() > 0 ? Color.white : Color.red;
+    
+
+    }
+
+    private void QuickReload(){
+
     }
 }
