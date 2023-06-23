@@ -5,18 +5,24 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerAnimator))]
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] KeyCode melee = KeyCode.E;
+    [SerializeField] KeyCode melee = KeyCode.E, reload = KeyCode.R;
     public bool TESTGROUNDED;
 
     [Header("SMG")]
     [SerializeField] float SMGResetTime;
     [SerializeField] float SMGReloadTime, SMGBulletSpeed;
     [SerializeField] int SMGMagazineSize;
+    int SMGmagLeft;
     [SerializeField] GameObject SMGBulletPrefab;
     float SMGcooldown;
 
-    bool aimingSniper;
+    bool aimingSniper, needToRelease;
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
+
+    private void Start()
+    {
+        Reload();
+    }
 
     private void Update()
     {
@@ -24,10 +30,18 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKeyDown(melee)) Melee();
 
+        if (Input.GetKeyDown(reload)) Reload();
+        if (Input.GetMouseButtonUp(0)) needToRelease = false;
         if (Input.GetMouseButton(0)) FireGun1();
 
         if (Input.GetMouseButtonDown(1)) StartAimingSniper();
         if (Input.GetMouseButtonUp(1)) FireSniper();
+    }
+
+    void Reload()
+    {
+        if (Input.GetMouseButton(0)) needToRelease = true;
+        SMGmagLeft = SMGMagazineSize;
     }
 
     void DoCooldowns()
@@ -45,14 +59,26 @@ public class PlayerCombat : MonoBehaviour
         if (!aimingSniper) return;
     }
 
+    public int GetMagLeft()
+    {
+        return SMGmagLeft;
+    }
+
+    public int GetMagCapacity()
+    {
+        return SMGMagazineSize;
+    }
+
     void FireGun1()
     {
-        if (aimingSniper || SMGcooldown > 0) return;
+        if (needToRelease || aimingSniper || SMGcooldown > 0 || SMGmagLeft <= 0) return;
 
+        SMGmagLeft -= 1;
+        var aimAngle = anim.AimFrontArm();
         SMGcooldown = SMGResetTime;
 
         var newBullet = Instantiate(SMGBulletPrefab, transform.position, Quaternion.identity);
-        newBullet.transform.eulerAngles = FaceMouse(newBullet.transform);
+        newBullet.transform.eulerAngles = aimAngle;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
     }
 
@@ -74,6 +100,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Punch()
     {
+        if (Input.GetMouseButton(0)) needToRelease = true;
         anim.Punch();
     }
 

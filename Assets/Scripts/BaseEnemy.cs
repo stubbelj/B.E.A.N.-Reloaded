@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
 public class BaseEnemy : MonoBehaviour
 {
     [SerializeField] float maxHealth, health;
     [SerializeField] Slider hpSlider;
-
+    [Space()]
     [SerializeField] float walkSpeed, defaultStunTime = 0.6f, knockBackYMin = 0.2f;
+    [Space()]
+    [SerializeField] Sprite whiteSprite;
+    [SerializeField] float flashWhiteTime = 0.1f;
+    Sprite originalSprite;
 
+    protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
+    protected SpriteRenderer srend => GetComponent<SpriteRenderer>();
     protected float stunTime;
     protected Transform target;
-    protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     protected float dist;
 
     protected virtual void Update()
@@ -41,6 +45,19 @@ public class BaseEnemy : MonoBehaviour
 
         this.stunTime = stunTime;
         rb.AddForce(knockBack);
+
+
+        if (whiteSprite != null) StartCoroutine(flashWhite(flashWhiteTime));
+    }
+
+    protected virtual IEnumerator flashWhite(float time)
+    {
+        if (originalSprite == null) originalSprite = srend.sprite;
+        srend.sprite = whiteSprite;
+
+        yield return new WaitForSeconds(time);
+
+        srend.sprite = originalSprite;
     }
 
     protected void WalkTowardPlayer()
