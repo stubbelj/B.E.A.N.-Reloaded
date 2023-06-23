@@ -168,6 +168,7 @@ MonoBehaviour:
   deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
   walkSpeed: 0.7
   defaultStunTime: 0.6
+  stunTimeResist: 0.5
   knockBackYMin: 0.4
   whiteSprite: {fileID: 21300000, guid: 01db1323aadc50748927d8e6d6ceb686, type: 3}
   flashWhiteTime: 0.1
@@ -175,7 +176,7 @@ MonoBehaviour:
   flipToFacePlayer: 0
   range: 1
   nextSplitter: {fileID: 1183830769024631110, guid: 64d0bd9543302614b8333ea393a56c83, type: 3}
-  spawnOffset: {x: 0.1, y: 0}
+  spawnOffset: {x: 0.8, y: 0}
   spawnCount: 2
 --- !u!1001 &2475401447340686010
 PrefabInstance:

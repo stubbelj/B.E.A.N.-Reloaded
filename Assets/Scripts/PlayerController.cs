@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashSpeed;
     
     private float groundCheckBoxYOffset = -0.06f;
-    [SerializeField] Vector2 groundCheckBoxDimensions;
+    [SerializeField] Vector2 groundCheckBoxDimensions, groundCheckBoxOffset;
     [SerializeField] LayerMask platformLayer;
     
     [SerializeField] public int maxJumps = 2;
@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isOnGround;
     public bool isDashing = false;
+    [SerializeField] bool faceMouse = true;
+    bool stepping;
 
     [SerializeField][Tooltip("Amount of time in seconds a dash lasts")] float dashDuration = 0.3f; 
     private float dashTimer; 
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
     }
     // Update is called once per frame
     void Update(){
+        if (faceMouse) FaceMouse();
+
         CheckGround();
         
         //print(dashTimer);
@@ -47,12 +51,34 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) Move(-1);
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) Move(1);
 
-        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !isDashing) StopMove();
+        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !isDashing && !stepping) StopMove();
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isDashing){ //Press shift while holding a movement key
             isDashing = true;
             dashTimer = dashDuration;
         }
+    }
+
+    public void Step(float xForce, float stepTime)
+    {
+        rb.AddForce(new Vector2(xForce, 0));
+        stepping = true;
+        StartCoroutine(EndStep(stepTime));
+    }
+
+    IEnumerator EndStep(float time)
+    {
+        yield return new WaitForSeconds(time);
+        stepping = false;
+    }
+
+    void FaceMouse()
+    {
+        if (isDashing) return;
+
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10);
+        float yAngle = mousePos.x < transform.position.x ? 180 : 0;
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, yAngle, 0);
     }
 
     public void Jump(){
@@ -69,6 +95,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Move(int dir){ //dir = -1 for left, 1 for right 
+        if (stepping) return;
         float baseSpeed = (isOnGround ? movementSpeed : airMovementSpeed);
         float speed     = (isDashing  ? dashSpeed : baseSpeed);
 
@@ -82,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckGround(){
         bool wasOnGround = isOnGround;
-        isOnGround = Physics2D.BoxCast(transform.position, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);
+        isOnGround = Physics2D.BoxCast(transform.position + (Vector3) groundCheckBoxOffset, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);
         if (!wasOnGround && isOnGround) jumpsLeft = maxJumps; //This line triggers when you first touch ground after being off it, and resets your jumps
     }
 
@@ -94,6 +121,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnDrawGizmosSelected(){
-        Gizmos.DrawWireCube(new Vector2(transform.position.x, transform.position.y + groundCheckBoxYOffset), (Vector3)groundCheckBoxDimensions);
+        Gizmos.DrawWireCube(transform.position + (Vector3)groundCheckBoxOffset, (Vector3)groundCheckBoxDimensions);
     }
 }

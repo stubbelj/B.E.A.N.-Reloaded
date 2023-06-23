@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] bool playerFollow;
+    Transform player => FindObjectOfType<PlayerController>().transform;
+    float oldPlayerPos;
+    [Space()]
+
     [SerializeField] Vector2 waitRange = new Vector2(1, 3);
     [SerializeField] Vector2 forceRange = new Vector2(-3, 3);
     float waitCooldown;
@@ -11,8 +16,18 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>(), spawnedEnemies = new List<GameObject>();
     [SerializeField] GameObject dropRock;
 
+    private void Start()
+    {
+        oldPlayerPos = player.position.x;
+    }
+
     private void Update()
     {
+        if (playerFollow) {
+            transform.position += Vector3.right * (player.position.x - oldPlayerPos);
+            oldPlayerPos = player.position.x;
+        }
+
         waitCooldown -= Time.deltaTime;
         if (waitCooldown > 0) return;
 

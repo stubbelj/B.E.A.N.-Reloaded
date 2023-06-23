@@ -12,7 +12,7 @@ public class BaseEnemy : MonoBehaviour
 
     [Space()]
     [SerializeField] protected float walkSpeed;
-    [SerializeField] float defaultStunTime = 0.6f, knockBackYMin = 0.2f;
+    [SerializeField] float defaultStunTime = 0.6f, stunTimeResist, knockBackYMin = 0.2f;
 
     [Space()]
     [SerializeField] Sprite whiteSprite;
@@ -65,10 +65,16 @@ public class BaseEnemy : MonoBehaviour
         target = FindObjectOfType<PlayerCombat>().transform;
     }
 
+    public virtual void Stun(float stunTime)
+    {
+        this.stunTime = stunTime;
+    }
+
     public virtual void Hit(float damage, Vector3 knockBack, float stunTime = -1)
     {
         knockBack.y = Mathf.Max(knockBack.y, knockBackYMin);
         if (stunTime == -1) stunTime = defaultStunTime;
+        stunTime -= stunTimeResist;
         Stop();
 
         health -= damage;

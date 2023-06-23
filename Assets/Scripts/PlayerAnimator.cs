@@ -11,58 +11,63 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] GameObject punchFXPrefabHorizontal, punchFXPrefabVertical;
     [SerializeField] Vector2 fXOffsetHorizontal, FXOffsetVertical, AimArmLimits = new Vector2();
     float punchComboCooldown;
+    [Space()]
+    [SerializeField] float walkThreshold, jumpThreshold = 0.1f;
 
-    public bool testWalking, punch;
+    PlayerController pMove =>GetComponent<PlayerController>();
+    Rigidbody2D rb => GetComponent<Rigidbody2D>();
     int punchStep;
 
     private void Update()
     {
         punchComboCooldown -= Time.deltaTime;
-
-        Walk(testWalking);
-
-        if (punch) {
-            punch = false;
-            Punch();
-        }
+        Walk(Mathf.Abs(rb.velocity.x) > walkThreshold);
+        Jump(Mathf.Abs(rb.velocity.y) > jumpThreshold || !pMove.isOnGround);
     }
 
     public Vector3 AimFrontArm()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10);
+        if (mousePosition.x < transform.position.x) mousePosition.x = transform.position.x + Mathf.Abs(transform.position.x - mousePosition.x);
         Vector2 dir = mousePosition - transform.position;
         float angle = Vector2.SignedAngle(Vector2.right, dir);
 
         angle = Mathf.Clamp(angle, AimArmLimits.x, AimArmLimits.y);
         Vector3 eulerAngles = new Vector3(0, 0, angle);
-        frontArm.transform.eulerAngles = eulerAngles;
+        frontArm.transform.localEulerAngles = eulerAngles;
 
+        if (transform.eulerAngles.y != 0) eulerAngles.y += 180;
         return eulerAngles;
     }
 
-    public void SpawnPunchFX()
+    public void ShowArms()
     {
-        var prefab = punchStep < 4 ? punchFXPrefabHorizontal : punchFXPrefabVertical;
-        var offset = punchStep < 4 ? fXOffsetHorizontal : FXOffsetVertical;
-        if (prefab != null) Instantiate(prefab, transform.position + (Vector3)offset, Quaternion.identity);
+        frontArm.gameObject.SetActive(true);
+        backArm.gameObject.SetActive(true);
     }
 
     public void Punch()
     {
-        if (punchComboCooldown <= 0 || punchStep > 4) punchStep = 1;
+        if (punchComboCooldown <= 0 || punchStep > 3) punchStep = 1;
 
-        frontArm.transform.eulerAngles = Vector3.zero;
+        frontArm.transform.localEulerAngles = Vector3.zero;
+        frontArm.gameObject.SetActive(false);
+        backArm.gameObject.SetActive(false);
 
-        if (punchStep == 1) frontArm.SetTrigger("PUNCH1");
-        if (punchStep == 2) backArm.SetTrigger("PUNCH2");
-        if (punchStep == 3) frontArm.SetTrigger("PUNCH3");
-        if (punchStep == 4) backArm.SetTrigger("PUNCH4");
+        if (punchStep == 1) cockpit.SetTrigger("PUNCH1");
+        if (punchStep == 2) cockpit.SetTrigger("PUNCH2");
+        if (punchStep == 3) cockpit.SetTrigger("PUNCH3");
 
         punchComboCooldown = punchComboBreakTime;
         punchStep += 1;
     }
 
-    public void Walk(bool walking)
+    void Jump(bool jumping)
+    {
+        cockpit.SetBool("JUMP", jumping);
+    }
+
+    void Walk(bool walking)
     {
         cockpit.SetBool("WALK", walking);
     }

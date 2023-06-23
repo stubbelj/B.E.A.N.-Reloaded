@@ -8,7 +8,7 @@ public class RangedEnemy : BaseEnemy
     [Space()]
     [SerializeField] float range;
 
-    [SerializeField] float bulletSpeed, bulletSpacing = 0.1f;
+    [SerializeField] float damage, bulletSpeed, bulletSpacing = 0.1f;
     float bulletCooldown;
     [SerializeField] float reloadTime;
     float reloadCooldown;
@@ -63,6 +63,7 @@ public class RangedEnemy : BaseEnemy
         newBullet.transform.eulerAngles = new Vector3(0, 0, angle);
 
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * bulletSpeed);
+        newBullet.GetComponent<Bullet>().damage = damage; 
         bulletCooldown = bulletSpacing;
         leftInMag -= 1;
     }

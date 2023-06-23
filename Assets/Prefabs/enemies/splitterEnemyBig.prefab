@@ -162,12 +162,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ada76f2302ce94987154af142d8406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  health: 20
+  maxHealth: 35
+  health: 35
   hpSlider: {fileID: 6140263286204733146}
   deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
   walkSpeed: 0.5
   defaultStunTime: 0.6
+  stunTimeResist: 1
   knockBackYMin: 0.2
   whiteSprite: {fileID: 21300000, guid: 1365cafcfe48a3a42af0ff6f2fa488fe, type: 3}
   flashWhiteTime: 0.1
@@ -175,7 +176,7 @@ MonoBehaviour:
   flipToFacePlayer: 0
   range: 1
   nextSplitter: {fileID: 2236770581059442183, guid: a280c7474c9d63540a0f75cf408058ae, type: 3}
-  spawnOffset: {x: 0.1, y: 0}
+  spawnOffset: {x: 1, y: 0}
   spawnCount: 3
 --- !u!1001 &6612473963026758680
 PrefabInstance:

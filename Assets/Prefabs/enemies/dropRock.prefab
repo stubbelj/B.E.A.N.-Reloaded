@@ -102,6 +102,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   crackedRock: {fileID: 1441276942431029889, guid: c5f51fac3f258c146b4a4635608175af, type: 3}
   groundLayer: 6
+  stunTimeOnSpawn: 0.8
 --- !u!50 &5006089106873154156
 Rigidbody2D:
   serializedVersion: 4

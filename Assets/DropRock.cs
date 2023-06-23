@@ -6,6 +6,7 @@ public class DropRock : MonoBehaviour
 {
     [SerializeField] GameObject enemy, crackedRock;
     [SerializeField] int groundLayer;
+    [SerializeField] float stunTimeOnSpawn = 2;
     EnemySpawner spawner;
 
     public void Init(GameObject enemyPrefab, EnemySpawner spawner)
@@ -20,6 +21,7 @@ public class DropRock : MonoBehaviour
 
         if (enemy) {
             enemy = Instantiate(enemy, transform.position, Quaternion.identity);
+            enemy.GetComponent<BaseEnemy>().Stun(stunTimeOnSpawn);
             if (spawner) spawner.AddSpawnedEnemy(enemy);
         }
         if (crackedRock) Instantiate(crackedRock, transform.position, Quaternion.identity);

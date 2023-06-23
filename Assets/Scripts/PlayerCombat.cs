@@ -5,27 +5,60 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerAnimator))]
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] KeyCode melee = KeyCode.E, reload = KeyCode.R;
-    public bool TESTGROUNDED;
+    [Header("Stats")]
+    [SerializeField] float maxHealth;
+    float health;
+    [HideInInspector] public bool dead { get { return health <= 0; } }
+
+    [Space()]
+    [SerializeField] KeyCode melee = KeyCode.E, altMelee = KeyCode.LeftAlt, reload = KeyCode.R;
 
     [Header("SMG")]
     [SerializeField] float SMGResetTime;
-    [SerializeField] float SMGReloadTime, SMGBulletSpeed;
+    [SerializeField] float SMGReloadTime, SMGBulletSpeed, SMGDamage;
     [SerializeField] int SMGMagazineSize;
     int SMGmagLeft;
     [SerializeField] GameObject SMGBulletPrefab;
     float SMGcooldown;
 
-    bool aimingSniper, needToRelease;
-    PlayerAnimator anim => GetComponent<PlayerAnimator>();
+    [Header("Punch")]
+    [SerializeField] HitBox punchHB;
+    [SerializeField] float punchDamage, punchKBStrength, punchStunTime, punch3Damage, punch3KB, punch3StunTime;
+    [SerializeField] float punchStepForce = 50, stepTime = 0.1f;
 
-    public void PunchImpact()
+    bool aimingSniper, needToRelease, punching;
+    PlayerAnimator anim => GetComponent<PlayerAnimator>();
+    PlayerController pMove => GetComponent<PlayerController>();
+
+    
+
+    public void Hit(float Damage)
     {
-        anim.SpawnPunchFX();
+        if (pMove.isDashing) return;
+
+        health -= Damage;
+        if (health <= 0) Die();
+    }
+
+    void Die()
+    {
+        print("Player has died");
+    }
+
+    public float GetHealthPercent()
+    {
+        return health / maxHealth;
+    }
+
+    public void EndPunch()
+    {
+        punching = false;
+        punchHB.EndHitting();
     }
 
     private void Start()
     {
+        health = maxHealth;
         Reload();
     }
 
@@ -33,9 +66,10 @@ public class PlayerCombat : MonoBehaviour
     {
         DoCooldowns();
 
-        if (Input.GetKeyDown(melee)) Melee();
+        if (Input.GetKeyDown(melee) || Input.GetKeyDown(altMelee)) Melee();
 
         if (Input.GetKeyDown(reload)) Reload();
+        if (Input.GetMouseButtonDown(0) && SMGmagLeft <= 0) Reload();
         if (Input.GetMouseButtonUp(0)) needToRelease = false;
         if (Input.GetMouseButton(0)) FireGun1();
 
@@ -84,29 +118,28 @@ public class PlayerCombat : MonoBehaviour
 
         var newBullet = Instantiate(SMGBulletPrefab, transform.position, Quaternion.identity);
         newBullet.transform.eulerAngles = aimAngle;
+        newBullet.GetComponent<Bullet>().damage = SMGDamage;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
-    }
-
-    Vector3 FaceMouse(Transform transform)
-    {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward*10);
-        Vector2 dir = mousePosition - transform.position;
-        float angle = Vector2.SignedAngle(Vector2.right, dir);
-        return new Vector3(0, 0, angle);
     }
 
     void Melee()
     {
         if (aimingSniper) return;
 
-        if (TESTGROUNDED) Punch();
+        if (pMove.isOnGround) Punch();
         else GroundSlam();
     }
 
     void Punch()
     {
+        if (punching) return;
+
         if (Input.GetMouseButton(0)) needToRelease = true;
+        punching = true;
         anim.Punch();
+        pMove.Step(transform.eulerAngles.y == 0 ? punchStepForce : -punchStepForce, stepTime);
+
+        punchHB.StartHitting(punchDamage, transform, punchKBStrength, punchStunTime);
     }
 
     void GroundSlam()

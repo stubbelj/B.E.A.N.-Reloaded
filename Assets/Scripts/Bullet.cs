@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] GameObject createOnDestroy;
-    [SerializeField] float damage, knockBack, stunTime, lifeTime = 5;
+    public float damage, knockBack, stunTime, lifeTime = 5;
     [SerializeField] bool hurtPlayer, hurtEnemy;
 
     private void Start()
@@ -15,14 +15,15 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!hurtPlayer && collision.gameObject.GetComponent<PlayerCombat>() != null) return;
-        if (!hurtEnemy && collision.gameObject.GetComponent<BaseEnemy>() != null) return;
+        if (collision.GetComponentInParent<HitBox>()) return;
+        if (!hurtPlayer && collision.gameObject.GetComponentInParent<PlayerCombat>() != null) return;
+        if (!hurtEnemy && collision.gameObject.GetComponentInParent<BaseEnemy>() != null) return;
 
         var enemy = collision.gameObject.GetComponentInParent<BaseEnemy>();
         if (enemy != null) enemy.Hit(damage, (collision.gameObject.transform.position - transform.position).normalized * knockBack, stunTime);
 
-        var player = collision.gameObject.GetComponent<PlayerCombat>();
-        if (player != null) print("Hit player!");
+        var player = collision.gameObject.GetComponentInParent<PlayerCombat>();
+        if (player != null) player.Hit(damage);
 
         if (createOnDestroy != null) Instantiate(createOnDestroy, transform.position, Quaternion.identity);
         Destroy(gameObject);

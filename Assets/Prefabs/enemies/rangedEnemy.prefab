@@ -168,15 +168,17 @@ MonoBehaviour:
   deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
   walkSpeed: 1
   defaultStunTime: 0.6
+  stunTimeResist: 0
   knockBackYMin: 0.2
   whiteSprite: {fileID: 21300000, guid: 5ea2a7c74015540459b738c95c5a340b, type: 3}
   flashWhiteTime: 0.1
   debug: 1
   flipToFacePlayer: 1
   range: 16.16
-  bulletSpeed: 60
-  bulletSpacing: 0.1
-  reloadTime: 0.5
+  damage: 1
+  bulletSpeed: 30
+  bulletSpacing: 0.15
+  reloadTime: 1
   magazineSize: 3
   bulletPrefab: {fileID: 8307803291934795910, guid: 592a1a0d94b8a16479702f2d34a3f650, type: 3}
   bulletSpawnOffset: {x: 0.4, y: 0.3, z: 0}
