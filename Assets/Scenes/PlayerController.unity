@@ -169,7 +169,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &240772
 BoxCollider2D:
@@ -312,6 +312,7 @@ MonoBehaviour:
   airMovementSpeed: 3.5
   dashSpeed: 35
   groundCheckBoxDimensions: {x: 0.94, y: 1}
+  groundCheckBoxOffset: {x: 0, y: 0}
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -319,7 +320,9 @@ MonoBehaviour:
   jumpsLeft: 0
   isOnGround: 0
   isDashing: 0
+  faceMouse: 1
   dashDuration: 0.1
+  jumpSfx: {fileID: 0}
 --- !u!1 &46684010
 GameObject:
   m_ObjectHideFlags: 0
