@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] Animator backArm, cockpit, frontArm;
+
+    [Header("Punch")]
     [SerializeField] float punchComboBreakTime = 1;
-    [SerializeField] Vector2 AimArmLimits = new Vector2();
+    [SerializeField] GameObject punchFXPrefabHorizontal, punchFXPrefabVertical;
+    [SerializeField] Vector2 fXOffsetHorizontal, FXOffsetVertical, AimArmLimits = new Vector2();
     float punchComboCooldown;
 
     public bool testWalking, punch;
@@ -35,6 +38,13 @@ public class PlayerAnimator : MonoBehaviour
         frontArm.transform.eulerAngles = eulerAngles;
 
         return eulerAngles;
+    }
+
+    public void SpawnPunchFX()
+    {
+        var prefab = punchStep < 4 ? punchFXPrefabHorizontal : punchFXPrefabVertical;
+        var offset = punchStep < 4 ? fXOffsetHorizontal : FXOffsetVertical;
+        if (prefab != null) Instantiate(prefab, transform.position + (Vector3)offset, Quaternion.identity);
     }
 
     public void Punch()

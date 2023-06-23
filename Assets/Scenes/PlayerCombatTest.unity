@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitRange: {x: 1, y: 3}
-  maxEnemies: 5
+  maxEnemies: 0
   enemyPrefabs:
   - {fileID: 5458837079773197303, guid: a621e1bf836f7fd44b69272163fa0137, type: 3}
   spawnedEnemies: []
@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 103033824}
   - component: {fileID: 103033826}
   - component: {fileID: 103033825}
+  - component: {fileID: 103033827}
   m_Layer: 0
   m_Name: backArm
   m_TagString: Untagged
@@ -278,6 +279,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &103033827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103033823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738f32c486536864b9a82d7aa44e67e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &162872678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,6 +2443,10 @@ MonoBehaviour:
   cockpit: {fileID: 201694195}
   frontArm: {fileID: 1684686351}
   punchComboBreakTime: 1
+  punchFXPrefabHorizontal: {fileID: 1520165263839544217, guid: 48d34638a950bc24b86ff776a179e096, type: 3}
+  punchFXPrefabVertical: {fileID: 1520165263839544217, guid: 82287a10f048cf24d880d5c67fa2a535, type: 3}
+  fXOffsetHorizontal: {x: 0.6, y: 0}
+  FXOffsetVertical: {x: 0.4, y: 0.6}
   AimArmLimits: {x: -20, y: 45}
   testWalking: 0
   punch: 0
@@ -2566,6 +2583,7 @@ GameObject:
   - component: {fileID: 1684686350}
   - component: {fileID: 1684686352}
   - component: {fileID: 1684686351}
+  - component: {fileID: 1684686353}
   m_Layer: 0
   m_Name: frontArm
   m_TagString: Untagged
@@ -2661,6 +2679,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1684686353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684686349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738f32c486536864b9a82d7aa44e67e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1856451685
 GameObject:
   m_ObjectHideFlags: 0

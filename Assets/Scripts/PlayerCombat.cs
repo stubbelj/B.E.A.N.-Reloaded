@@ -19,6 +19,11 @@ public class PlayerCombat : MonoBehaviour
     bool aimingSniper, needToRelease;
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
 
+    public void PunchImpact()
+    {
+        anim.SpawnPunchFX();
+    }
+
     private void Start()
     {
         Reload();
