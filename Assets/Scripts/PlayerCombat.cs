@@ -16,7 +16,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("SMG")]
     [SerializeField] float SMGResetTime;
     [SerializeField] float SMGReloadTime, SMGBulletSpeed, SMGDamage;
-    [SerializeField] int SMGMagazineSize;
+    [SerializeField] int SMGMagazineSize, SMGAmmo = 100;
     int SMGmagLeft;
     [SerializeField] GameObject SMGBulletPrefab;
     float SMGcooldown;
@@ -32,10 +32,17 @@ public class PlayerCombat : MonoBehaviour
     PlayerSound pSound => GetComponent<PlayerSound>();
 
     
+    public void AddAmmo(int amount)
+    {
+        SMGAmmo += amount;
+        pSound.AmmoPickup.Play();
+    }
 
     public void Hit(float Damage)
     {
         if (pMove.isDashing) return;
+
+        CameraShake.i.Shake(0.3f, 0.2f);
 
         health -= Damage;
         if (health <= 0) Die();
@@ -53,6 +60,9 @@ public class PlayerCombat : MonoBehaviour
 
     public void EndPunch()
     {
+        if (anim.GetPunchStep() > 3) CameraShake.i.Shake(0.2f, 0.2f);
+        else CameraShake.i.Shake(0.05f, 0.1f);
+
         punching = false;
         punchHB.EndHitting();
     }
@@ -80,6 +90,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Reload()
     {
+        if (SMGAmmo <= 0) return;
+        SMGAmmo -= 1;
+
         if (Input.GetMouseButton(0)) needToRelease = true;
         SMGmagLeft = SMGMagazineSize;
     }
@@ -99,6 +112,10 @@ public class PlayerCombat : MonoBehaviour
         if (!aimingSniper) return;
     }
 
+    public int GetAmmo()
+    {
+        return SMGAmmo;
+    }
     public int GetMagLeft()
     {
         return SMGmagLeft;
@@ -132,6 +149,11 @@ public class PlayerCombat : MonoBehaviour
         else GroundSlam();
     }
 
+    public bool IsPunching()
+    {
+        return punching;
+    }
+
     void Punch()
     {
         if (punching) return;
@@ -142,7 +164,7 @@ public class PlayerCombat : MonoBehaviour
         pMove.Step(transform.eulerAngles.y == 0 ? punchStepForce : -punchStepForce, stepTime);
 
         bool final = anim.GetPunchStep() == 4;
-        punchHB.StartHitting(final ? punch3Damage : punchDamage, transform, final ? punch3KB : punchKBStrength, final ? punch3StunTime: punchStunTime);
+        punchHB.StartHitting(final ? punch3Damage : punchDamage, transform, final ? punch3KB : punchKBStrength, final ? punch3StunTime: punchStunTime, pSound.punchHit);
         if (final) pSound.strongPunch.Play();
         else pSound.weakPunch.Play();
     }

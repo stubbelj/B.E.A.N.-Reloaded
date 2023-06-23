@@ -8,14 +8,16 @@ public class HitBox : MonoBehaviour
     Transform knockBackSource;
     bool hitting;
     List<BaseEnemy> alreadyHit = new List<BaseEnemy>();
+    Sound hitSound;
 
-    public void StartHitting(float damage, Transform knockBackSource, float knockBackStrength, float stunTime = -1)
+    public void StartHitting(float damage, Transform knockBackSource, float knockBackStrength, float stunTime = -1, Sound hitSound = null)
     {
         this.damage = damage;
         this.knockBackStrength = knockBackStrength;
         this.knockBackSource = knockBackSource; 
         this.stunTime = stunTime;
         hitting = true;
+        this.hitSound = hitSound;
     }
 
     public void EndHitting()
@@ -42,6 +44,7 @@ public class HitBox : MonoBehaviour
         if (!enemy || alreadyHit.Contains(enemy)) return;
         alreadyHit.Add(enemy);
 
+        if (hitSound != null) hitSound.Play();
         enemy.Hit(damage, (enemy.transform.position - knockBackSource.position).normalized * knockBackStrength, stunTime);
     }
 }

@@ -8,6 +8,14 @@ public class DropRock : MonoBehaviour
     [SerializeField] int groundLayer;
     [SerializeField] float stunTimeOnSpawn = 2;
     EnemySpawner spawner;
+    [SerializeField] Sound whistle, impact;
+
+    private void Start()
+    {
+        whistle = Instantiate(whistle);
+        impact = Instantiate(impact);
+        whistle.Play(transform);
+    }
 
     public void Init(GameObject enemyPrefab, EnemySpawner spawner)
     {
@@ -25,6 +33,9 @@ public class DropRock : MonoBehaviour
             if (spawner) spawner.AddSpawnedEnemy(enemy);
         }
         if (crackedRock) Instantiate(crackedRock, transform.position, Quaternion.identity);
+        impact.Play(enemy.transform);
+
+        CameraShake.i.Shake(0.2f, 0.2f);
         Destroy(gameObject);
     }
 }

@@ -12,7 +12,8 @@ public class BaseEnemy : MonoBehaviour
 
     [Space()]
     [SerializeField] protected float walkSpeed;
-    [SerializeField] float defaultStunTime = 0.6f, stunTimeResist, knockBackYMin = 0.2f;
+    [SerializeField] float defaultStunTime = 0.6f, stunTimeResist;
+    [SerializeField] Vector2 knockBackLimits = new Vector2(0.2f, 15);
 
     [Space()]
     [SerializeField] Sprite whiteSprite;
@@ -72,7 +73,7 @@ public class BaseEnemy : MonoBehaviour
 
     public virtual void Hit(float damage, Vector3 knockBack, float stunTime = -1)
     {
-        knockBack.y = Mathf.Max(knockBack.y, knockBackYMin);
+        knockBack.y = Mathf.Clamp(knockBack.y, knockBackLimits.x, knockBackLimits.y);
         if (stunTime == -1) stunTime = defaultStunTime;
         stunTime -= stunTimeResist;
         Stop();
@@ -97,10 +98,21 @@ public class BaseEnemy : MonoBehaviour
         srend.sprite = originalSprite;
     }
 
-    protected void WalkTowardPlayer()
+    protected void WalkAwayFromPlayer()
+    {
+        var targetSpeed = GetWalkTowardSpeed() * -1;
+        rb.velocity = Vector2.Lerp(rb.velocity, targetSpeed, 0.25f);
+    }
+
+    Vector2 GetWalkTowardSpeed()
     {
         Vector2 dir = target.transform.position - transform.position;
-        Vector2 targetSpeed = new Vector2(dir.x > 0 ? walkSpeed : -walkSpeed, rb.velocity.y);
+        return new Vector2(dir.x > 0 ? walkSpeed : -walkSpeed, rb.velocity.y);
+    }
+
+    protected void WalkTowardPlayer()
+    {
+        var targetSpeed = GetWalkTowardSpeed();
         rb.velocity = Vector2.Lerp(rb.velocity, targetSpeed, 0.25f);
     }
 

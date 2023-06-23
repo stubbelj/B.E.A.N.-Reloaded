@@ -103,6 +103,8 @@ MonoBehaviour:
   crackedRock: {fileID: 1441276942431029889, guid: c5f51fac3f258c146b4a4635608175af, type: 3}
   groundLayer: 6
   stunTimeOnSpawn: 0.8
+  whistle: {fileID: 11400000, guid: 3a195faba9706404198dfc9521f70f3c, type: 2}
+  impact: {fileID: 11400000, guid: 4e65b5bb4e39b07449b2636793a5442e, type: 2}
 --- !u!50 &5006089106873154156
 Rigidbody2D:
   serializedVersion: 4

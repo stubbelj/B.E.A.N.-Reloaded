@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
     PlayerSound pSound => GetComponent<PlayerSound>();
+    PlayerAnimator anim => GetComponent<PlayerAnimator>();
+    PlayerCombat pCombat => GetComponent<PlayerCombat>();
 
     [SerializeField] float jumpForce;
     [SerializeField] float movementSpeed;
@@ -96,7 +98,12 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Move(int dir){ //dir = -1 for left, 1 for right 
+
         if (stepping) return;
+        bool moveRight = dir > 0;
+        bool faceRight = transform.eulerAngles.y == 0;
+        if (faceRight != moveRight && pCombat.IsPunching()) return;
+
         float baseSpeed = (isOnGround ? movementSpeed : airMovementSpeed);
         float speed     = (isDashing  ? dashSpeed : baseSpeed);
 

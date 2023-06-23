@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6810326906515215038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.04, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6364709, y: 0.6364709, z: 0.6364709}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -174,14 +174,17 @@ MonoBehaviour:
   flashWhiteTime: 0.1
   debug: 1
   flipToFacePlayer: 1
-  range: 16.16
+  range: {x: 2.4, y: 3.76}
   damage: 1
-  bulletSpeed: 30
+  bulletAngle: 45
+  bulletSpeed: 49
   bulletSpacing: 0.15
   reloadTime: 1
   magazineSize: 3
   bulletPrefab: {fileID: 8307803291934795910, guid: 592a1a0d94b8a16479702f2d34a3f650, type: 3}
   bulletSpawnOffset: {x: 0.4, y: 0.3, z: 0}
+  rootedColor: {r: 0.22974515, g: 1, b: 0, a: 1}
+  rootTime: 1
 --- !u!1001 &6015627377412776323
 PrefabInstance:
   m_ObjectHideFlags: 0

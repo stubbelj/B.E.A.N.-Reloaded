@@ -9,10 +9,8 @@ public class EnemySpawner : MonoBehaviour
     float oldPlayerPos;
     [Space()]
 
-    [SerializeField] Vector2 waitRange = new Vector2(1, 3);
-    [SerializeField] Vector2 forceRange = new Vector2(-3, 3);
+    [SerializeField] Vector2 waitRange = new Vector2(1, 3), forceRange = new Vector2(-3, 3), xLimits;
     float waitCooldown;
-    [SerializeField] int maxEnemies = 5;
     [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>(), spawnedEnemies = new List<GameObject>();
     [SerializeField] GameObject dropRock;
 
@@ -25,6 +23,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (playerFollow) {
             transform.position += Vector3.right * (player.position.x - oldPlayerPos);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, xLimits.x, xLimits.y), transform.position.y, transform.position.z);
+
             oldPlayerPos = player.position.x;
         }
 
@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < spawnedEnemies.Count; i++) {
             if (spawnedEnemies[i] == null) spawnedEnemies.RemoveAt(i);
         }
-        if (spawnedEnemies.Count >= maxEnemies) return;
+        if (spawnedEnemies.Count >= GameManager.i.maxEnemies) return;
 
         var newDropRock = Instantiate(dropRock, transform.position, Quaternion.identity);
         newDropRock.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(forceRange.x, forceRange.y), 0));

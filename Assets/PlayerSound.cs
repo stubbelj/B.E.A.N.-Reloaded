@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
-    public Sound SMGFire, jump, weakPunch, strongPunch;
+    public Sound SMGFire, jump, weakPunch, strongPunch, punchHit, AmmoPickup;
 
     private void Start()
     {
@@ -12,7 +12,7 @@ public class PlayerSound : MonoBehaviour
         jump = Instantiate(jump);
         weakPunch = Instantiate(weakPunch);
         strongPunch = Instantiate(strongPunch);
+        punchHit = Instantiate(punchHit);
+        AmmoPickup = Instantiate(AmmoPickup);
     }
-
-
 }
