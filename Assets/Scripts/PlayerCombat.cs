@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerAnimator))]
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] KeyCode melee = KeyCode.E;
@@ -15,6 +16,7 @@ public class PlayerCombat : MonoBehaviour
     float SMGcooldown;
 
     bool aimingSniper;
+    PlayerAnimator anim => GetComponent<PlayerAnimator>();
 
     private void Update()
     {
@@ -72,7 +74,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Punch()
     {
-        print("punch!");
+        anim.Punch();
     }
 
     void GroundSlam()
