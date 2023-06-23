@@ -34,11 +34,11 @@ public class PlayerController : MonoBehaviour
     void Update(){
         CheckGround();
         
-        print(dashTimer);
+        //print(dashTimer);
         if (isDashing && dashTimer > 0) {
             dashTimer -= Time.deltaTime;
             if(dashTimer <= 0) {
-                print("done");
+                //print("done");
                 isDashing = false;
             }
         }

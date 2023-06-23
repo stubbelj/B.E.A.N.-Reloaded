@@ -8,12 +8,20 @@ public class BaseEnemy : MonoBehaviour
 {
     [SerializeField] float maxHealth, health;
     [SerializeField] Slider hpSlider;
+    [SerializeField] GameObject deathFX;
+
     [Space()]
-    [SerializeField] float walkSpeed, defaultStunTime = 0.6f, knockBackYMin = 0.2f;
+    [SerializeField] protected float walkSpeed;
+    [SerializeField] float defaultStunTime = 0.6f, knockBackYMin = 0.2f;
+
     [Space()]
     [SerializeField] Sprite whiteSprite;
     [SerializeField] float flashWhiteTime = 0.1f;
     Sprite originalSprite;
+
+    [Space()]
+    [SerializeField] protected bool debug;
+    [SerializeField] protected bool flipToFacePlayer;
 
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     protected SpriteRenderer srend => GetComponent<SpriteRenderer>();
@@ -21,14 +29,37 @@ public class BaseEnemy : MonoBehaviour
     protected Transform target;
     protected float dist;
 
+    protected virtual void OnValidate()
+    {
+        health = maxHealth;
+    }
+
     protected virtual void Update()
     {
         dist = Vector2.Distance(transform.position, target.position);
-        stunTime -= Time.deltaTime;
+        Cooldowns();
+
         if (hpSlider != null) hpSlider.value = health / maxHealth;
+        if (flipToFacePlayer) srend.flipX = target.position.x < transform.position.x;
     }
 
-    private void Start()
+    protected virtual void Cooldowns()
+    {
+        stunTime -= Time.deltaTime;
+    }
+
+    protected bool LineOfSightToTarget(float range)
+    {
+        int layerMask = 1 << gameObject.layer;
+        layerMask = ~layerMask;
+
+        var dir = target.position - transform.position;
+        var hit = Physics2D.Raycast(transform.position, dir, range, layerMask:layerMask);
+
+        return hit.collider != null;
+    }
+
+    protected virtual void Start()
     {
         health = maxHealth;
         target = FindObjectOfType<PlayerCombat>().transform;
@@ -69,11 +100,12 @@ public class BaseEnemy : MonoBehaviour
 
     protected void Stop()
     {
-        rb.velocity = Vector2.zero;
+        rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     protected virtual void Die()
     {
+        if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
