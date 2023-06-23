@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,9 +154,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 240769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: deba9cd1e02d4fd4987eecb3c469a7a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ce8c412c3c59f145a977657903e5dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 10
 --- !u!50 &240771
 Rigidbody2D:
   serializedVersion: 4
@@ -309,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 7ecd060ec42f0af42817fc4ef4fe8697, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -320,7 +321,75 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74179063-7650-41f5-82fc-d7556ef736e7
+    m_ActionName: PlayerControls/Move
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce2154ce-817a-44fb-baf4-b0457fca2bf3
+    m_ActionName: PlayerControls/Look
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ac3e39c3-7d5f-4b5c-8c32-bc1094545c16
+    m_ActionName: PlayerControls/Fire
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 240776}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8de4c2c0-b31a-441c-8d38-e9c143dd9548
+    m_ActionName: PlayerControls/Jump
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aaefebfc-6c2a-458d-96eb-a08f2992439f
+    m_ActionName: UI/Navigate
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1512bf9b-f9a3-4c63-b962-f3c370554a18
+    m_ActionName: UI/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c5653443-7eff-4d59-aaa4-9683b88668ca
+    m_ActionName: UI/Cancel
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7589408a-2b08-4e69-af0d-a78f10b65ce3
+    m_ActionName: UI/Point
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 200b2db8-bd4f-445b-a246-c82d39344b17
+    m_ActionName: UI/Click
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1896db5a-baf2-46a5-9756-c24fc371a0f9
+    m_ActionName: UI/ScrollWheel
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ef86507-784d-4bbc-bc4d-12fef0965fff
+    m_ActionName: UI/MiddleClick
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 44f5b326-9bbb-4c4a-ba26-485f08151ac8
+    m_ActionName: UI/RightClick
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6dcebdc-69b8-40ca-9d61-a532cab7e754
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8693dd3b-69cc-4364-8d30-6b4a5bddf22d
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: PlayerControls

@@ -11,9 +11,14 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start(){}
     // Update is called once per frame
-    void Update(){}
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.Space)) Jump();
+    
+    }
 
-    private void OnJump(){
+    public void Jump(){
+        print("AH");
+
         Debug.Log("Jump!");
         rb.velocity += Vector2.up * jumpForce;
     }
@@ -21,4 +26,6 @@ public class PlayerController : MonoBehaviour
     private void OnMove(){
         Debug.Log("Move!");
     }
+
+    
 }
