@@ -310,6 +310,7 @@ MonoBehaviour:
   jumpForce: 6
   movementSpeed: 4
   airMovementSpeed: 3.5
+  dashSpeed: 35
   groundCheckBoxDimensions: {x: 0.94, y: 1}
   platformLayer:
     serializedVersion: 2
@@ -317,6 +318,8 @@ MonoBehaviour:
   maxJumps: 2
   jumpsLeft: 0
   isOnGround: 0
+  isDashing: 0
+  dashDuration: 0.1
 --- !u!1 &46684010
 GameObject:
   m_ObjectHideFlags: 0
