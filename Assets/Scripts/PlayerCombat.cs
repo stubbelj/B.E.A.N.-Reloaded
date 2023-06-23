@@ -30,7 +30,7 @@ public class PlayerCombat : MonoBehaviour
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
-
+    GameObject bulletParent => GameObject.Find("PlayerBulletParent");
     
     public void AddAmmo(int amount)
     {
@@ -139,6 +139,7 @@ public class PlayerCombat : MonoBehaviour
         newBullet.transform.eulerAngles = aimAngle;
         newBullet.GetComponent<Bullet>().damage = SMGDamage;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
+        newBullet.transform.SetParent(bulletParent.transform);
     }
 
     void Melee()
