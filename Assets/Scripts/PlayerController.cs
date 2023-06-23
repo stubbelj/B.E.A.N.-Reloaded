@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
+    PlayerSound pSound => GetComponent<PlayerSound>();
 
     [SerializeField] float jumpForce;
     [SerializeField] float movementSpeed;
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
     public void Jump(){
         if(isOnGround || jumpsLeft > 0){
             jumpsLeft--;
-            SoundManager.instance.PlaySound(jumpSfx);
+            pSound.jump.Play();
             rb.velocity *= Vector2.up * 0; //Reset vertical velocity so the second jump isn't affected by your current velocity
             rb.velocity += Vector2.up * jumpForce;
         }

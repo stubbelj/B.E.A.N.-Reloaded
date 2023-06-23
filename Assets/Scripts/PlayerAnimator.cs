@@ -18,6 +18,11 @@ public class PlayerAnimator : MonoBehaviour
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
     int punchStep;
 
+    public int GetPunchStep()
+    {
+        return punchStep;
+    }
+
     private void Update()
     {
         punchComboCooldown -= Time.deltaTime;

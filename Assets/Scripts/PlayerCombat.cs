@@ -29,6 +29,7 @@ public class PlayerCombat : MonoBehaviour
     bool aimingSniper, needToRelease, punching;
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerController pMove => GetComponent<PlayerController>();
+    PlayerSound pSound => GetComponent<PlayerSound>();
 
     
 
@@ -112,6 +113,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (needToRelease || aimingSniper || SMGcooldown > 0 || SMGmagLeft <= 0) return;
 
+        pSound.SMGFire.Play();
         SMGmagLeft -= 1;
         var aimAngle = anim.AimFrontArm();
         SMGcooldown = SMGResetTime;
@@ -139,7 +141,10 @@ public class PlayerCombat : MonoBehaviour
         anim.Punch();
         pMove.Step(transform.eulerAngles.y == 0 ? punchStepForce : -punchStepForce, stepTime);
 
-        punchHB.StartHitting(punchDamage, transform, punchKBStrength, punchStunTime);
+        bool final = anim.GetPunchStep() == 4;
+        punchHB.StartHitting(final ? punch3Damage : punchDamage, transform, final ? punch3KB : punchKBStrength, final ? punch3StunTime: punchStunTime);
+        if (final) pSound.strongPunch.Play();
+        else pSound.weakPunch.Play();
     }
 
     void GroundSlam()
