@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] float movementSpeed;
     [SerializeField] float airMovementSpeed;
+    [SerializeField] float dashSpeed;
     
     float groundCheckBoxYOffset = -0.06f;
     [SerializeField] Vector2 groundCheckBoxDimensions;
@@ -20,18 +21,38 @@ public class PlayerController : MonoBehaviour
     public int jumpsLeft = 0;
 
     public bool isOnGround;
+    public bool isDashing = false;
+    
+    [SerializeField][Tooltip("Amount of time in seconds a dash lasts")] float dashDuration = 0.3f; 
+    private float dashTimer; 
 
     // Start is called before the first frame update
-    void Start(){}
+    void Start(){
+        dashTimer = dashDuration;
+    }
     // Update is called once per frame
     void Update(){
         CheckGround();
         
+        print(dashTimer);
+        if (isDashing && dashTimer > 0) {
+            dashTimer -= Time.deltaTime;
+            if(dashTimer <= 0) {
+                print("done");
+                isDashing = false;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) Move(-1);
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) Move(1);
 
-        if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) StopMove();
+        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !isDashing) StopMove();
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isDashing){ //Press shift while holding a movement key
+            isDashing = true;
+            dashTimer = dashDuration;
+        }
     }
 
     public void Jump(){
@@ -47,10 +68,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Move(int dir){ //dir = -1 for left, 1 for right 
-        Debug.Log("Move! " + dir);
+        float baseSpeed = (isOnGround ? movementSpeed : airMovementSpeed);
+        float speed     = (isDashing  ? dashSpeed : baseSpeed);
 
-        float speed = (isOnGround ? movementSpeed : airMovementSpeed);
-        
         if(CheckWallSide(dir)){
             //Debug.Log("Hit Wall");
             StopMove();
