@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 537338089847894680}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2898757537840060556
 SpriteRenderer:
@@ -169,12 +169,12 @@ MonoBehaviour:
   walkSpeed: 1
   defaultStunTime: 0.6
   stunTimeResist: 0
-  knockBackYMin: 0.2
+  knockBackLimits: {x: 0.2, y: 15}
   whiteSprite: {fileID: 21300000, guid: 5ea2a7c74015540459b738c95c5a340b, type: 3}
   flashWhiteTime: 0.1
   debug: 1
   flipToFacePlayer: 1
-  range: {x: 2.4, y: 3.76}
+  range: {x: 2.15, y: 14.01}
   damage: 1
   bulletAngle: 45
   bulletSpeed: 49
