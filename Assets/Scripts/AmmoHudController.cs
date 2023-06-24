@@ -9,8 +9,8 @@ public class AmmoHudController : MonoBehaviour
     PlayerCombat player => FindObjectOfType<PlayerCombat>();
 
     [SerializeField] TextMeshProUGUI magText, ammoText;
-    [SerializeField] Slider ammoSlider;
-    [SerializeField] Slider reloadSlider;
+    [SerializeField] Slider ammoSlider, reloadSlider;
+    [SerializeField] GameObject reloadSliderObj;
     private bool reloading;
 
     private void Update()
@@ -24,11 +24,13 @@ public class AmmoHudController : MonoBehaviour
 
         ammoText.color = ammoLeft == 0 ? Color.red : Color.white;
         magText.color = player.GetMagsLeft() > 0 ? Color.white : Color.red;
-    
 
-    }
-
-    private void QuickReload(){
-
+        float reloadProg = player.GetReloadProgress();
+        if(reloadProg == -1f){
+            reloadSliderObj.active = false;
+        } else { 
+            reloadSliderObj.active = true;
+            reloadSlider.value = reloadProg;
+        }
     }
 }

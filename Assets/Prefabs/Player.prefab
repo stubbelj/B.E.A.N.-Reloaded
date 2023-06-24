@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 5762742260275734781}
   - component: {fileID: 3884537787536404133}
   - component: {fileID: 22204898320837981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ Transform:
   - {fileID: 6262890607128480286}
   - {fileID: 1309240229907724765}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4925110271336631882
 MonoBehaviour:
@@ -419,16 +419,19 @@ MonoBehaviour:
   SMGBulletSpeed: 80
   SMGDamage: 1
   SMGMagazineSize: 60
+  SMGMagsLeft: 100
   SMGBulletPrefab: {fileID: 8432434969716908706, guid: f7376d8beb368ff4d8ac5140f1dc5f42, type: 3}
   punchHB: {fileID: 4854961460610646553}
-  punchDamage: 3
-  punchKBStrength: 150
+  punchDamage: 8
+  punchKBStrength: 300
   punchStunTime: 0.2
-  punch3Damage: 0
-  punch3KB: 0
-  punch3StunTime: 0
+  punch3Damage: 10
+  punch3KB: 800
+  punch3StunTime: 0.5
   punchStepForce: 450
   stepTime: 0.1
+  perfectReloadStart: 0.5
+  perfectReloadEnd: 0.6
 --- !u!114 &328059879757683769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +561,8 @@ MonoBehaviour:
   jump: {fileID: 11400000, guid: 00a20dda23d60044eaae4c8f74015595, type: 2}
   weakPunch: {fileID: 11400000, guid: de571a99a0733ff4e98a11cd81a964e3, type: 2}
   strongPunch: {fileID: 11400000, guid: bf8ac57ce317229489e1d63bcb270e7f, type: 2}
-  punchHit: {fileID: 0}
+  punchHit: {fileID: 11400000, guid: 3fecd70cb0eea1647b571d42f2bb6410, type: 2}
+  AmmoPickup: {fileID: 11400000, guid: 67160779efca72c4b84939f78c7c2ee7, type: 2}
 --- !u!1 &8255883282999582387
 GameObject:
   m_ObjectHideFlags: 0

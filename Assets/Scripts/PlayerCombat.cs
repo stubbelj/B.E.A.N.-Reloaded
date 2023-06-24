@@ -33,6 +33,11 @@ public class PlayerCombat : MonoBehaviour
     GameObject bulletParent => GameObject.Find("PlayerBulletParent");
     
     private bool isReloading = false;
+    private float reloadDur = 1.3f;
+    private float reloadTimer = 0f;
+    [Header("Reloading")]
+    [SerializeField] float perfectReloadStart;
+    [SerializeField] float perfectReloadEnd;
 
     public void AddAmmo(int amount)
     {
@@ -81,13 +86,47 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKeyDown(melee) || Input.GetKeyDown(altMelee)) Melee();
 
-        if (Input.GetKeyDown(reload)) StartReload();
-        if (Input.GetMouseButtonUp(0) && SMGcurAmmo <= 0) StartReload();
+        if (Input.GetKeyDown(reload)){
+            if(!isReloading){
+                StartReload();
+            } else {
+                print("Attempting perfect reload");
+                AttemptPerfectReload();
+            }
+        }
+        if (Input.GetMouseButtonUp(0) && SMGcurAmmo <= 0 && !isReloading) StartReload();
         if (Input.GetMouseButtonUp(0)) needToRelease = false;
-        if (Input.GetMouseButton(0)) FireGun1();
+        if (Input.GetMouseButton(0) && !isReloading) FireGun1();
 
         if (Input.GetMouseButtonDown(1)) StartAimingSniper();
         if (Input.GetMouseButtonUp(1)) FireSniper();
+
+        if(isReloading){
+            reloadTimer += Time.deltaTime;
+            if(reloadTimer >= reloadDur) {
+                reloadTimer = reloadDur;
+                FinishReload();
+            }
+        }
+    }
+
+    public bool AttemptPerfectReload(){
+        if(!isReloading) { print("not reloading"); return false; }
+        if(GetReloadProgress() > perfectReloadStart && GetReloadProgress() < perfectReloadEnd){
+            reloadTimer = reloadDur;
+            print("perf reload successful");
+            FinishReload();
+            return true;
+        } else {
+            print("perf reload failed");
+            return false;
+        }
+    }
+
+    public float GetReloadProgress(){
+        if(!isReloading) { return -1f; }
+        
+        return reloadTimer / reloadDur;
     }
 
     void FinishReload()
@@ -98,12 +137,10 @@ public class PlayerCombat : MonoBehaviour
 
     void StartReload()
     {
-        if (SMGMagsLeft <= 0) return;
+        if (SMGMagsLeft <= 0 || GetCurAmmo() == SMGMagazineSize) return;
         SMGMagsLeft -= 1;
+        reloadTimer = 0f;
         isReloading = true;
-
-        if (Input.GetMouseButton(0)) needToRelease = true;
-        SMGcurAmmo = SMGMagazineSize;
     }
 
     void DoCooldowns()
