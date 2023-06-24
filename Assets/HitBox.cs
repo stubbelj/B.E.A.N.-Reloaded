@@ -1,14 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
     float damage, knockBackStrength, stunTime;
     Transform knockBackSource;
-    bool hitting;
-    List<BaseEnemy> alreadyHit = new List<BaseEnemy>();
+    public bool hitting;
+    [SerializeField] int hitLimit = 3;
+    List<GameObject> alreadyHit = new List<GameObject>();
     Sound hitSound;
+    [SerializeField] bool player;
+
+    public void Setup(float damage, Transform knockBackSource, float knockBackStrength, float stunTime = -1, Sound hitSound = null)
+    {
+        StartHitting(damage, knockBackSource, knockBackStrength, stunTime, hitSound);
+        hitting = false;
+    }
+
+    public void StartHitting()
+    {
+        hitting = true;
+    }
 
     public void StartHitting(float damage, Transform knockBackSource, float knockBackStrength, float stunTime = -1, Sound hitSound = null)
     {
@@ -40,11 +54,22 @@ public class HitBox : MonoBehaviour
     {
         if (!hitting) return;
 
-        var enemy = obj.GetComponentInParent<BaseEnemy>();
-        if (!enemy || alreadyHit.Contains(enemy)) return;
-        alreadyHit.Add(enemy);
+        float damage = alreadyHit.Count > hitLimit ? this.damage / 4 : this.damage;
+
+        if (player) {
+            var enemy = obj.GetComponentInParent<BaseEnemy>();
+            if (!enemy || alreadyHit.Contains(enemy.gameObject)) return;
+            alreadyHit.Add(enemy.gameObject);
+            enemy.Hit(damage, (enemy.transform.position - knockBackSource.position).normalized * knockBackStrength, stunTime);
+        }
+        else {
+            var p = obj.GetComponentInParent<PlayerCombat>();
+            if (!p || alreadyHit.Contains(p.gameObject)) return;
+            alreadyHit.Add(p.gameObject);
+            p.Hit(damage);
+        }
 
         if (hitSound != null) hitSound.Play();
-        enemy.Hit(damage, (enemy.transform.position - knockBackSource.position).normalized * knockBackStrength, stunTime);
+        
     }
 }

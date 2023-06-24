@@ -11,13 +11,13 @@ public class PlayerCombat : MonoBehaviour
     [HideInInspector] public bool dead { get { return health <= 0; } }
 
     [Space()]
-    [SerializeField] KeyCode melee = KeyCode.E, altMelee = KeyCode.LeftAlt, reload = KeyCode.R;
+    [SerializeField] KeyCode reload = KeyCode.R;
 
     [Header("SMG")]
     [SerializeField] float SMGResetTime;
     [SerializeField] float SMGReloadTime, SMGBulletSpeed, SMGDamage;
-    [SerializeField] int SMGMagazineSize, SMGAmmo = 100;
-    int SMGmagLeft;
+    [SerializeField] int SMGMagazineSize, SMGMagsLeft = 100;
+    int SMGcurAmmo;
     [SerializeField] GameObject SMGBulletPrefab;
     float SMGcooldown;
 
@@ -26,18 +26,32 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float punchDamage, punchKBStrength, punchStunTime, punch3Damage, punch3KB, punch3StunTime;
     [SerializeField] float punchStepForce = 50, stepTime = 0.1f;
 
+    [Header("Gound Slam")]
+    [SerializeField] float groundSlamSpeed = 30;
+    [SerializeField] HitBox slamHB;
+    [SerializeField] float slamDamage, slamKB, slamStunTime;
+    bool slamming;
+
+    [Header("Reloading")]
+    [SerializeField] float perfectReloadStart;
+    [SerializeField] float perfectReloadEnd;
+
     bool aimingSniper, needToRelease, punching;
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
     GameObject bulletParent => GameObject.Find("PlayerBulletParent");
     
-    public void AddAmmo(int ammoAmout, int magAmount)
-    {
-        SMGAmmo += ammoAmout;
-        SMGmagLeft = Mathf.Min(SMGMagazineSize, SMGmagLeft + magAmount);
+    bool isReloading = false;
+    float reloadDur = 1.3f, reloadTimer = 0f;
+    
 
-        if (ammoAmout > 0) pSound.ammoPickup.Play();
+    public void AddAmmo(int magAmount, int bulletAmount)
+    {
+        SMGMagsLeft += magAmount;
+        SMGcurAmmo = Mathf.Min(SMGMagazineSize, SMGcurAmmo + bulletAmount);
+
+        if (magAmount > 0) pSound.ammoPickup.Play();
         else pSound.magRefillPickup.Play();
     }
 
@@ -49,6 +63,11 @@ public class PlayerCombat : MonoBehaviour
 
         health -= Damage;
         if (health <= 0) Die();
+    }
+    
+    public void EndAttack()
+    {
+        slamHB.EndHitting();
     }
 
     void Die()
@@ -70,34 +89,83 @@ public class PlayerCombat : MonoBehaviour
         punchHB.EndHitting();
     }
 
+    public void Punch3StartHit()
+    {
+        pSound.strongPunch.Play();
+        punchHB.StartHitting();
+    }
+
     private void Start()
     {
         health = maxHealth;
-        Reload();
+        StartReload();
     }
 
     private void Update()
     {
         DoCooldowns();
 
-        if (Input.GetKeyDown(melee) || Input.GetKeyDown(altMelee)) Melee();
+        if (Input.GetMouseButtonDown(0) ) Melee();
 
-        if (Input.GetKeyDown(reload)) Reload();
-        if (Input.GetMouseButtonDown(0) && SMGmagLeft <= 0) Reload();
-        if (Input.GetMouseButtonUp(0)) needToRelease = false;
-        if (Input.GetMouseButton(0)) FireGun1();
+        if (Input.GetKeyDown(reload)) ReloadInteract();
+        if (Input.GetMouseButtonDown(1) && isReloading) AttemptPerfectReload();
+        if (Input.GetMouseButtonUp(1) && SMGcurAmmo <= 0 && !isReloading) StartReload();
 
-        if (Input.GetMouseButtonDown(1)) StartAimingSniper();
-        if (Input.GetMouseButtonUp(1)) FireSniper();
+        if (Input.GetMouseButtonUp(1)) needToRelease = false;
+        if (Input.GetMouseButton(1) && !isReloading) FireCurrentGun();
+
+        if (slamming && pMove.isOnGround) EndSlam(); 
+
+        if(isReloading){
+            reloadTimer += Time.deltaTime;
+            if(reloadTimer >= reloadDur) {
+                reloadTimer = reloadDur;
+                FinishReload();
+            }
+        }
     }
 
-    void Reload()
+    void EndSlam()
     {
-        if (SMGAmmo <= 0) return;
-        SMGAmmo -= 1;
+        slamming = false;
+        slamHB.StartHitting(slamDamage, transform, slamKB, slamStunTime);
+    }
 
-        if (Input.GetMouseButton(0)) needToRelease = true;
-        SMGmagLeft = SMGMagazineSize;
+    void ReloadInteract()
+    {
+        if (isReloading) AttemptPerfectReload();
+        else StartReload();
+    }
+
+    public bool AttemptPerfectReload(){
+        if(!isReloading) return false; 
+        if(GetReloadProgress() > perfectReloadStart && GetReloadProgress() < perfectReloadEnd){
+            reloadTimer = reloadDur;
+            FinishReload();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public float GetReloadProgress(){
+        if(!isReloading) { return -1f; }
+        
+        return reloadTimer / reloadDur;
+    }
+
+    void FinishReload()
+    {
+        isReloading = false;
+        SMGcurAmmo = SMGMagazineSize;
+    }
+
+    void StartReload()
+    {
+        if (SMGMagsLeft <= 0 || GetCurAmmo() == SMGMagazineSize) return;
+        SMGMagsLeft -= 1;
+        reloadTimer = 0f;
+        isReloading = true;
     }
 
     void DoCooldowns()
@@ -105,23 +173,13 @@ public class PlayerCombat : MonoBehaviour
         SMGcooldown -= Time.deltaTime;
     }
 
-    void StartAimingSniper()
+    public int GetMagsLeft()
     {
-        aimingSniper = true;
+        return SMGMagsLeft;
     }
-
-    void FireSniper()
+    public int GetCurAmmo()
     {
-        if (!aimingSniper) return;
-    }
-
-    public int GetAmmo()
-    {
-        return SMGAmmo;
-    }
-    public int GetMagLeft()
-    {
-        return SMGmagLeft;
+        return SMGcurAmmo;
     }
 
     public int GetMagCapacity()
@@ -129,12 +187,12 @@ public class PlayerCombat : MonoBehaviour
         return SMGMagazineSize;
     }
 
-    void FireGun1()
+    void FireCurrentGun()
     {
-        if (needToRelease || aimingSniper || SMGcooldown > 0 || SMGmagLeft <= 0) return;
+        if (needToRelease || aimingSniper || SMGcooldown > 0 || SMGcurAmmo <= 0) return;
 
         pSound.SMGFire.Play();
-        SMGmagLeft -= 1;
+        SMGcurAmmo -= 1;
         var aimAngle = anim.AimFrontArm();
         SMGcooldown = SMGResetTime;
 
@@ -162,19 +220,20 @@ public class PlayerCombat : MonoBehaviour
     {
         if (punching) return;
 
-        if (Input.GetMouseButton(0)) needToRelease = true;
+        if (Input.GetMouseButton(1)) needToRelease = true;
         punching = true;
         anim.Punch();
         pMove.Step(transform.eulerAngles.y == 0 ? punchStepForce : -punchStepForce, stepTime);
 
         bool final = anim.GetPunchStep() == 4;
-        punchHB.StartHitting(final ? punch3Damage : punchDamage, transform, final ? punch3KB : punchKBStrength, final ? punch3StunTime: punchStunTime, pSound.punchHit);
-        if (final) pSound.strongPunch.Play();
-        else pSound.weakPunch.Play();
+        if (final) punchHB.Setup(punch3Damage, transform, punch3KB, punch3StunTime, pSound.punchHit);
+        else punchHB.StartHitting(punchDamage, transform, punchKBStrength, punchStunTime, pSound.punchHit);
+        if (!final) pSound.weakPunch.Play();
     }
 
     void GroundSlam()
     {
-        print("ground slam!");
+        slamming = true;
+        pMove.GroundSlam(groundSlamSpeed);
     }
 }

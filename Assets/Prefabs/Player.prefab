@@ -369,10 +369,10 @@ GameObject:
   - component: {fileID: 4925110271336631882}
   - component: {fileID: 328059879757683769}
   - component: {fileID: 3609877756702823956}
+  - component: {fileID: 22204898320837981}
   - component: {fileID: 5762742260275734781}
   - component: {fileID: 3884537787536404133}
-  - component: {fileID: 22204898320837981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,24 +411,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  melee: 101
-  altMelee: 308
   reload: 114
   SMGResetTime: 0.1
   SMGReloadTime: 1
   SMGBulletSpeed: 80
   SMGDamage: 1
   SMGMagazineSize: 60
+  SMGMagsLeft: 100
   SMGBulletPrefab: {fileID: 8432434969716908706, guid: f7376d8beb368ff4d8ac5140f1dc5f42, type: 3}
   punchHB: {fileID: 4854961460610646553}
-  punchDamage: 3
-  punchKBStrength: 150
+  punchDamage: 8
+  punchKBStrength: 300
   punchStunTime: 0.2
-  punch3Damage: 0
-  punch3KB: 0
-  punch3StunTime: 0
+  punch3Damage: 10
+  punch3KB: 800
+  punch3StunTime: 0.5
   punchStepForce: 450
   stepTime: 0.1
+  perfectReloadStart: 0.5
+  perfectReloadEnd: 0.6
 --- !u!114 &328059879757683769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +481,25 @@ MonoBehaviour:
   faceMouse: 1
   dashDuration: 0.1
   jumpSfx: {fileID: 8300000, guid: 42d266ec9e49aa54c8a5d1aac1779de4, type: 3}
+--- !u!114 &22204898320837981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514489930646763345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354a734627c310f459c6883d48f8f06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SMGFire: {fileID: 11400000, guid: b7c543f261439a24183a42538a276bce, type: 2}
+  jump: {fileID: 11400000, guid: 00a20dda23d60044eaae4c8f74015595, type: 2}
+  weakPunch: {fileID: 11400000, guid: de571a99a0733ff4e98a11cd81a964e3, type: 2}
+  strongPunch: {fileID: 11400000, guid: bf8ac57ce317229489e1d63bcb270e7f, type: 2}
+  punchHit: {fileID: 11400000, guid: 3fecd70cb0eea1647b571d42f2bb6410, type: 2}
+  ammoPickup: {fileID: 0}
+  magRefillPickup: {fileID: 0}
 --- !u!70 &5762742260275734781
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -542,23 +562,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &22204898320837981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4514489930646763345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354a734627c310f459c6883d48f8f06b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SMGFire: {fileID: 11400000, guid: b7c543f261439a24183a42538a276bce, type: 2}
-  jump: {fileID: 11400000, guid: 00a20dda23d60044eaae4c8f74015595, type: 2}
-  weakPunch: {fileID: 11400000, guid: de571a99a0733ff4e98a11cd81a964e3, type: 2}
-  strongPunch: {fileID: 11400000, guid: bf8ac57ce317229489e1d63bcb270e7f, type: 2}
-  punchHit: {fileID: 0}
 --- !u!1 &8255883282999582387
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +660,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23081d42a0734b0438fc20831224b7cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitting: 0
+  hitLimit: 3
+  player: 0
 --- !u!61 &1241127474640890111
 BoxCollider2D:
   m_ObjectHideFlags: 0

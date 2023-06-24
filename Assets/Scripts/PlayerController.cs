@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool isOnGround;
     public bool isDashing = false;
     [SerializeField] bool faceMouse = true;
-    bool stepping;
+    bool stepping, slamming, busy;
 
     [SerializeField][Tooltip("Amount of time in seconds a dash lasts")] float dashDuration = 0.3f; 
     private float dashTimer; 
@@ -41,22 +41,23 @@ public class PlayerController : MonoBehaviour
 
         CheckGround();
         
-        //print(dashTimer);
         if (isDashing && dashTimer > 0) {
             dashTimer -= Time.deltaTime;
             if(dashTimer <= 0) {
-                //print("done");
                 isDashing = false;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) Jump();
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) Move(-1);
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) Move(1);
+        if (!slamming) {
+            if (Input.GetKeyDown(KeyCode.Space)) Jump();
+            if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) Move(-1);
+            if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) Move(1);
+        }
+        
+        busy = stepping || isDashing || slamming;
+        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !busy) StopMove();
 
-        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !isDashing && !stepping) StopMove();
-
-        if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isDashing){ //Press shift while holding a movement key
+        if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !busy){ //Press shift while holding a movement key
             isDashing = true;
             dashTimer = dashDuration;
         }
@@ -82,6 +83,12 @@ public class PlayerController : MonoBehaviour
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10);
         float yAngle = mousePos.x < transform.position.x ? 180 : 0;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, yAngle, 0);
+    }
+
+    public void GroundSlam(float fallSpeed)
+    {
+        slamming = true;
+        rb.velocity = Vector2.down * fallSpeed;
     }
 
     public void Jump(){
@@ -119,6 +126,7 @@ public class PlayerController : MonoBehaviour
         bool wasOnGround = isOnGround;
         isOnGround = Physics2D.BoxCast(transform.position + (Vector3) groundCheckBoxOffset, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);
         if (!wasOnGround && isOnGround) jumpsLeft = maxJumps; //This line triggers when you first touch ground after being off it, and resets your jumps
+        if (isOnGround) slamming = false;
     }
 
     private bool CheckWallSide(int dir){ //dir = -1 for left, 1 for right

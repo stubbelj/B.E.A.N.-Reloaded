@@ -122,6 +122,9 @@ public class BaseEnemy : MonoBehaviour
         rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
+    public virtual void EndAttack() { }
+    public virtual void StartAttck() { }
+
     protected virtual void Die()
     {
         if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);

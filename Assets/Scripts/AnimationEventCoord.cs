@@ -6,10 +6,17 @@ public class AnimationEventCoord : MonoBehaviour
 {
     PlayerCombat pCombat => GetComponentInParent<PlayerCombat>();
     PlayerAnimator pAnim => GetComponentInParent<PlayerAnimator>();
+    BaseEnemy enemy => GetComponentInParent<BaseEnemy>();
 
-    public void Destroy()
+    public void EndAttack()
     {
-        Destroy(gameObject);
+        if (enemy) enemy.EndAttack();
+    }
+
+    public void StartAttack()
+    {
+        if (enemy) enemy.StartAttck();
+        if (pCombat) pCombat.Punch3StartHit();
     }
 
     public void EndPunch()
@@ -20,5 +27,10 @@ public class AnimationEventCoord : MonoBehaviour
     public void ShowArms()
     {
         if (pAnim) pAnim.ShowArms();
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

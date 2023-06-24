@@ -5,12 +5,13 @@ using UnityEngine;
 public class SplitterEnemy : BaseEnemy
 {
     [Space()]
-    [SerializeField] float range = 1;
+    [SerializeField] float range = 1, inturruptThreshold = 2;
     [SerializeField] GameObject nextSplitter;
     [SerializeField] Vector2 spawnOffset;
     [SerializeField] int spawnCount;
 
     [Header("attack")]
+    [SerializeField] HitBox attackHB;
     [SerializeField] float attackResetTime;
     float attackCooldown;
     [SerializeField] float attackDamage;
@@ -18,6 +19,16 @@ public class SplitterEnemy : BaseEnemy
     [Header("Anims")]
     [SerializeField] Animator anim;
     [SerializeField] string attackTrigger = "ATTACK";
+
+    public override void Hit(float damage, Vector3 knockBack, float stunTime = -1)
+    {
+        base.Hit(damage, knockBack, stunTime);
+        if (damage > inturruptThreshold) {
+            anim.SetTrigger("INTURRUPT");
+            EndAttack();
+        }
+
+    }
 
     protected override void Start()
     {
@@ -49,6 +60,19 @@ public class SplitterEnemy : BaseEnemy
     {
         attackCooldown = attackResetTime;
         anim.SetTrigger(attackTrigger);
+        attackHB.Setup(attackDamage, null, 0);
+    }
+
+    public override void StartAttck()
+    {
+        base.StartAttck();
+        attackHB.StartHitting();
+    }
+
+    public override void EndAttack()
+    {
+        base.EndAttack();
+        attackHB.EndHitting();
     }
 
     protected override void Die()
