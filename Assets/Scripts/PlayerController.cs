@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckBoxDimensions, groundCheckBoxOffset;
     [SerializeField] LayerMask platformLayer;
     
-    [Header("Jump")]
+    [Header("StartJump")]
     [SerializeField] float jumpForce;
     [SerializeField][Tooltip("Max amount of time in seconds you can hold the spacebar to get a longer jump")] float jumpMaxTime;
+    float jumpTimer;
     [SerializeField] public int maxJumps = 2;
     public int jumpsLeft = 0;
     [SerializeField] public AudioClip jumpSfx;
@@ -29,8 +30,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashSpeed;
     private float dashTimer; 
 
-    //State bools
+    [Header("State bools")]
     public bool isOnGround;
+    public bool isJumping = false;
     public bool isDashing = false;
     bool faceMouse = true;
     bool stepping, slamming, busy;
@@ -54,16 +56,39 @@ public class PlayerController : MonoBehaviour
         }
 
         if (!slamming && !anim.slamming) {
-            if (Input.GetKeyDown(KeyCode.Space)) Jump();
+            if (Input.GetKeyDown(KeyCode.Space)) StartJump();
             if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) Move(-1);
             if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) Move(1);
         }
-        
+        if(isJumping && Input.GetKey(KeyCode.Space) && jumpTimer > 0){
+            ContinueJump();
+        }
+        if(isJumping && (jumpTimer <= 0 && Input.GetKeyUp(KeyCode.Space))){
+            isJumping = false;
+        }
+
         busy = stepping || isDashing || slamming || anim.slamming;
         if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !busy && !pGrapple.LaunchFromGrapple()) StopMove();
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !busy){ //Press shift while holding a movement key
             Dash();
+        }
+    }
+    
+    public void ContinueJump(){
+        rb.velocity = new Vector2(rb.velocity.x, 0); 
+        rb.velocity += Vector2.up * jumpForce;
+        jumpTimer -= Time.deltaTime;
+    }
+
+    public void StartJump(){
+        if(isOnGround || jumpsLeft > 0){
+            isJumping = true;
+            jumpsLeft--;
+            pSound.jump.Play();
+            rb.velocity = new Vector2(rb.velocity.x, 0); //Reset vertical velocity so the second jump isn't affected by your current velocity
+            rb.velocity += Vector2.up * jumpForce;
+            jumpTimer = jumpMaxTime;
         }
     }
 
@@ -118,21 +143,11 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.down * fallSpeed;
     }
 
-    public void Jump(){
-        if(isOnGround || jumpsLeft > 0){
-            jumpsLeft--;
-            pSound.jump.Play();
-            rb.velocity *= Vector2.up * 0; //Reset vertical velocity so the second jump isn't affected by your current velocity
-            rb.velocity += Vector2.up * jumpForce;
-        }
-    }
-
     private void StopMove(){ //Stops the player's *horizontal* movement
         rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     private void Move(int dir){ //dir = -1 for left, 1 for right 
-
         if (stepping) return;
         bool moveRight = dir > 0;
         bool faceRight = transform.eulerAngles.y == 0;
