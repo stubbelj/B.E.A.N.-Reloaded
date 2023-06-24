@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 3884537787536404133}
   - component: {fileID: 5488995530429941460}
   - component: {fileID: 7976931468169469737}
+  - component: {fileID: 7313321825066213153}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -546,7 +547,7 @@ Transform:
   - {fileID: 1309240229907724765}
   - {fileID: 3341014043655083560}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4925110271336631882
 MonoBehaviour:
@@ -631,8 +632,8 @@ MonoBehaviour:
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 12
-  jumpMaxTime: 0
+  jumpForce: 10
+  jumpMaxTime: 0.3
   maxJumps: 2
   jumpsLeft: 0
   jumpSfx: {fileID: 8300000, guid: 42d266ec9e49aa54c8a5d1aac1779de4, type: 3}
@@ -852,6 +853,21 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &7313321825066213153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514489930646763345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baae9c4f51495614ca0411a1042c3ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentXP: 0
+  nextThreshold: 0
+  currentLevel: 0
 --- !u!1 &8255883282999582387
 GameObject:
   m_ObjectHideFlags: 0

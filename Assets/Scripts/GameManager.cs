@@ -60,10 +60,13 @@ public class GameManager : MonoBehaviour
     [Space()]
     [SerializeField] float difficultIncreasePeriod;
     float difficultIncreaseCooldown;
+    public int maxEnemies = 3;
+
+    [Header("restart")]
+    [SerializeField] int sceneNum = 2;
 
     PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
     PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
-    public int maxEnemies = 3;
 
     private void OnValidate()
     {
@@ -105,12 +108,18 @@ public class GameManager : MonoBehaviour
  
     private void Update()
     {
-        if (pCombat.dead) SceneManager.LoadScene(0);
+        if (pCombat.dead) ReloadScene(); 
 
         difficultIncreaseCooldown -= Time.deltaTime;
         if (difficultIncreaseCooldown <= 0) {
             difficultIncreaseCooldown = difficultIncreasePeriod;
             maxEnemies += 1;
         }
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
     }
 }
