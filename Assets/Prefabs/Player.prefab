@@ -734,9 +734,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a0addbcb581924da1e0da318190330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverDist: 0.8
+  hoverDist: 2
+  moveSpeed: 16
+  autoBreakDist: 1.5
+  timeSinceGrappleEnd: 0
   point: {fileID: 0}
   movingToPoint: 0
+  launchedFromGrapple: 0
   activateKey: 101
 --- !u!120 &7976931468169469737
 LineRenderer:
