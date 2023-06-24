@@ -44,6 +44,7 @@ public class PlayerCombat : MonoBehaviour
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
     Transform bulletParent => FindObjectOfType<GameManager>().transform;
+    Transform bulletSpawnLoc => gameObject.transform.Find("frontArm").Find("bulletSpawnLocation");
     
     bool isReloading = false;
     float reloadDur = 1.3f, reloadTimer = 0f;
@@ -214,7 +215,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Mathf.Abs(aimAngle.z + 90) < 8f) Boost(); 
 
-        var newBullet = Instantiate(SMGBulletPrefab, transform.position, Quaternion.identity);
+        var newBullet = Instantiate(SMGBulletPrefab, bulletSpawnLoc.position, Quaternion.identity);
         newBullet.transform.eulerAngles = aimAngle;
         newBullet.GetComponent<Bullet>().damage = SMGDamage;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
