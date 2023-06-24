@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitting: 0
+  hitLimit: 3
   player: 0
 --- !u!61 &3641670193771591135
 BoxCollider2D:
@@ -324,6 +325,7 @@ MonoBehaviour:
   debug: 0
   flipToFacePlayer: 1
   range: 1.3
+  inturruptThreshold: 8
   nextSplitter: {fileID: 2236770581059442183, guid: a280c7474c9d63540a0f75cf408058ae, type: 3}
   spawnOffset: {x: 1, y: 0}
   spawnCount: 3

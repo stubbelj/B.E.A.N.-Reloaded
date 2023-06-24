@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimator))]
@@ -12,14 +13,15 @@ public class PlayerCombat : MonoBehaviour
 
     [Space()]
     [SerializeField] KeyCode reload = KeyCode.R;
+    [SerializeField] float boostForceMult = 0.8f;
 
     [Header("SMG")]
     [SerializeField] float SMGResetTime;
-    [SerializeField] float SMGReloadTime, SMGBulletSpeed, SMGDamage;
+    [SerializeField] float SMGReloadTime, SMGBulletSpeed, SMGDamage, SMGBoostForce = 320;
     [SerializeField] int SMGMagazineSize, SMGMagsLeft = 100;
     int SMGcurAmmo;
     [SerializeField] GameObject SMGBulletPrefab;
-    float SMGcooldown;
+    float SMGcooldown, remainingBoostForce;
 
     [Header("Punch")]
     [SerializeField] HitBox punchHB;
@@ -40,7 +42,7 @@ public class PlayerCombat : MonoBehaviour
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
-    GameObject bulletParent => GameObject.Find("PlayerBulletParent");
+    Transform bulletParent => FindObjectOfType<GameManager>().transform;
     
     bool isReloading = false;
     float reloadDur = 1.3f, reloadTimer = 0f;
@@ -67,6 +69,9 @@ public class PlayerCombat : MonoBehaviour
     
     public void EndAttack()
     {
+        if (!slamHB.hitting) return;
+        
+        anim.slamming = false;
         slamHB.EndHitting();
     }
 
@@ -82,8 +87,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void EndPunch()
     {
-        if (anim.GetPunchStep() > 3) CameraShake.i.Shake(0.2f, 0.2f);
-        else CameraShake.i.Shake(0.05f, 0.1f);
+        if (anim.GetPunchStep() <= 3) CameraShake.i.Shake(0.05f, 0.1f);
 
         punching = false;
         punchHB.EndHitting();
@@ -114,7 +118,10 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetMouseButtonUp(1)) needToRelease = false;
         if (Input.GetMouseButton(1) && !isReloading) FireCurrentGun();
 
-        if (slamming && pMove.isOnGround) LandSlam(); 
+        if (pMove.isOnGround) {
+            if (slamming) LandSlam();
+            remainingBoostForce = SMGBoostForce;
+        }
 
         if(isReloading){
             reloadTimer += Time.deltaTime;
@@ -129,6 +136,10 @@ public class PlayerCombat : MonoBehaviour
     {
         slamming = false;
         slamHB.StartHitting(slamDamage, transform, slamKB, slamStunTime);
+
+        anim.LandSlam();
+        pSound.slamLand.Play();
+        CameraShake.i.Shake(0.3f, 0.2f);
     }
 
     void ReloadInteract()
@@ -196,11 +207,19 @@ public class PlayerCombat : MonoBehaviour
         var aimAngle = anim.AimFrontArm();
         SMGcooldown = SMGResetTime;
 
+        if (Mathf.Abs(aimAngle.z + 90) < 8f) Boost(); 
+
         var newBullet = Instantiate(SMGBulletPrefab, transform.position, Quaternion.identity);
         newBullet.transform.eulerAngles = aimAngle;
         newBullet.GetComponent<Bullet>().damage = SMGDamage;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
         newBullet.transform.SetParent(bulletParent.transform);
+    }
+
+    void Boost()
+    {
+        pMove.BoostUp(remainingBoostForce);
+        remainingBoostForce *= boostForceMult;
     }
 
     void Melee()
@@ -229,6 +248,7 @@ public class PlayerCombat : MonoBehaviour
         if (final) punchHB.Setup(punch3Damage, transform, punch3KB, punch3StunTime, pSound.punchHit);
         else punchHB.StartHitting(punchDamage, transform, punchKBStrength, punchStunTime, pSound.punchHit);
         if (!final) pSound.weakPunch.Play();
+        else pSound.punch3WindUp.Play();
     }
 
     void GroundSlam()

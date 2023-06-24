@@ -6,12 +6,23 @@ public class AnimationEventCoord : MonoBehaviour
 {
     PlayerCombat pCombat => GetComponentInParent<PlayerCombat>();
     PlayerAnimator pAnim => GetComponentInParent<PlayerAnimator>();
+    PlayerSound pSound => GetComponentInParent<PlayerSound>();
     BaseEnemy enemy => GetComponentInParent<BaseEnemy>();
 
     public void EndAttack()
     {
         if (enemy) enemy.EndAttack();
         if (pCombat) pCombat.EndAttack();
+    }
+
+    public void BigPunchCameraShake()
+    {
+        CameraShake.i.Shake(0.2f, 0.2f);
+    }
+
+    public void PlayFootStep()
+    {
+        if (pSound) pSound.footStep.Play();
     }
 
     public void StartAttack()

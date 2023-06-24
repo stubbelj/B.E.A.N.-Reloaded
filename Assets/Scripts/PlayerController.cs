@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     PlayerSound pSound => GetComponent<PlayerSound>();
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerCombat pCombat => GetComponent<PlayerCombat>();
+    PlayerGrapple pGrapple => GetComponent<PlayerGrapple>();
 
     [SerializeField] float jumpForce;
     [SerializeField] float movementSpeed;
@@ -48,19 +49,34 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (!slamming) {
+        if (!slamming && !anim.slamming) {
             if (Input.GetKeyDown(KeyCode.Space)) Jump();
             if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) Move(-1);
             if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) Move(1);
         }
         
-        busy = stepping || isDashing || slamming;
-        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !busy) StopMove();
+        busy = stepping || isDashing || slamming || anim.slamming;
+        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !busy && !pGrapple.LaunchFromGrapple()) StopMove();
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !busy){ //Press shift while holding a movement key
             isDashing = true;
             dashTimer = dashDuration;
         }
+    }
+
+    public bool isSlamming()
+    {
+        return slamming;
+    }
+
+    public void RefreshJump(int numJumps)
+    {
+        jumpsLeft = Mathf.Max(jumpsLeft, numJumps);
+    }
+
+    public void BoostUp(float force)
+    {
+        rb.AddForce(Vector2.up * force);
     }
 
     public void Step(float xForce, float stepTime)
@@ -110,6 +126,7 @@ public class PlayerController : MonoBehaviour
         bool moveRight = dir > 0;
         bool faceRight = transform.eulerAngles.y == 0;
         if (faceRight != moveRight && pCombat.IsPunching()) return;
+        pGrapple.EndGrappleLaunch();
 
         float baseSpeed = (isOnGround ? movementSpeed : airMovementSpeed);
         float speed     = (isDashing  ? dashSpeed : baseSpeed);

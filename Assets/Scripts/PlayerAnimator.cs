@@ -17,10 +17,12 @@ public class PlayerAnimator : MonoBehaviour
     PlayerController pMove =>GetComponent<PlayerController>();
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
     int punchStep;
+    public bool slamming;
 
     public void LandSlam()
     {
         cockpit.SetTrigger("SLAM");
+        slamming = true;
     }
 
     public int GetPunchStep()
