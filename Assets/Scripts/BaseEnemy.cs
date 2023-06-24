@@ -9,6 +9,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] float maxHealth, health;
     [SerializeField] Slider hpSlider;
     [SerializeField] GameObject deathFX;
+    [SerializeField] int lootTableID = -1;
 
     [Space()]
     [SerializeField] protected float walkSpeed;
@@ -124,6 +125,7 @@ public class BaseEnemy : MonoBehaviour
     protected virtual void Die()
     {
         if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
+        if (lootTableID != -1) GameManager.i.SpawnLoot(lootTableID, transform.position);
         Destroy(gameObject);
     }
 }

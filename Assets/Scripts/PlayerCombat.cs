@@ -32,10 +32,13 @@ public class PlayerCombat : MonoBehaviour
     PlayerSound pSound => GetComponent<PlayerSound>();
     GameObject bulletParent => GameObject.Find("PlayerBulletParent");
     
-    public void AddAmmo(int amount)
+    public void AddAmmo(int ammoAmout, int magAmount)
     {
-        SMGAmmo += amount;
-        pSound.AmmoPickup.Play();
+        SMGAmmo += ammoAmout;
+        SMGmagLeft = Mathf.Min(SMGMagazineSize, SMGmagLeft + magAmount);
+
+        if (ammoAmout > 0) pSound.ammoPickup.Play();
+        else pSound.magRefillPickup.Play();
     }
 
     public void Hit(float Damage)

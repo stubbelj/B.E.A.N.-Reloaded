@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5604179515551203692}
   - component: {fileID: 1258847246824076314}
   - component: {fileID: 4718616108271000250}
+  - component: {fileID: 5514928587446319915}
   m_Layer: 3
   m_Name: splitterEnemyBig
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 1137991338870746883}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &302439003366526981
 SpriteRenderer:
@@ -166,18 +167,44 @@ MonoBehaviour:
   health: 35
   hpSlider: {fileID: 6140263286204733146}
   deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
+  lootTableID: 0
   walkSpeed: 0.5
   defaultStunTime: 0.6
   stunTimeResist: 1
-  knockBackYMin: 0.2
+  knockBackLimits: {x: 0.2, y: 15}
   whiteSprite: {fileID: 21300000, guid: 1365cafcfe48a3a42af0ff6f2fa488fe, type: 3}
   flashWhiteTime: 0.1
   debug: 0
-  flipToFacePlayer: 0
-  range: 1
+  flipToFacePlayer: 1
+  range: 1.3
   nextSplitter: {fileID: 2236770581059442183, guid: a280c7474c9d63540a0f75cf408058ae, type: 3}
   spawnOffset: {x: 1, y: 0}
   spawnCount: 3
+  attackResetTime: 1
+  attackDamage: 20
+  anim: {fileID: 5514928587446319915}
+  attackTrigger: ATTACK
+--- !u!95 &5514928587446319915
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3284098514627064922}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1332317adf8b14448838caa8f6853696, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6612473963026758680
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -131,9 +131,11 @@ MonoBehaviour:
   health: 20
   hpSlider: {fileID: 7155432530292007704}
   deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
+  lootTableID: 0
   walkSpeed: 1
   defaultStunTime: 0.6
-  knockBackYMin: 0.2
+  stunTimeResist: 0
+  knockBackLimits: {x: 0.2, y: 15}
   whiteSprite: {fileID: 21300000, guid: 484c29e7b3e5a2748b0b3031f921e026, type: 3}
   flashWhiteTime: 0.1
   debug: 0
