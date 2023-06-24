@@ -18,6 +18,11 @@ public class PlayerAnimator : MonoBehaviour
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
     int punchStep;
 
+    public void LandSlam()
+    {
+        cockpit.SetTrigger("SLAM");
+    }
+
     public int GetPunchStep()
     {
         return punchStep;

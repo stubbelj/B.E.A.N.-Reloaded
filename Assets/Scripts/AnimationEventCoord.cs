@@ -11,6 +11,7 @@ public class AnimationEventCoord : MonoBehaviour
     public void EndAttack()
     {
         if (enemy) enemy.EndAttack();
+        if (pCombat) pCombat.EndAttack();
     }
 
     public void StartAttack()

@@ -114,7 +114,7 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetMouseButtonUp(1)) needToRelease = false;
         if (Input.GetMouseButton(1) && !isReloading) FireCurrentGun();
 
-        if (slamming && pMove.isOnGround) EndSlam(); 
+        if (slamming && pMove.isOnGround) LandSlam(); 
 
         if(isReloading){
             reloadTimer += Time.deltaTime;
@@ -125,7 +125,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    void EndSlam()
+    void LandSlam()
     {
         slamming = false;
         slamHB.StartHitting(slamDamage, transform, slamKB, slamStunTime);
