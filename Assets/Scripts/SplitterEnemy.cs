@@ -27,7 +27,6 @@ public class SplitterEnemy : BaseEnemy
             anim.SetTrigger("INTURRUPT");
             EndAttack();
         }
-
     }
 
     protected override void Start()

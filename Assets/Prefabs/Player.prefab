@@ -545,7 +545,7 @@ Transform:
   - {fileID: 1309240229907724765}
   - {fileID: 3341014043655083560}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4925110271336631882
 MonoBehaviour:
@@ -586,6 +586,7 @@ MonoBehaviour:
   slamStunTime: 0.3
   perfectReloadStart: 0.5
   perfectReloadEnd: 0.6
+  attempingPerfectReload: 0
 --- !u!114 &328059879757683769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +661,9 @@ MonoBehaviour:
   slamLand: {fileID: 11400000, guid: eff4472c0d86d0f44ba4d8a66f4de091, type: 2}
   footStep: {fileID: 11400000, guid: b686d3f22b0f74a468b4cf62d6a86f04, type: 2}
   punch3WindUp: {fileID: 11400000, guid: e1bc94e245ef760418fc399a97f1f287, type: 2}
+  landingSound: {fileID: 11400000, guid: 9a456b3288c04044388d2306eacd6c03, type: 2}
+  dash: {fileID: 11400000, guid: ee5000977d70ed34f85c7f2e8a0fcd44, type: 2}
+  maxFallSpeed: 20
 --- !u!70 &5762742260275734781
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
