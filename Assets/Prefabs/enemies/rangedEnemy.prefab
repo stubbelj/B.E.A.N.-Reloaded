@@ -167,6 +167,7 @@ MonoBehaviour:
   hpSlider: {fileID: 6740041323437099841}
   deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
   lootTableID: 0
+  XPAmount: 20
   walkSpeed: 1
   defaultStunTime: 0.6
   stunTimeResist: 0

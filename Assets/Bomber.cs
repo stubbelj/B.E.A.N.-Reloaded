@@ -18,6 +18,16 @@ public class Bomber : BaseEnemy
         explodeSound = Instantiate(explodeSound);
     }
 
+    public void Suicide()
+    {
+        Die();
+    }
+
+    protected override void Die(bool playerKill = true)
+    {
+        base.Die(!exploding);
+    }
+
     protected override void Update()
     {
         base.Update(); 
