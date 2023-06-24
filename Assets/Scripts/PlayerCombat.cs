@@ -16,8 +16,8 @@ public class PlayerCombat : MonoBehaviour
     [Header("SMG")]
     [SerializeField] float SMGResetTime;
     [SerializeField] float SMGReloadTime, SMGBulletSpeed, SMGDamage;
-    [SerializeField] int SMGMagazineSize, SMGAmmo = 100;
-    int SMGmagLeft;
+    [SerializeField] int SMGMagazineSize, SMGMagsLeft = 100;
+    int SMGcurAmmo;
     [SerializeField] GameObject SMGBulletPrefab;
     float SMGcooldown;
 
@@ -30,11 +30,18 @@ public class PlayerCombat : MonoBehaviour
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
-
+    GameObject bulletParent => GameObject.Find("PlayerBulletParent");
     
+    private bool isReloading = false;
+    private float reloadDur = 1.3f;
+    private float reloadTimer = 0f;
+    [Header("Reloading")]
+    [SerializeField] float perfectReloadStart;
+    [SerializeField] float perfectReloadEnd;
+
     public void AddAmmo(int amount)
     {
-        SMGAmmo += amount;
+        SMGMagsLeft += amount;
         pSound.AmmoPickup.Play();
     }
 
@@ -70,7 +77,7 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
-        Reload();
+        StartReload();
     }
 
     private void Update()
@@ -79,22 +86,61 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKeyDown(melee) || Input.GetKeyDown(altMelee)) Melee();
 
-        if (Input.GetKeyDown(reload)) Reload();
-        if (Input.GetMouseButtonDown(0) && SMGmagLeft <= 0) Reload();
+        if (Input.GetKeyDown(reload)){
+            if(!isReloading){
+                StartReload();
+            } else {
+                print("Attempting perfect reload");
+                AttemptPerfectReload();
+            }
+        }
+        if (Input.GetMouseButtonUp(0) && SMGcurAmmo <= 0 && !isReloading) StartReload();
         if (Input.GetMouseButtonUp(0)) needToRelease = false;
-        if (Input.GetMouseButton(0)) FireGun1();
+        if (Input.GetMouseButton(0) && !isReloading) FireGun1();
 
         if (Input.GetMouseButtonDown(1)) StartAimingSniper();
         if (Input.GetMouseButtonUp(1)) FireSniper();
+
+        if(isReloading){
+            reloadTimer += Time.deltaTime;
+            if(reloadTimer >= reloadDur) {
+                reloadTimer = reloadDur;
+                FinishReload();
+            }
+        }
     }
 
-    void Reload()
-    {
-        if (SMGAmmo <= 0) return;
-        SMGAmmo -= 1;
+    public bool AttemptPerfectReload(){
+        if(!isReloading) { print("not reloading"); return false; }
+        if(GetReloadProgress() > perfectReloadStart && GetReloadProgress() < perfectReloadEnd){
+            reloadTimer = reloadDur;
+            print("perf reload successful");
+            FinishReload();
+            return true;
+        } else {
+            print("perf reload failed");
+            return false;
+        }
+    }
 
-        if (Input.GetMouseButton(0)) needToRelease = true;
-        SMGmagLeft = SMGMagazineSize;
+    public float GetReloadProgress(){
+        if(!isReloading) { return -1f; }
+        
+        return reloadTimer / reloadDur;
+    }
+
+    void FinishReload()
+    {
+        isReloading = false;
+        SMGcurAmmo = SMGMagazineSize;
+    }
+
+    void StartReload()
+    {
+        if (SMGMagsLeft <= 0 || GetCurAmmo() == SMGMagazineSize) return;
+        SMGMagsLeft -= 1;
+        reloadTimer = 0f;
+        isReloading = true;
     }
 
     void DoCooldowns()
@@ -112,13 +158,13 @@ public class PlayerCombat : MonoBehaviour
         if (!aimingSniper) return;
     }
 
-    public int GetAmmo()
+    public int GetMagsLeft()
     {
-        return SMGAmmo;
+        return SMGMagsLeft;
     }
-    public int GetMagLeft()
+    public int GetCurAmmo()
     {
-        return SMGmagLeft;
+        return SMGcurAmmo;
     }
 
     public int GetMagCapacity()
@@ -128,10 +174,10 @@ public class PlayerCombat : MonoBehaviour
 
     void FireGun1()
     {
-        if (needToRelease || aimingSniper || SMGcooldown > 0 || SMGmagLeft <= 0) return;
+        if (needToRelease || aimingSniper || SMGcooldown > 0 || SMGcurAmmo <= 0) return;
 
         pSound.SMGFire.Play();
-        SMGmagLeft -= 1;
+        SMGcurAmmo -= 1;
         var aimAngle = anim.AimFrontArm();
         SMGcooldown = SMGResetTime;
 
@@ -139,6 +185,7 @@ public class PlayerCombat : MonoBehaviour
         newBullet.transform.eulerAngles = aimAngle;
         newBullet.GetComponent<Bullet>().damage = SMGDamage;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
+        newBullet.transform.SetParent(bulletParent.transform);
     }
 
     void Melee()
