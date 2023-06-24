@@ -10,7 +10,7 @@ public class AmmoHudController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI magText, ammoText;
     [SerializeField] Slider ammoSlider, reloadSlider;
-    [SerializeField] GameObject reloadSliderObj;
+    [SerializeField] GameObject reloadSliderObj, targetBlock;
     private bool reloading;
 
     private void Update()
@@ -18,7 +18,8 @@ public class AmmoHudController : MonoBehaviour
         int ammoLeft = player.GetCurAmmo();
         int magCap = player.GetMagCapacity();
 
-        ammoText.text = ammoLeft + "/" + magCap;
+
+        ammoText.text = AddLeadingZeroes(ammoLeft, magCap.ToString().Length) + "/" + magCap;
         magText.text = player.GetMagsLeft().ToString();
         ammoSlider.value = (float) ammoLeft / magCap;
 
@@ -27,10 +28,18 @@ public class AmmoHudController : MonoBehaviour
 
         float reloadProg = player.GetReloadProgress();
         if(reloadProg == -1f){
-            reloadSliderObj.active = false;
-        } else { 
-            reloadSliderObj.active = true;
+            reloadSliderObj.SetActive(false);
+        } else {
+            reloadSliderObj.SetActive(true);
+            targetBlock.SetActive(player.attempingPerfectReload);
             reloadSlider.value = reloadProg;
         }
+    }
+
+    string AddLeadingZeroes(int num, int sigFigs)
+    {
+        string s = num.ToString();
+        while (s.Length < sigFigs) s = "0" + s;
+        return s; 
     }
 }

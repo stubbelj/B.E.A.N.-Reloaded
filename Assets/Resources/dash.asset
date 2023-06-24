@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b54c4e062583404688e9450addf1871, type: 3}
-  m_Name: jump
+  m_Name: dash
   m_EditorClassIdentifier: 
   clips:
   - name: 
-    clip: {fileID: 8300000, guid: 3248eeb6e61c3de4ab4a71ff32ec76cb, type: 3}
+    clip: {fileID: 8300000, guid: a84e6bbd66c00d44db267231e09b79d9, type: 3}
     looping: 0
     CustomPitchAndVolume: 0
     volume: 0
     pitch: 0
   type: 0
   SynchronizePitchAndVolume: 1
-  pitch: 1.096
-  volume: 0.033
+  pitch: 1
+  volume: 1
   voiceLines: 0
   audioSource: {fileID: 0}
   instantialized: 0

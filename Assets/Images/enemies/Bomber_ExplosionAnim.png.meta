@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,12 +136,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_0
+      name: Bomber_ExplosionAnim_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 30
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -150,17 +150,59 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0313be87fd70b7942b8a17ee56940185
-      internalID: -2044184968
+      spriteID: d5fc3b022fdc64d4d847e7cc5f85f3f4
+      internalID: -1311763793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_1
+      name: Bomber_ExplosionAnim_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 31
+        y: 0
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 545cc696a759bd44e8e1e767ca64d3ba
+      internalID: 965435985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomber_ExplosionAnim_2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e433e53c779ebde499e8276d0e9f40de
+      internalID: -1158937500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomber_ExplosionAnim_3
+      rect:
+        serializedVersion: 2
+        x: 94
         y: 0
         width: 32
         height: 32
@@ -171,17 +213,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9826960a379f49b4b8bbb891deb60f9f
-      internalID: 935378796
+      spriteID: 53a2058d07a1c2848b01c6203b559793
+      internalID: -378027326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_2
+      name: Bomber_ExplosionAnim_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 126
         y: 0
         width: 32
         height: 32
@@ -192,17 +234,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef98b8f14335a645bfec9b772b92032
-      internalID: 796277372
+      spriteID: 9ecc7b2d1b43eb64f9bb4549868612a8
+      internalID: 1674418791
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_3
+      name: Bomber_ExplosionAnim_5
       rect:
         serializedVersion: 2
-        x: 96
+        x: 158
         y: 0
         width: 32
         height: 32
@@ -213,17 +255,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc90f3666f097a74bbdedd4e7b151fab
-      internalID: -162342927
+      spriteID: fb1b01f8fe1d26c4b9e86d931082e5fa
+      internalID: -495006006
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_4
+      name: Bomber_ExplosionAnim_6
       rect:
         serializedVersion: 2
-        x: 128
+        x: 190
         y: 0
         width: 32
         height: 32
@@ -234,8 +276,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
-      internalID: -486213973
+      spriteID: e5090b810c7f1d944a62efd5bbe9ce22
+      internalID: -24352423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomber_ExplosionAnim_7
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f79c2e8f0600c584ba980209d6931531
+      internalID: 136127169
       vertices: []
       indices: 
       edges: []
@@ -251,11 +314,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Arms_PunchCombo_1_0: -2044184968
-      Player_Arms_PunchCombo_1_1: 935378796
-      Player_Arms_PunchCombo_1_2: 796277372
-      Player_Arms_PunchCombo_1_3: -162342927
-      Player_Arms_PunchCombo_1_4: -486213973
+      Bomber_ExplosionAnim_0: -1311763793
+      Bomber_ExplosionAnim_1: 965435985
+      Bomber_ExplosionAnim_2: -1158937500
+      Bomber_ExplosionAnim_3: -378027326
+      Bomber_ExplosionAnim_4: 1674418791
+      Bomber_ExplosionAnim_5: -495006006
+      Bomber_ExplosionAnim_6: -24352423
+      Bomber_ExplosionAnim_7: 136127169
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -59,9 +59,16 @@ public class PlayerController : MonoBehaviour
         if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !busy && !pGrapple.LaunchFromGrapple()) StopMove();
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !busy){ //Press shift while holding a movement key
-            isDashing = true;
-            dashTimer = dashDuration;
+            Dash();
         }
+    }
+
+    void Dash()
+    {
+        isDashing = true;
+        anim.SetDash();
+        dashTimer = dashDuration;
+        pSound.dash.Play();
     }
 
     public bool isSlamming()
@@ -142,7 +149,10 @@ public class PlayerController : MonoBehaviour
     private void CheckGround(){
         bool wasOnGround = isOnGround;
         isOnGround = Physics2D.BoxCast(transform.position + (Vector3) groundCheckBoxOffset, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);
-        if (!wasOnGround && isOnGround) jumpsLeft = maxJumps; //This line triggers when you first touch ground after being off it, and resets your jumps
+        if (!wasOnGround && isOnGround) {
+            if (!slamming) pSound.Land();
+            jumpsLeft = maxJumps; //This line triggers when you first touch ground after being off it, and resets your jumps
+        }
         if (isOnGround) slamming = false;
     }
 
