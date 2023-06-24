@@ -10,27 +10,31 @@ public class PlayerController : MonoBehaviour
     PlayerCombat pCombat => GetComponent<PlayerCombat>();
     PlayerGrapple pGrapple => GetComponent<PlayerGrapple>();
 
-    [SerializeField] float jumpForce;
     [SerializeField] float movementSpeed;
     [SerializeField] float airMovementSpeed;
-    [SerializeField] float dashSpeed;
     
     private float groundCheckBoxYOffset = -0.06f;
     [SerializeField] Vector2 groundCheckBoxDimensions, groundCheckBoxOffset;
     [SerializeField] LayerMask platformLayer;
     
+    [Header("Jump")]
+    [SerializeField] float jumpForce;
+    [SerializeField][Tooltip("Max amount of time in seconds you can hold the spacebar to get a longer jump")] float jumpMaxTime;
     [SerializeField] public int maxJumps = 2;
     public int jumpsLeft = 0;
+    [SerializeField] public AudioClip jumpSfx;
 
-    public bool isOnGround;
-    public bool isDashing = false;
-    [SerializeField] bool faceMouse = true;
-    bool stepping, slamming, busy;
-
+    [Header("Dash")]
     [SerializeField][Tooltip("Amount of time in seconds a dash lasts")] float dashDuration = 0.3f; 
+    [SerializeField] float dashSpeed;
     private float dashTimer; 
 
-    [SerializeField] public AudioClip jumpSfx;
+    //State bools
+    public bool isOnGround;
+    public bool isDashing = false;
+    bool faceMouse = true;
+    bool stepping, slamming, busy;
+
 
     // Start is called before the first frame update
     void Start(){
@@ -149,9 +153,9 @@ public class PlayerController : MonoBehaviour
     private void CheckGround(){
         bool wasOnGround = isOnGround;
         isOnGround = Physics2D.BoxCast(transform.position + (Vector3) groundCheckBoxOffset, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);
-        if (!wasOnGround && isOnGround) {
-            if (!slamming) pSound.Land();
-            jumpsLeft = maxJumps; //This line triggers when you first touch ground after being off it, and resets your jumps
+        if (!wasOnGround && isOnGround){ //This line triggers when you first touch ground after being off it
+            if(!slamming) pSound.Land();
+            jumpsLeft = maxJumps; 
         }
         if (isOnGround) slamming = false;
     }
