@@ -10,27 +10,33 @@ public class PlayerController : MonoBehaviour
     PlayerCombat pCombat => GetComponent<PlayerCombat>();
     PlayerGrapple pGrapple => GetComponent<PlayerGrapple>();
 
-    [SerializeField] float jumpForce;
     [SerializeField] float movementSpeed;
     [SerializeField] float airMovementSpeed;
-    [SerializeField] float dashSpeed;
     
     private float groundCheckBoxYOffset = -0.06f;
     [SerializeField] Vector2 groundCheckBoxDimensions, groundCheckBoxOffset;
     [SerializeField] LayerMask platformLayer;
     
+    [Header("StartJump")]
+    [SerializeField] float jumpForce;
+    [SerializeField][Tooltip("Max amount of time in seconds you can hold the spacebar to get a longer jump")] float jumpMaxTime;
+    float jumpTimer;
     [SerializeField] public int maxJumps = 2;
     public int jumpsLeft = 0;
+    [SerializeField] public AudioClip jumpSfx;
 
-    public bool isOnGround;
-    public bool isDashing = false;
-    [SerializeField] bool faceMouse = true;
-    bool stepping, slamming, busy;
-
+    [Header("Dash")]
     [SerializeField][Tooltip("Amount of time in seconds a dash lasts")] float dashDuration = 0.3f; 
+    [SerializeField] float dashSpeed;
     private float dashTimer; 
 
-    [SerializeField] public AudioClip jumpSfx;
+    [Header("State bools")]
+    public bool isOnGround;
+    public bool isJumping = false;
+    public bool isDashing = false;
+    bool faceMouse = true;
+    bool stepping, slamming, busy;
+
 
     // Start is called before the first frame update
     void Start(){
@@ -50,18 +56,48 @@ public class PlayerController : MonoBehaviour
         }
 
         if (!slamming && !anim.slamming) {
-            if (Input.GetKeyDown(KeyCode.Space)) Jump();
+            if (Input.GetKeyDown(KeyCode.Space)) StartJump();
             if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) Move(-1);
             if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) Move(1);
         }
-        
+        if(isJumping && Input.GetKey(KeyCode.Space) && jumpTimer > 0){
+            ContinueJump();
+        }
+        if(isJumping && (jumpTimer <= 0 && Input.GetKeyUp(KeyCode.Space))){
+            isJumping = false;
+        }
+
         busy = stepping || isDashing || slamming || anim.slamming;
         if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !busy && !pGrapple.LaunchFromGrapple()) StopMove();
 
         if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !busy){ //Press shift while holding a movement key
-            isDashing = true;
-            dashTimer = dashDuration;
+            Dash();
         }
+    }
+    
+    public void ContinueJump(){
+        rb.velocity = new Vector2(rb.velocity.x, 0); 
+        rb.velocity += Vector2.up * jumpForce;
+        jumpTimer -= Time.deltaTime;
+    }
+
+    public void StartJump(){
+        if(isOnGround || jumpsLeft > 0){
+            isJumping = true;
+            jumpsLeft--;
+            pSound.jump.Play();
+            rb.velocity = new Vector2(rb.velocity.x, 0); //Reset vertical velocity so the second jump isn't affected by your current velocity
+            rb.velocity += Vector2.up * jumpForce;
+            jumpTimer = jumpMaxTime;
+        }
+    }
+
+    void Dash()
+    {
+        isDashing = true;
+        anim.SetDash();
+        dashTimer = dashDuration;
+        pSound.dash.Play();
     }
 
     public bool isSlamming()
@@ -107,21 +143,11 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.down * fallSpeed;
     }
 
-    public void Jump(){
-        if(isOnGround || jumpsLeft > 0){
-            jumpsLeft--;
-            pSound.jump.Play();
-            rb.velocity *= Vector2.up * 0; //Reset vertical velocity so the second jump isn't affected by your current velocity
-            rb.velocity += Vector2.up * jumpForce;
-        }
-    }
-
     private void StopMove(){ //Stops the player's *horizontal* movement
         rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     private void Move(int dir){ //dir = -1 for left, 1 for right 
-
         if (stepping) return;
         bool moveRight = dir > 0;
         bool faceRight = transform.eulerAngles.y == 0;
@@ -142,7 +168,10 @@ public class PlayerController : MonoBehaviour
     private void CheckGround(){
         bool wasOnGround = isOnGround;
         isOnGround = Physics2D.BoxCast(transform.position + (Vector3) groundCheckBoxOffset, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);
-        if (!wasOnGround && isOnGround) jumpsLeft = maxJumps; //This line triggers when you first touch ground after being off it, and resets your jumps
+        if (!wasOnGround && isOnGround){ //This line triggers when you first touch ground after being off it
+            if(!slamming) pSound.Land();
+            jumpsLeft = maxJumps; 
+        }
         if (isOnGround) slamming = false;
     }
 

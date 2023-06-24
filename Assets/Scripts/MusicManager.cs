@@ -15,7 +15,7 @@ public class MusicManager : MonoBehaviour
         ambient.Play();
         music.Play();
         ambient.PercentVolume(0);
-        music.PercentVolume(1);
+        music.PercentVolume(0);
     }
 
     private void Update()

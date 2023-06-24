@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - name: 
-    clip: {fileID: 8300000, guid: 42d266ec9e49aa54c8a5d1aac1779de4, type: 3}
+    clip: {fileID: 8300000, guid: 3248eeb6e61c3de4ab4a71ff32ec76cb, type: 3}
     looping: 0
     CustomPitchAndVolume: 0
     volume: 0
     pitch: 0
   type: 0
   SynchronizePitchAndVolume: 1
-  pitch: 1
-  volume: 0.433
+  pitch: 1.096
+  volume: 0.033
   voiceLines: 0
   audioSource: {fileID: 0}
   instantialized: 0

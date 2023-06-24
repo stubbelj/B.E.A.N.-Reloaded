@@ -37,12 +37,14 @@ public class PlayerCombat : MonoBehaviour
     [Header("Reloading")]
     [SerializeField] float perfectReloadStart;
     [SerializeField] float perfectReloadEnd;
+    [HideInInspector] public bool attempingPerfectReload;
 
     bool aimingSniper, needToRelease, punching;
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
     Transform bulletParent => FindObjectOfType<GameManager>().transform;
+    Transform bulletSpawnLoc => gameObject.transform.Find("frontArm").Find("bulletSpawnLocation");
     
     bool isReloading = false;
     float reloadDur = 1.3f, reloadTimer = 0f;
@@ -108,6 +110,7 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         DoCooldowns();
+        anim.AimFrontArm();
 
         if (Input.GetMouseButtonDown(0) ) Melee();
 
@@ -155,6 +158,7 @@ public class PlayerCombat : MonoBehaviour
             FinishReload();
             return true;
         } else {
+            attempingPerfectReload = false;
             return false;
         }
     }
@@ -174,6 +178,8 @@ public class PlayerCombat : MonoBehaviour
     void StartReload()
     {
         if (SMGMagsLeft <= 0 || GetCurAmmo() == SMGMagazineSize) return;
+
+        attempingPerfectReload = true;
         SMGMagsLeft -= 1;
         reloadTimer = 0f;
         isReloading = true;
@@ -209,7 +215,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Mathf.Abs(aimAngle.z + 90) < 8f) Boost(); 
 
-        var newBullet = Instantiate(SMGBulletPrefab, transform.position, Quaternion.identity);
+        var newBullet = Instantiate(SMGBulletPrefab, bulletSpawnLoc.position, Quaternion.identity);
         newBullet.transform.eulerAngles = aimAngle;
         newBullet.GetComponent<Bullet>().damage = SMGDamage;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
@@ -224,7 +230,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Melee()
     {
-        if (aimingSniper) return;
+        if (aimingSniper || anim.slamming) return;
 
         if (pMove.isOnGround) Punch();
         else GroundSlam();

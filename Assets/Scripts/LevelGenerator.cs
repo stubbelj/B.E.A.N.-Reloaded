@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour {
 
     void GenerateLevel()
     {
-        lastPos = Vector2.zero;
+        lastPos = transform.position;
         DeleteChildren();
         for (int i = 0; i < sectionsToGenerate; i++) {
             var chosenSection = ChoseNextSection();

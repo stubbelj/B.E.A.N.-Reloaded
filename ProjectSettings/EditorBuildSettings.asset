@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Persistent.unity
+    guid: 867cae637ff4ec54cb334169aceeedbf
+  - enabled: 1
     path: Assets/Scenes/PlayerCombatTest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/LevelGenerator.unity
+    guid: 126b5714d9cac5b4e84922f289daa75b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ea21289591bfe6b4aa1f14aaef4cb06f, type: 2}

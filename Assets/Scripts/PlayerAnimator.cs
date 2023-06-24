@@ -52,6 +52,11 @@ public class PlayerAnimator : MonoBehaviour
         return eulerAngles;
     }
 
+    public void SetDash()
+    {
+        cockpit.SetTrigger("DASH");
+    }
+
     public void ShowArms()
     {
         frontArm.gameObject.SetActive(true);

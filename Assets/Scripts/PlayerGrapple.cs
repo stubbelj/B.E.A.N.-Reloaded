@@ -7,6 +7,7 @@ public class PlayerGrapple : MonoBehaviour
 {
     [SerializeField] float hoverDist = 4, moveSpeed, autoBreakDist = 1.5f, timeSinceGrappleEnd;
     [SerializeField] GrapplePoint point;
+    Vector3 currentTargetPoint;
     [SerializeField] bool movingToPoint, launchedFromGrapple;
     [SerializeField] KeyCode activateKey = KeyCode.E;
 
@@ -37,28 +38,34 @@ public class PlayerGrapple : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(activateKey)) GrappleInteract();
+        if (Input.GetKeyDown(activateKey)) GrappleInteract(); 
         if (launchedFromGrapple && pMove.isOnGround && timeSinceGrappleEnd > 0.5f) launchedFromGrapple = false;
 
         if (!movingToPoint) {
             timeSinceGrappleEnd += Time.deltaTime;
             return;
         }
-        line.SetPosition(0, transform.position);
-        line.SetPosition(1, point.transform.position);
+        DrawLine();
+        
 
         MoveToPoint();
     }
 
+    void DrawLine()
+    {
+        line.SetPosition(0, transform.position);
+        line.SetPosition(1, currentTargetPoint);
+    }
+
     void MoveToPoint()
     {
-        var dist = Vector2.Distance(transform.position, point.transform.position);
+        var dist = Vector2.Distance(transform.position, currentTargetPoint);
         if (dist <= autoBreakDist) {
             EndGrapple();
             return;
         }
 
-        var dir = point.transform.position - transform.position;
+        var dir = currentTargetPoint - transform.position;
         rb.velocity = dir.normalized * moveSpeed;
     }
 
@@ -83,6 +90,7 @@ public class PlayerGrapple : MonoBehaviour
     {
         if (point == null || !point.hovered || pMove.isSlamming()) return;
 
+        currentTargetPoint = point.transform.position;
         movingToPoint = true;
         line.enabled = true;
         

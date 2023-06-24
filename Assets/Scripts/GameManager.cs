@@ -53,6 +53,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<LootTable> lootTables = new List<LootTable>();
     [SerializeField] List<ItemID> lootPrefabs = new List<ItemID>();
 
+    [Header("XP")]
+    [SerializeField] GameObject xpPrefab;
+    [SerializeField] Vector2 xOrbSpeedRange, yOrbSpeedRange;
+
+    [Space()]
+    [SerializeField] float difficultIncreasePeriod;
+    float difficultIncreaseCooldown;
+    public int maxEnemies = 3;
+
+    [Header("restart")]
+    [SerializeField] int sceneNum = 2;
+
+    PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
+    PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
+
     private void OnValidate()
     {
         for (int i = 0; i < lootPrefabs.Count; i++) {
@@ -65,11 +80,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField] float difficultIncreasePeriod;
-    float difficultIncreaseCooldown;
-    PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
 
-    public int maxEnemies = 3;
+    public void SpawnXP(float amount, Vector2 pos)
+    {
+        while (amount > 1) {
+            float _amount = Random.Range(1, amount);
+            amount -= _amount;
+            var newOrb = Instantiate(xpPrefab, pos, Quaternion.identity, transform);
+            newOrb.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(xOrbSpeedRange.x, xOrbSpeedRange.y), Random.Range(yOrbSpeedRange.x, yOrbSpeedRange.y)));
+            newOrb.GetComponent<xpPickup>().Init(pXP, _amount);
+        }
+    }
 
     public void SpawnLoot(int lootTableID, Vector3 position)
     {
@@ -87,12 +108,18 @@ public class GameManager : MonoBehaviour
  
     private void Update()
     {
-        if (pCombat.dead) SceneManager.LoadScene(0);
+        if (pCombat.dead) ReloadScene(); 
 
         difficultIncreaseCooldown -= Time.deltaTime;
         if (difficultIncreaseCooldown <= 0) {
             difficultIncreaseCooldown = difficultIncreasePeriod;
             maxEnemies += 1;
         }
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
     }
 }

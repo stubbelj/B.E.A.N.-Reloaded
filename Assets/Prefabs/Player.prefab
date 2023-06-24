@@ -176,7 +176,8 @@ Transform:
   m_LocalPosition: {x: -0.0010000952, y: 0.23000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3627457512587665189}
   m_Father: {fileID: 4055653818809799196}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -520,6 +521,7 @@ GameObject:
   - component: {fileID: 3884537787536404133}
   - component: {fileID: 5488995530429941460}
   - component: {fileID: 7976931468169469737}
+  - component: {fileID: 7313321825066213153}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -545,7 +547,7 @@ Transform:
   - {fileID: 1309240229907724765}
   - {fileID: 3341014043655083560}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4925110271336631882
 MonoBehaviour:
@@ -586,6 +588,7 @@ MonoBehaviour:
   slamStunTime: 0.3
   perfectReloadStart: 0.5
   perfectReloadEnd: 0.6
+  attempingPerfectReload: 0
 --- !u!114 &328059879757683769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,22 +625,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce8c412c3c59f145a977657903e5dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 12
   movementSpeed: 4
   airMovementSpeed: 3.5
-  dashSpeed: 35
   groundCheckBoxDimensions: {x: 0.42, y: 1.27}
   groundCheckBoxOffset: {x: 0, y: -0.27}
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpForce: 10
+  jumpMaxTime: 0.3
   maxJumps: 2
   jumpsLeft: 0
-  isOnGround: 0
-  isDashing: 0
-  faceMouse: 1
-  dashDuration: 0.1
   jumpSfx: {fileID: 8300000, guid: 42d266ec9e49aa54c8a5d1aac1779de4, type: 3}
+  dashDuration: 0.1
+  dashSpeed: 35
+  isOnGround: 0
+  isJumping: 0
+  isDashing: 0
 --- !u!114 &22204898320837981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +664,9 @@ MonoBehaviour:
   slamLand: {fileID: 11400000, guid: eff4472c0d86d0f44ba4d8a66f4de091, type: 2}
   footStep: {fileID: 11400000, guid: b686d3f22b0f74a468b4cf62d6a86f04, type: 2}
   punch3WindUp: {fileID: 11400000, guid: e1bc94e245ef760418fc399a97f1f287, type: 2}
+  landingSound: {fileID: 11400000, guid: 9a456b3288c04044388d2306eacd6c03, type: 2}
+  dash: {fileID: 11400000, guid: ee5000977d70ed34f85c7f2e8a0fcd44, type: 2}
+  maxFallSpeed: 20
 --- !u!70 &5762742260275734781
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -846,6 +853,21 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &7313321825066213153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514489930646763345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baae9c4f51495614ca0411a1042c3ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentXP: 0
+  nextThreshold: 0
+  currentLevel: 0
 --- !u!1 &8255883282999582387
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,3 +1014,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &8879214103541613403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3627457512587665189}
+  m_Layer: 0
+  m_Name: bulletSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3627457512587665189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8879214103541613403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3125, y: -0.266, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6262890607128480286}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
