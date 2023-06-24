@@ -10,6 +10,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] Slider hpSlider;
     [SerializeField] GameObject deathFX;
     [SerializeField] int lootTableID = -1;
+    [SerializeField] float XPAmount = 0;
 
     [Space()]
     [SerializeField] protected float walkSpeed;
@@ -91,12 +92,16 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual IEnumerator flashWhite(float time)
     {
+        var anim = GetComponent<Animator>();
+        if (anim) anim.enabled = false;
+
         if (originalSprite == null) originalSprite = srend.sprite;
         srend.sprite = whiteSprite;
 
         yield return new WaitForSeconds(time);
 
         srend.sprite = originalSprite;
+        if (anim) anim.enabled = true;
     }
 
     protected void WalkAwayFromPlayer()
@@ -129,6 +134,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
         if (lootTableID != -1) GameManager.i.SpawnLoot(lootTableID, transform.position);
+        if (XPAmount > 0) GameManager.i.SpawnXP(XPAmount, transform.position);
         Destroy(gameObject);
     }
 }

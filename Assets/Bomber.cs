@@ -37,11 +37,11 @@ public class Bomber : BaseEnemy
 
         anim.SetTrigger(explodeTrigger);
         explodeHitBox.Setup(explodeDamage, null, 0);
-        explodeSound.Play();
     }
 
     public void Explode()
     {
+        explodeSound.Play();
         explodeHitBox.StartHitting();
     }
 
