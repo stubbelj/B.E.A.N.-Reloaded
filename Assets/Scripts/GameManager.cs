@@ -163,11 +163,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
     }
 
-    public void Pause()
+    public void Pause(bool showPauseMenu = true)
     {
         paused = true;
         Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
+        if (showPauseMenu) pauseMenu.SetActive(true);
     }
 
     public void Resume()
