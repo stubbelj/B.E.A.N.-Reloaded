@@ -68,9 +68,9 @@ public class GameManager : MonoBehaviour
 
     [Space()]
     [SerializeField] GameObject pauseMenu;
-    private bool paused = false;
+    private bool paused = true;
     public bool isPaused(){ return paused; }
-    [SerializeField] GameObject gameOverCanvas;
+    [SerializeField] GameObject gameOverCanvas, openingStoryCanvas;
     public bool gameOver = false;
 
     private void OnValidate()
@@ -116,6 +116,10 @@ public class GameManager : MonoBehaviour
         if (obj != null) Instantiate(obj, position, Quaternion.identity);
     }
  
+    private void Start(){
+        Time.timeScale = 0f;
+    }
+
     private void Update()
     {
         if (pCombat.dead){
@@ -161,6 +165,7 @@ public class GameManager : MonoBehaviour
     {
         paused = false;
         pauseMenu.SetActive(false);
+        openingStoryCanvas.SetActive(false);
         Time.timeScale = 1f;
     }
 
