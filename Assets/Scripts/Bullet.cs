@@ -8,6 +8,22 @@ public class Bullet : MonoBehaviour
     public float damage, knockBack, stunTime, lifeTime = 5;
     [SerializeField] bool hurtPlayer, hurtEnemy;
 
+    [Header("Ghost")]
+    [SerializeField] GameObject ghostObject;
+    [SerializeField] float ghostSpacing;
+    float ghostCooldown;
+
+    private void Update()
+    {
+        if (ghostObject == null) return;
+
+        ghostCooldown -= Time.deltaTime;
+        if (ghostCooldown > 0) return;
+
+        ghostCooldown = ghostSpacing;
+        Instantiate(ghostObject, transform.position, transform.rotation, transform.parent);
+    }
+
     private void Start()
     {
         Destroy(gameObject, lifeTime);

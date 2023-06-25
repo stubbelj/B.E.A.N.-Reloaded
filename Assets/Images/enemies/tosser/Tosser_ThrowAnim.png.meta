@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_0
+      name: Tosser_ThrowAnim_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0313be87fd70b7942b8a17ee56940185
-      internalID: -2044184968
+      spriteID: 8d82a1d3d7c216b45a7a68979d5e2b47
+      internalID: -1845577395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_1
+      name: Tosser_ThrowAnim_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,41 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9826960a379f49b4b8bbb891deb60f9f
-      internalID: 935378796
+      spriteID: d20d22bd35cebd142aaf17ab4aa48296
+      internalID: 1657767956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ef98b8f14335a645bfec9b772b92032
-      internalID: 796277372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_3
+      name: Tosser_ThrowAnim_2
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +192,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc90f3666f097a74bbdedd4e7b151fab
-      internalID: -162342927
+      spriteID: 4da0ce1876e666340940a0475b9756d2
+      internalID: -1240157346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_4
+      name: Tosser_ThrowAnim_3
       rect:
         serializedVersion: 2
-        x: 128
+        x: 144
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,8 +213,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
-      internalID: -486213973
+      spriteID: 580999b0ba7ec5649a1efdcda20bc8a1
+      internalID: 1161476709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tosser_ThrowAnim_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84baf66b617fc4443a8fa4349b4e839d
+      internalID: -276739464
       vertices: []
       indices: 
       edges: []
@@ -251,11 +251,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Arms_PunchCombo_1_0: -2044184968
-      Player_Arms_PunchCombo_1_1: 935378796
-      Player_Arms_PunchCombo_1_2: 796277372
-      Player_Arms_PunchCombo_1_3: -162342927
-      Player_Arms_PunchCombo_1_4: -486213973
+      Tosser_ThrowAnim_0: -1845577395
+      Tosser_ThrowAnim_1: 1657767956
+      Tosser_ThrowAnim_2: -1240157346
+      Tosser_ThrowAnim_3: 1161476709
+      Tosser_ThrowAnim_4: -276739464
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

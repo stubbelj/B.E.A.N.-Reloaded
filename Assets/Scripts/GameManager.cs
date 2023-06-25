@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     }
  
     private void Start(){
-        Time.timeScale = 0f;
+        Resume();
     }
 
     private void Update()

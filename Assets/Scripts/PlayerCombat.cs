@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimator))]
@@ -15,13 +16,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] KeyCode reload = KeyCode.R;
     [SerializeField] float boostForceMult = 0.8f;
 
-    [Header("SMG")]
-    [SerializeField] float SMGResetTime;
-    [SerializeField] float SMGReloadTime, SMGBulletSpeed, SMGDamage, SMGBoostForce = 320;
-    [SerializeField] int SMGMagazineSize, SMGMagsLeft = 100;
-    int SMGcurAmmo;
-    [SerializeField] GameObject SMGBulletPrefab;
-    float SMGcooldown, remainingBoostForce;
+    [SerializeField] Gun currentGun;
+    [SerializeField] Transform bulletFirePoint;
 
     [Header("Punch")]
     [SerializeField] HitBox punchHB;
@@ -44,7 +40,6 @@ public class PlayerCombat : MonoBehaviour
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
     Transform bulletParent => FindObjectOfType<GameManager>().transform;
-    Transform bulletSpawnLoc => gameObject.transform.Find("frontArm").Find("bulletSpawnLocation");
     
     bool isReloading = false;
     float reloadDur = 1.3f, reloadTimer = 0f;
@@ -55,8 +50,8 @@ public class PlayerCombat : MonoBehaviour
 
     public void AddAmmo(int magAmount, int bulletAmount)
     {
-        SMGMagsLeft += magAmount;
-        SMGcurAmmo = Mathf.Min(SMGMagazineSize, SMGcurAmmo + bulletAmount);
+        currentGun.magsLeft += magAmount;
+        currentGun.currentAmmo = Mathf.Min(currentGun.magazineSize, currentGun.currentAmmo + bulletAmount);
 
         if (magAmount > 0) pSound.ammoPickup.Play();
         else pSound.magRefillPickup.Play();
@@ -122,6 +117,12 @@ public class PlayerCombat : MonoBehaviour
     {
         health = maxHealth;
         StartReload();
+        GetNewGun(currentGun);
+    }
+
+    public float GetCameraPullDistance()
+    {
+        return currentGun.GetCameraPullDistance();
     }
 
     private void Update()
@@ -134,10 +135,14 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKeyDown(reload)) ReloadInteract();
         if (Input.GetMouseButtonDown(1) && isReloading) AttemptPerfectReload();
-        if (Input.GetMouseButtonUp(1) && SMGcurAmmo <= 0 && !isReloading) StartReload();
+        if (Input.GetMouseButtonUp(1) && currentGun.currentAmmo <= 0 && !isReloading) StartReload();
 
         if (Input.GetMouseButtonUp(1)) needToRelease = false;
-        if (Input.GetMouseButton(1) && !isReloading) FireCurrentGun();
+
+        if (!isReloading) {
+            if (currentGun.IsAutomatic() && Input.GetMouseButton(1)) FireCurrentGun();
+            if (!currentGun.IsAutomatic() && Input.GetMouseButtonDown(1)) FireCurrentGun();
+        }
 
         if (Input.GetKeyDown(KeyCode.Minus) && !dead){
             health = 0f;
@@ -147,7 +152,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (pMove.isOnGround) {
             if (slamming) LandSlam();
-            remainingBoostForce = SMGBoostForce;
+            currentGun.remainingBoostForce = currentGun.boostForce;
         }
 
         if(isReloading){
@@ -157,6 +162,12 @@ public class PlayerCombat : MonoBehaviour
                 FinishReload();
             }
         }
+    }
+
+    public void GetNewGun(Gun newGun)
+    {
+        newGun.Init();
+        currentGun = newGun;
     }
 
     void LandSlam()
@@ -196,60 +207,51 @@ public class PlayerCombat : MonoBehaviour
     void FinishReload()
     {
         isReloading = false;
-        SMGcurAmmo = SMGMagazineSize;
+        currentGun.currentAmmo = currentGun.magazineSize;
     }
 
     void StartReload()
     {
-        if (SMGMagsLeft <= 0 || GetCurAmmo() == SMGMagazineSize) return;
+        if (currentGun.magsLeft <= 0 || GetCurAmmo() == currentGun.magazineSize) return;
 
         attempingPerfectReload = true;
-        SMGMagsLeft -= 1;
+        currentGun.magsLeft -= 1;
         reloadTimer = 0f;
         isReloading = true;
     }
 
     void DoCooldowns()
     {
-        SMGcooldown -= Time.deltaTime;
+        currentGun.cooldown -= Time.deltaTime;
     }
 
     public int GetMagsLeft()
     {
-        return SMGMagsLeft;
+        return currentGun.magsLeft;
     }
     public int GetCurAmmo()
     {
-        return SMGcurAmmo;
+        return currentGun.currentAmmo;
     }
 
     public int GetMagCapacity()
     {
-        return SMGMagazineSize;
+        return currentGun.magazineSize;
     }
 
     void FireCurrentGun()
     {
-        if (needToRelease || aimingSniper || SMGcooldown > 0 || SMGcurAmmo <= 0) return;
-
-        pSound.SMGFire.Play();
-        SMGcurAmmo -= 1;
+        if (needToRelease || currentGun.cooldown > 0 || currentGun.currentAmmo <= 0) return;
+        
         var aimAngle = anim.AimFrontArm();
-        SMGcooldown = SMGResetTime;
-
-        if (Mathf.Abs(aimAngle.z + 90) < 8f) Boost(); 
-
-        var newBullet = Instantiate(SMGBulletPrefab, bulletSpawnLoc.position, Quaternion.identity);
-        newBullet.transform.eulerAngles = aimAngle;
-        newBullet.GetComponent<Bullet>().damage = SMGDamage;
-        newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * SMGBulletSpeed);
-        newBullet.transform.SetParent(bulletParent.transform);
+        if (Mathf.Abs(aimAngle.z + 90) < 8f) Boost();
+        currentGun.Shoot(bulletFirePoint.position, aimAngle, bulletParent);    
     }
 
     void Boost()
     {
-        pMove.BoostUp(remainingBoostForce);
-        remainingBoostForce *= boostForceMult;
+        pMove.BoostUp(currentGun.remainingBoostForce);
+        currentGun.remainingBoostForce *= boostForceMult;
     }
 
     void Melee()
