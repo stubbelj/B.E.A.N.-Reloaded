@@ -56,16 +56,17 @@ public class HitBox : MonoBehaviour
         if (!hitting) return;
 
         float damage = alreadyHit.Count > hitLimit ? this.damage / 4 : this.damage;
-        
+
+        if (obj.GetComponent<TargetScript>()) {
+            var target = obj.GetComponent<TargetScript>();
+            target.Hit(attackType);
+        }
+
         if (player) {
             var enemy = obj.GetComponentInParent<BaseEnemy>();
             if (!enemy || alreadyHit.Contains(enemy.gameObject)) return;
             alreadyHit.Add(enemy.gameObject);
             enemy.Hit(damage, (enemy.transform.position - knockBackSource.position).normalized * knockBackStrength, stunTime);
-        }
-        else if (obj.GetComponent<TargetScript>()) {
-            var target = obj.GetComponent<TargetScript>();
-            target.Hit(attackType);
         }
         else {
             var p = obj.GetComponentInParent<PlayerCombat>();
