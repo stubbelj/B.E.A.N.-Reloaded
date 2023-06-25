@@ -66,6 +66,11 @@ public class GameManager : MonoBehaviour
     PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
     PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
 
+    [Space()]
+    [SerializeField] GameObject pauseMenu;
+    private bool paused = false;
+    public bool isPaused(){ return paused; }
+
     private void OnValidate()
     {
         for (int i = 0; i < lootPrefabs.Count; i++) {
@@ -113,10 +118,20 @@ public class GameManager : MonoBehaviour
     {
         if (pCombat.dead) ReloadScene(); 
 
-        difficultIncreaseCooldown -= Time.deltaTime;
-        if (difficultIncreaseCooldown <= 0) {
-            difficultIncreaseCooldown = difficultIncreasePeriod;
-            maxEnemies += 1;
+        if(!isPaused()){
+            difficultIncreaseCooldown -= Time.deltaTime;
+            if (difficultIncreaseCooldown <= 0) {
+                difficultIncreaseCooldown = difficultIncreasePeriod;
+                maxEnemies += 1;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            if (isPaused()){
+                Resume();
+            } else {
+                Pause();
+            }
         }
     }
 
@@ -124,5 +139,25 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
+    }
+
+    public void Pause()
+    {
+        paused = true;
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        paused = false;
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void ReturnToMenu(){
+        SceneManager.LoadScene(0);
+        paused = false;
+        Time.timeScale = 1f;
     }
 }

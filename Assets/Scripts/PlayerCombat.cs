@@ -49,6 +49,7 @@ public class PlayerCombat : MonoBehaviour
     bool isReloading = false;
     float reloadDur = 1.3f, reloadTimer = 0f;
     
+    GameManager gameManager => GameObject.Find("gameManager").GetComponent<GameManager>();
 
     public void AddAmmo(int magAmount, int bulletAmount)
     {
@@ -108,6 +109,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        if(gameManager.isPaused()){ return; }
         DoCooldowns();
         anim.AimFrontArm();
 

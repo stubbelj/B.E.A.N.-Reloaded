@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] Animator backArm, cockpit, frontArm;
+    GameManager gameManager => GameObject.Find("gameManager").GetComponent<GameManager>();
 
     [Header("Punch")]
     [SerializeField] float punchComboBreakTime = 1;
@@ -32,6 +33,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
+        if(gameManager.isPaused()) { return; }
         punchComboCooldown -= Time.deltaTime;
         Walk(Mathf.Abs(rb.velocity.x) > walkThreshold);
         Jump(Mathf.Abs(rb.velocity.y) > jumpThreshold || !pMove.isOnGround);

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerCombat pCombat => GetComponent<PlayerCombat>();
     PlayerGrapple pGrapple => GetComponent<PlayerGrapple>();
+    GameManager gameManager => GameObject.Find("gameManager").GetComponent<GameManager>();
 
     [SerializeField] float movementSpeed;
     [SerializeField] float airMovementSpeed;
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour
     }
     // Update is called once per frame
     void Update(){
+        if(gameManager.isPaused()){ return; }
+
         if (faceMouse) FaceMouse();
 
         CheckGround();
