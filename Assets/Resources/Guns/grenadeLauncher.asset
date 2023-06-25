@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0832800a18021484288c900b4b13cbb3, type: 3}
+  m_Name: grenadeLauncher
+  m_EditorClassIdentifier: 
+  displayName: grenade launcher
+  bulletSpacing: 0
+  reloadTime: 4
+  bulletSpeed: 450
+  damage: 0
+  boostForce: 0
+  magazineSize: 1
+  magsLeft: 13
+  maxMags: 30
+  currentAmmo: 1
+  bulletPrefab: {fileID: 5221142134288874925, guid: e4b995474c61daf45a8be98f41e088c2, type: 3}
+  cooldown: -1.5163296
+  remainingBoostForce: 0
+  gunshotSound: {fileID: 11400000, guid: afc366a71029c13428d156a3da992eba, type: 2}
+  automatic: 0
+  cameraPullDistance: 0.1

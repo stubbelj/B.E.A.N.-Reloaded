@@ -8,11 +8,20 @@ public class CameraController : MonoBehaviour
     [SerializeField] float forwardOffset = 10, offsetSmoothness = 0.02f;
     float offset;
     Transform player => FindObjectOfType<PlayerController>().transform;
+    PlayerCombat pCombat => player.GetComponent<PlayerCombat>();
+
     private void LateUpdate()
     {
         offset = Mathf.Lerp(offset, player.eulerAngles.y == 0 ? forwardOffset : -forwardOffset, offsetSmoothness);
         float x = Mathf.Lerp(transform.position.x, player.position.x + offset, followSmoothness.x);
         float y = Mathf.Lerp(transform.position.y, player.position.y, followSmoothness.y);
         transform.position = new Vector3(x, y, transform.position.z);
+
+        var mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToViewportPoint(mousePos) * 2 - new Vector3(1, 1, 0);
+        float aimPull = pCombat.GetCameraPullDistance();
+        var _offset = new Vector3(aimPull * mousePos.x, aimPull * mousePos.y);
+        transform.position += (Vector3) _offset;
+
     }
 }
