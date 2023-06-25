@@ -32,7 +32,7 @@ public class Bomber : BaseEnemy
     {
         base.Update(); 
         
-        if (dist > explodeRange) {
+        if (dist > explodeRange && !exploding) {
             WalkTowardPlayer();
             return;
         }

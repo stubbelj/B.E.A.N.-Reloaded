@@ -14,8 +14,8 @@ public class AudioManager : MonoBehaviour {
 
     [SerializeField] GameObject coordinatorPrefab;
     List<SoundCoordinator> soundCoordinators = new List<SoundCoordinator>();
-    [SerializeField] AudioMixerGroup sfxMixerG, musicMixerG, AmbientMixerG;
-    [SerializeField] AudioMixer masterMixer, sfxMixer, musicMixer, AmbientMixer;
+    [SerializeField] AudioMixerGroup sfxMixerG, musicMixerG;
+    [SerializeField] AudioMixer masterMixer, sfxMixer, musicMixer;
 
     public AudioMixerGroup GetMixer(SoundType type)
     {
@@ -24,8 +24,6 @@ public class AudioManager : MonoBehaviour {
                 return sfxMixerG;
             case SoundType.music:
                 return musicMixerG;
-            case SoundType.ambient:
-                return AmbientMixerG;
         }
         return null;
     }

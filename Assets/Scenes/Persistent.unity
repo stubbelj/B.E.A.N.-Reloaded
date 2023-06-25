@@ -1432,6 +1432,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4457546337318852339, guid: 61af3623639afc945b07394e5e3a02dc, type: 3}
+      propertyPath: sfxMixerG
+      value: 
+      objectReference: {fileID: 24300002, guid: 9dd439609545ba54d9bc11108ea1cf0b, type: 2}
+    - target: {fileID: 4457546337318852339, guid: 61af3623639afc945b07394e5e3a02dc, type: 3}
+      propertyPath: musicMixerG
+      value: 
+      objectReference: {fileID: 24300002, guid: f14a65b1022fca64baaaf5774c01a74d, type: 2}
     - target: {fileID: 6002374743517962687, guid: 61af3623639afc945b07394e5e3a02dc, type: 3}
       propertyPath: m_Name
       value: audioManager
