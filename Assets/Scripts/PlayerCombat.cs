@@ -23,6 +23,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] HitBox punchHB;
     [SerializeField] float punchDamage, punchKBStrength, punchStunTime, punch3Damage, punch3KB, punch3StunTime;
     [SerializeField] float punchStepForce = 50, stepTime = 0.1f;
+    bool punching;
 
     [Header("Gound Slam")]
     [SerializeField] float groundSlamSpeed = 30;
@@ -34,19 +35,21 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float perfectReloadStart;
     [SerializeField] float perfectReloadEnd;
     [HideInInspector] public bool attempingPerfectReload;
+    bool isReloading = false, needToRelease;
+    float reloadDur = 1.3f, reloadTimer = 0f;
 
-    bool aimingSniper, needToRelease, punching;
+    [Header("tutorialStrings")]
+    [SerializeField] string normalPunchString = "punch";
+    [SerializeField] string bigPunchString = "bigPunch", slamString = "groundSlam";
+
+    [Space()]
+    [SerializeField] GameObject deathPrefab;
+
     PlayerAnimator anim => GetComponent<PlayerAnimator>();
     PlayerController pMove => GetComponent<PlayerController>();
     PlayerSound pSound => GetComponent<PlayerSound>();
     Transform bulletParent => FindObjectOfType<GameManager>().transform;
-    
-    bool isReloading = false;
-    float reloadDur = 1.3f, reloadTimer = 0f;
-    
     GameManager gameManager => GameObject.Find("gameManager").GetComponent<GameManager>();
-
-    [SerializeField] GameObject deathPrefab;
 
     public void AddAmmo(int magAmount, int bulletAmount)
     {
@@ -177,6 +180,7 @@ public class PlayerCombat : MonoBehaviour
     void LandSlam()
     {
         slamming = false;
+        slamHB.attackType = slamString;
         slamHB.StartHitting(slamDamage, transform, slamKB, slamStunTime);
 
         anim.LandSlam();
@@ -228,7 +232,6 @@ public class PlayerCombat : MonoBehaviour
     {
         currentGun.cooldown -= Time.deltaTime;
     }
-
     public string GetGunName()
     {
         return currentGun.displayName;
@@ -265,7 +268,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Melee()
     {
-        if (aimingSniper || anim.slamming) return;
+        if (anim.slamming) return;
 
         if (pMove.isOnGround) Punch();
         else GroundSlam();
@@ -286,10 +289,16 @@ public class PlayerCombat : MonoBehaviour
         pMove.Step(transform.eulerAngles.y == 0 ? punchStepForce : -punchStepForce, stepTime);
 
         bool final = anim.GetPunchStep() == 4;
-        if (final) punchHB.Setup(punch3Damage, transform, punch3KB, punch3StunTime, pSound.punchHit);
-        else punchHB.StartHitting(punchDamage, transform, punchKBStrength, punchStunTime, pSound.punchHit);
-        if (!final) pSound.weakPunch.Play();
-        else pSound.punch3WindUp.Play();
+        if (final) {
+            punchHB.Setup(punch3Damage, transform, punch3KB, punch3StunTime, pSound.punchHit);
+            pSound.punch3WindUp.Play();
+            punchHB.attackType = bigPunchString;
+        }
+        else {
+            punchHB.StartHitting(punchDamage, transform, punchKBStrength, punchStunTime, pSound.punchHit);
+            pSound.weakPunch.Play();
+            punchHB.attackType = normalPunchString;
+        }
     }
 
     void GroundSlam()

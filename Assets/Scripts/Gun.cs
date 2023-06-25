@@ -56,6 +56,7 @@ public class Gun : ScriptableObject
         var newBullet = Instantiate(bulletPrefab, firePos, Quaternion.identity);
         newBullet.transform.eulerAngles = aimAngle;
         newBullet.GetComponent<Bullet>().damage = damage;
+        newBullet.GetComponent<Bullet>().gunName = displayName;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * bulletSpeed);
         newBullet.transform.SetParent(bulletParent.transform);
     }

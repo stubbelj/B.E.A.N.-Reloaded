@@ -25,7 +25,6 @@ public class Parallax : MonoBehaviour
         if (totalDelta > startPos.x + size.x) {
             startPos += new Vector3(size.x, 0, 0);
         } else if (totalDelta < startPos.x - size.x) {
-            print("wrapping");
             startPos -= new Vector3(size.x, 0, 0);
         }
     }
