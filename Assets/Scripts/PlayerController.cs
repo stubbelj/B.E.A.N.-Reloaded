@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float movementSpeed;
     [SerializeField] float airMovementSpeed;
     
-    private float groundCheckBoxYOffset = -0.06f;
     [SerializeField] Vector2 groundCheckBoxDimensions, groundCheckBoxOffset;
     [SerializeField] LayerMask platformLayer;
     
@@ -36,6 +35,9 @@ public class PlayerController : MonoBehaviour
     public bool isDashing = false;
     bool faceMouse = true;
     bool stepping, slamming, busy;
+
+    [Header("limits")]
+    [SerializeField] float bulletBoostSpeedMax = 50;
 
 
     // Start is called before the first frame update
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     public void BoostUp(float force)
     {
-        rb.AddForce(Vector2.up * force);
+        if (rb.velocity.y < bulletBoostSpeedMax) rb.AddForce(Vector2.up * force);
     }
 
     public void Step(float xForce, float stepTime)
