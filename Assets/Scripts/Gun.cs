@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
 public class Gun : ScriptableObject
@@ -19,6 +20,9 @@ public class Gun : ScriptableObject
     [SerializeField] bool automatic;
     [SerializeField] bool canPerfectReload = true;
     [SerializeField] float cameraPullDistance;
+
+    [Header("Upgrade options")]
+    [SerializeField] List<UpgradeOption.config> upgrades = new List<UpgradeOption.config>();
 
     public float GetCameraPullDistance()
     {
@@ -59,5 +63,20 @@ public class Gun : ScriptableObject
         newBullet.GetComponent<Bullet>().gunName = displayName;
         newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * bulletSpeed);
         newBullet.transform.SetParent(bulletParent.transform);
+    }
+
+    public void ConfigureOption(UpgradeOption option, int i)
+    {
+        if (upgrades.Count <= i) return;
+
+        var config = upgrades[i];
+        option.upgradeTitle.text = config.title;
+        option.subtitle.text = config.subtitle;
+        option.cost.text = config.cost.ToString();
+    }
+
+    public void ChoseOption(int i)
+    {
+        upgrades[i].Chose();
     }
 }
