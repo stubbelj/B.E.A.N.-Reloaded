@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     private bool paused = false;
     public bool isPaused(){ return paused; }
+    [SerializeField] GameObject gameOverCanvas;
+    public bool gameOver = false;
 
     private void OnValidate()
     {
@@ -117,10 +119,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (pCombat.dead){
-            //fill in later            
+            //fill in later if necessary            
         }
 
-        if(!isPaused()){
+        if(!isPaused() && !gameOver){
             difficultIncreaseCooldown -= Time.deltaTime;
             if (difficultIncreaseCooldown <= 0) {
                 difficultIncreaseCooldown = difficultIncreasePeriod;
@@ -128,13 +130,18 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape)) {
+        if(Input.GetKeyDown(KeyCode.Escape) && !gameOver) {
             if (isPaused()){
                 Resume();
             } else {
                 Pause();
             }
         }
+    }
+
+    public void GameOver(){
+        gameOver = true;
+        gameOverCanvas.SetActive(true);
     }
 
     void ReloadScene()

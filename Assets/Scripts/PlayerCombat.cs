@@ -142,6 +142,7 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Minus) && !dead){
             health = 0f;
             Die();
+            gameManager.GameOver();
         }
 
         if (pMove.isOnGround) {
