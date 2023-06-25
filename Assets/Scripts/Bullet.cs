@@ -41,6 +41,9 @@ public class Bullet : MonoBehaviour
         var player = collision.gameObject.GetComponentInParent<PlayerCombat>();
         if (player != null) player.Hit(damage);
 
+        var target = collision.gameObject.GetComponentInParent<TargetScript>();
+        if(target != null) target.Hit("bullet");
+
         if (createOnDestroy != null) Instantiate(createOnDestroy, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
