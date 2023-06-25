@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
-    public Sound SMGFire, jump, weakPunch, strongPunch, punchHit, ammoPickup, magRefillPickup, slamLand, footStep, punch3WindUp, landingSound, dash;
+    public Sound SMGFire, jump, weakPunch, strongPunch, punchHit, ammoPickup, magRefillPickup, slamLand, footStep, punch3WindUp, landingSound, dash, levelUp, playerHurt, reload, perfectReload, playerDeath;
     [SerializeField] float maxFallSpeed = 30;
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
 
@@ -22,6 +22,11 @@ public class PlayerSound : MonoBehaviour
         SMGFire = Instantiate(SMGFire);
         jump = Instantiate(jump);
         dash = Instantiate(dash);
+        levelUp = Instantiate(levelUp);
+        playerHurt = Instantiate(playerHurt);
+        reload = Instantiate(reload);
+        perfectReload = Instantiate(perfectReload);
+        playerDeath = Instantiate(playerDeath);
     }
 
     public void Land()
