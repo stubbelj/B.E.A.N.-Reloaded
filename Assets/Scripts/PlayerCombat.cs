@@ -169,6 +169,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void GetNewGun(Gun newGun)
     {
+        if (currentGun != null && !string.Equals(newGun.displayName, currentGun.displayName)) GameManager.i.SpawnGunPickup(currentGun, transform.position);
         newGun.Init();
         currentGun = newGun;
     }
@@ -217,7 +218,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (currentGun.magsLeft <= 0 || GetCurAmmo() == currentGun.magazineSize) return;
 
-        attempingPerfectReload = true;
+        attempingPerfectReload = currentGun.CanPerfectReload();
         currentGun.magsLeft -= 1;
         reloadTimer = 0f;
         isReloading = true;
@@ -226,6 +227,11 @@ public class PlayerCombat : MonoBehaviour
     void DoCooldowns()
     {
         currentGun.cooldown -= Time.deltaTime;
+    }
+
+    public string GetGunName()
+    {
+        return currentGun.displayName;
     }
 
     public int GetMagsLeft()

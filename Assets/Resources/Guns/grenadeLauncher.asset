@@ -19,12 +19,13 @@ MonoBehaviour:
   damage: 0
   boostForce: 0
   magazineSize: 1
-  magsLeft: 13
+  magsLeft: 26
   maxMags: 30
   currentAmmo: 1
   bulletPrefab: {fileID: 5221142134288874925, guid: e4b995474c61daf45a8be98f41e088c2, type: 3}
-  cooldown: -1.5163296
+  cooldown: -1.6347647
   remainingBoostForce: 0
   gunshotSound: {fileID: 11400000, guid: afc366a71029c13428d156a3da992eba, type: 2}
-  automatic: 0
-  cameraPullDistance: 0.1
+  automatic: 1
+  canPerfectReload: 0
+  cameraPullDistance: 0

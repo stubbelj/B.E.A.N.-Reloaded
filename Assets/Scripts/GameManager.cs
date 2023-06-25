@@ -45,11 +45,13 @@ public class GameManager : MonoBehaviour
         public GameObject prefab;
     }
 
+   
     public static GameManager i;
     private void Awake() {i = this; }
 
     [SerializeField] List<LootTable> lootTables = new List<LootTable>();
     [SerializeField] List<ItemID> lootPrefabs = new List<ItemID>();
+    [SerializeField] GameObject gunPickupPrefab;
 
     [Header("XP")]
     [SerializeField] GameObject xpPrefab;
@@ -72,6 +74,13 @@ public class GameManager : MonoBehaviour
     public bool isPaused(){ return paused; }
     [SerializeField] GameObject gameOverCanvas, openingStoryCanvas;
     public bool gameOver = false;
+
+    public void SpawnGunPickup(Gun gun, Vector3 pos)
+    {
+        var newGun = Instantiate(gunPickupPrefab, pos, Quaternion.identity);
+        newGun.GetComponentInChildren<Pickup>().Init(gun, 2);
+    }
+
 
     private void OnValidate()
     {

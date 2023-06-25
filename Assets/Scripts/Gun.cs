@@ -17,11 +17,17 @@ public class Gun : ScriptableObject
 
     [Space()]
     [SerializeField] bool automatic;
+    [SerializeField] bool canPerfectReload = true;
     [SerializeField] float cameraPullDistance;
 
     public float GetCameraPullDistance()
     {
         return cameraPullDistance;
+    }
+
+    public bool CanPerfectReload()
+    {
+        return canPerfectReload;
     }
 
     public bool IsAutomatic()

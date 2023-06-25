@@ -8,7 +8,7 @@ public class AmmoHudController : MonoBehaviour
 {
     PlayerCombat player => FindObjectOfType<PlayerCombat>();
 
-    [SerializeField] TextMeshProUGUI magText, ammoText;
+    [SerializeField] TextMeshProUGUI magText, ammoText, gunDisplayName;
     [SerializeField] Slider ammoSlider, reloadSlider;
     [SerializeField] GameObject reloadSliderObj, targetBlock;
     private bool reloading;
@@ -22,9 +22,10 @@ public class AmmoHudController : MonoBehaviour
         ammoText.text = AddLeadingZeroes(ammoLeft, magCap.ToString().Length) + "/" + magCap;
         magText.text = player.GetMagsLeft().ToString();
         ammoSlider.value = (float) ammoLeft / magCap;
-
+        
         ammoText.color = ammoLeft == 0 ? Color.red : Color.white;
         magText.color = player.GetMagsLeft() > 0 ? Color.white : Color.red;
+        gunDisplayName.text = player.GetGunName();
 
         float reloadProg = player.GetReloadProgress();
         if(reloadProg == -1f){

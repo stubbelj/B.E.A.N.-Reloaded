@@ -7,6 +7,11 @@ public class PlayerXP : MonoBehaviour
     [SerializeField] float currentXP, nextThreshold;
     [SerializeField] int currentLevel;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) AddXP(20);
+    }
+
     private void Start()
     {
         currentLevel = 1;
