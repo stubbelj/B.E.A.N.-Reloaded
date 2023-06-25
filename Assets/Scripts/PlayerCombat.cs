@@ -64,6 +64,8 @@ public class PlayerCombat : MonoBehaviour
 
         CameraShake.i.Shake(0.3f, 0.2f);
 
+        anim.OnPlayerHit();
+
         health -= Damage;
         if (health <= 0) Die();
     }

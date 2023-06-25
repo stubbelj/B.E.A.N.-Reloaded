@@ -361,6 +361,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 328059879757683769, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
+      propertyPath: hitDust
+      value: 
+      objectReference: {fileID: 9139468678746473038, guid: e5eb402bc32c74748be1a1ea40eaeda6, type: 3}
+    - target: {fileID: 328059879757683769, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
+      propertyPath: jumpDust
+      value: 
+      objectReference: {fileID: 2434084426277405670, guid: 02dbd4e53e7b1704e86c522e44edbb34, type: 3}
+    - target: {fileID: 328059879757683769, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
+      propertyPath: landDust
+      value: 
+      objectReference: {fileID: 2396411922663709260, guid: ecda7245f247e2b41b223ecc9892d1cf, type: 3}
     - target: {fileID: 1399928138636384554, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: player
       value: 1

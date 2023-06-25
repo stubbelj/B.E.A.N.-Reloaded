@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,11 @@ public class PlayerAnimator : MonoBehaviour
     [Space()]
     [SerializeField] float walkThreshold, jumpThreshold = 0.1f;
 
+
     [Header("FX")]
-    [SerializeField] GameObject landDust, jumpDust, hitDust;
+    [SerializeField] GameObject landDust;
+    [SerializeField] GameObject jumpDust, hitDust;
+    [SerializeField] float jumpDustOffset = 0.75f, landDustOffset = 0.6f;
 
     PlayerController pMove =>GetComponent<PlayerController>();
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
@@ -40,6 +44,23 @@ public class PlayerAnimator : MonoBehaviour
         punchComboCooldown -= Time.deltaTime;
         Walk(Mathf.Abs(rb.velocity.x) > walkThreshold);
         Jump(Mathf.Abs(rb.velocity.y) > jumpThreshold || !pMove.isOnGround);
+    }
+
+    public void OnLand()
+    {
+        Instantiate(landDust, transform.position + Vector3.down * landDustOffset, Quaternion.identity);
+    }
+
+    public void AirJump()
+    {
+        Instantiate(jumpDust, transform.position + Vector3.down * jumpDustOffset, transform.rotation);
+    }
+
+    public void OnPlayerHit()
+    {
+        float maxOffset = 0.5f;
+        var offset = new Vector2(Random.Range(-maxOffset, maxOffset), Random.Range(-maxOffset, maxOffset));
+        Instantiate(hitDust, transform.position + (Vector3)offset, Quaternion.identity);
     }
 
     public Vector3 AimFrontArm()

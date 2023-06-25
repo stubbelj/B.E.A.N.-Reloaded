@@ -136,12 +136,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_0
+      name: Player_Smoke_Hit_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 31.833334
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -150,19 +150,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0313be87fd70b7942b8a17ee56940185
-      internalID: -2044184968
+      spriteID: 23732d7693a8dc94aae8cc2f9199be5f
+      internalID: -1594228096
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_1
+      name: Player_Smoke_Hit_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 31
         y: 0
-        width: 32
+        width: 31.833334
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -171,19 +171,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9826960a379f49b4b8bbb891deb60f9f
-      internalID: 935378796
+      spriteID: dd9b139f8bec7e14b8477b0e04fa6190
+      internalID: 850884622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_2
+      name: Player_Smoke_Hit_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 62
         y: 0
-        width: 32
+        width: 31.833334
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -192,19 +192,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef98b8f14335a645bfec9b772b92032
-      internalID: 796277372
+      spriteID: 3530d9fcef0baa547a0c60f7246d24e9
+      internalID: 106256424
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_3
+      name: Player_Smoke_Hit_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 93
         y: 0
-        width: 32
+        width: 31.833334
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -213,19 +213,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc90f3666f097a74bbdedd4e7b151fab
-      internalID: -162342927
+      spriteID: c8c7b5deb93846c4290bae3a5c36c1cb
+      internalID: -409560720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_4
+      name: Player_Smoke_Hit_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 124
         y: 0
-        width: 32
+        width: 31.833334
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -234,8 +234,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
-      internalID: -486213973
+      spriteID: fe3b6faecc6a0264d88d259704706378
+      internalID: -864845930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Smoke_Hit_5
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 0
+        width: 31.833334
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5abbe1ed645f841418969630c706f6b2
+      internalID: -571034290
       vertices: []
       indices: 
       edges: []
@@ -251,11 +272,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Arms_PunchCombo_1_0: -2044184968
-      Player_Arms_PunchCombo_1_1: 935378796
-      Player_Arms_PunchCombo_1_2: 796277372
-      Player_Arms_PunchCombo_1_3: -162342927
-      Player_Arms_PunchCombo_1_4: -486213973
+      Player_Smoke_Hit_0: -1594228096
+      Player_Smoke_Hit_1: 850884622
+      Player_Smoke_Hit_2: 106256424
+      Player_Smoke_Hit_3: -409560720
+      Player_Smoke_Hit_4: -864845930
+      Player_Smoke_Hit_5: -571034290
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

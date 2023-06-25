@@ -92,10 +92,13 @@ public class PlayerController : MonoBehaviour
         if(isOnGround || jumpsLeft > 0){
             isJumping = true;
             jumpsLeft--;
-            pSound.jump.Play();
+            jumpTimer = jumpMaxTime;
+
             rb.velocity = new Vector2(rb.velocity.x, 0); //Reset vertical velocity so the second jump isn't affected by your current velocity
             rb.velocity += Vector2.up * jumpForce;
-            jumpTimer = jumpMaxTime;
+
+            pSound.jump.Play();
+            if (!isOnGround) anim.AirJump();
         }
     }
 
@@ -177,7 +180,8 @@ public class PlayerController : MonoBehaviour
         isOnGround = Physics2D.BoxCast(transform.position + (Vector3) groundCheckBoxOffset, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);
         if (!wasOnGround && isOnGround){ //This line triggers when you first touch ground after being off it
             if(!slamming) pSound.Land();
-            jumpsLeft = maxJumps; 
+            jumpsLeft = maxJumps;
+            anim.OnLand();
         }
         if (isOnGround) slamming = false;
     }
