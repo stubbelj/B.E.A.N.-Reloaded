@@ -17,16 +17,27 @@ public class PlantKnight : BaseEnemy
 
         if (stunTime > 0) return;
 
-        if (dist > range && !attacking) WalkTowardPlayer();
+        if (dist > range && !attacking) {
+            WalkTowardPlayer();
+            anim.SetBool("MOVING", true);
+        }
         else Stop();
 
-        if (attackCooldown <= 0) Attack();
+        if (dist < range && attackCooldown <= 0) Attack();
+    }
+
+    protected override void Stop()
+    {
+        base.Stop();
+        anim.SetBool("MOVING", false);
     }
 
     public override void EndAttack()
     {
         base.EndAttack();
+        flipToFacePlayer = true;
         attacking = false;
+        attackHB.EndHitting();
     }
 
     public override void StartAttck()
@@ -37,6 +48,9 @@ public class PlantKnight : BaseEnemy
 
     void Attack()
     {
+        attacking = true;
+        flipToFacePlayer = false;
+        attackCooldown = attackResetTime;
         anim.SetTrigger(AttackTrigger);
         attackHB.Setup(attackDamage, null, 0);
     }

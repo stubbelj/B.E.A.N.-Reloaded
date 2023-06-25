@@ -43,7 +43,7 @@ public class BaseEnemy : MonoBehaviour
         Cooldowns();
 
         if (hpSlider != null) hpSlider.value = health / maxHealth;
-        if (flipToFacePlayer) srend.flipX = target.position.x < transform.position.x;
+        if (flipToFacePlayer) transform.eulerAngles = new Vector3(0, target.position.x < transform.position.x ? 180 : 0, 0);
     }
 
     protected virtual void Cooldowns()
@@ -122,7 +122,7 @@ public class BaseEnemy : MonoBehaviour
         rb.velocity = Vector2.Lerp(rb.velocity, targetSpeed, 0.25f);
     }
 
-    protected void Stop()
+    protected virtual void Stop()
     {
         rb.velocity = new Vector2(0, rb.velocity.y);
     }

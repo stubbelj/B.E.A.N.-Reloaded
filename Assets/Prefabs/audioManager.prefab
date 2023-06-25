@@ -75,7 +75,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6002374743517962687}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -97,13 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coordinatorPrefab: {fileID: 2297566603056730170, guid: e53ebab469c5783418f3bd5a0cc87006, type: 3}
-  sfxMixerG: {fileID: 0}
-  musicMixerG: {fileID: 0}
-  AmbientMixerG: {fileID: 0}
+  sfxMixerG: {fileID: 24300002, guid: 9dd439609545ba54d9bc11108ea1cf0b, type: 2}
+  musicMixerG: {fileID: 24300002, guid: f14a65b1022fca64baaaf5774c01a74d, type: 2}
   masterMixer: {fileID: 0}
   sfxMixer: {fileID: 0}
   musicMixer: {fileID: 0}
-  AmbientMixer: {fileID: 0}
 --- !u!114 &2673538946285524698
 MonoBehaviour:
   m_ObjectHideFlags: 0

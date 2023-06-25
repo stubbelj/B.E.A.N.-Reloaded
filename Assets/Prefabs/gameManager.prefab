@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745657948143051385}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -66,8 +66,8 @@ MonoBehaviour:
     ID: 1
     prefab: {fileID: 2898594361908085473, guid: d230d96c1e63ae1449f320d6e6cf2e58, type: 3}
   xpPrefab: {fileID: 9135675617975495560, guid: cc5ce2e735639444ca6d47c020317bcf, type: 3}
-  xOrbSpeedRange: {x: 0, y: 0}
-  yOrbSpeedRange: {x: 0, y: 0}
+  xOrbSpeedRange: {x: -200, y: 200}
+  yOrbSpeedRange: {x: 200, y: 150}
   difficultIncreasePeriod: 5
   maxEnemies: 0
-  sceneNum: 2
+  sceneNum: 3

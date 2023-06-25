@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class WalkEnemy : BaseEnemy
 {
-    [SerializeField] float range;
+    [SerializeField] float range, attackDamage, attackResetTime;
+    float attackCooldown;
+    [SerializeField] HitBox attackHB;
+    [SerializeField] Animator anim;
+    [SerializeField] string AttackTrigger = "ATTACK";
+    bool attacking;
 
     protected override void Update()
     {
@@ -12,7 +17,54 @@ public class WalkEnemy : BaseEnemy
 
         if (stunTime > 0) return;
 
-        if (dist > range) WalkTowardPlayer();
+        if (dist > range && !attacking) {
+            WalkTowardPlayer();
+            anim.SetBool("MOVING", true);
+        }
         else Stop();
+
+        if (dist < range && attackCooldown <= 0) Attack();
+    }
+
+    protected override void Stop()
+    {
+        base.Stop();
+        anim.SetBool("MOVING", false);
+    }
+
+    public override void EndAttack()
+    {
+        base.EndAttack();
+        flipToFacePlayer = true;
+        attacking = false;
+        attackHB.EndHitting();
+    }
+
+    public override void StartAttck()
+    {
+        base.StartAttck();
+        attackHB.StartHitting();
+    }
+
+    void Attack()
+    {
+        attacking = true;
+        flipToFacePlayer = false;
+        attackCooldown = attackResetTime;
+        anim.SetTrigger(AttackTrigger);
+        attackHB.Setup(attackDamage, null, 0);
+    }
+
+    protected override void Cooldowns()
+    {
+        base.Cooldowns();
+        attackCooldown -= Time.deltaTime;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!debug) return;
+
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

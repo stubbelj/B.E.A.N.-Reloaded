@@ -605,8 +605,7 @@ MonoBehaviour:
   cockpit: {fileID: 2723745069819578658}
   frontArm: {fileID: 554167305448039264}
   punchComboBreakTime: 1
-  punchFXPrefabHorizontal: {fileID: 1520165263839544217, guid: 48d34638a950bc24b86ff776a179e096, type: 3}
-  punchFXPrefabVertical: {fileID: 1520165263839544217, guid: 82287a10f048cf24d880d5c67fa2a535, type: 3}
+  dashFX: {fileID: 1520165263839544217, guid: cad175f15504a804986dff8d5b75c09a, type: 3}
   fXOffsetHorizontal: {x: 0.6, y: 0}
   FXOffsetVertical: {x: 0.4, y: 0.6}
   AimArmLimits: {x: -360, y: 360}
@@ -642,6 +641,7 @@ MonoBehaviour:
   isOnGround: 0
   isJumping: 0
   isDashing: 0
+  bulletBoostSpeedMax: 5
 --- !u!114 &22204898320837981
 MonoBehaviour:
   m_ObjectHideFlags: 0

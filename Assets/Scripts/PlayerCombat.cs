@@ -79,7 +79,6 @@ public class PlayerCombat : MonoBehaviour
 
     void Die()
     {
-        print("Player has died");
     }
 
     public float GetHealthPercent()

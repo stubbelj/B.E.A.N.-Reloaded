@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aa75fa1c306e1174980a393d2803bd54
+guid: f6c6f98b3c16c594aa97cfc194db57ee
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,85 +136,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bushAttack_0
+      name: Player_Arms_PunchCombo_1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
+        width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.2, y: 0.2}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6734334b566f3445818cdaa62d86f7e
-      internalID: 235591002
+      spriteID: 0313be87fd70b7942b8a17ee56940185
+      internalID: -2044184968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bushAttack_1
+      name: Player_Arms_PunchCombo_1_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 32
         y: 0
-        width: 48
+        width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.2, y: 0.2}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91f0cf41009fc9446866516a388799a6
-      internalID: -940753576
+      spriteID: 9826960a379f49b4b8bbb891deb60f9f
+      internalID: 935378796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bushAttack_2
+      name: Player_Arms_PunchCombo_1_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ef98b8f14335a645bfec9b772b92032
+      internalID: 796277372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Arms_PunchCombo_1_3
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 48
+        width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.2, y: 0.2}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2915302aa2dcd1c40bf9c3d98c1129c8
-      internalID: -677728264
+      spriteID: bc90f3666f097a74bbdedd4e7b151fab
+      internalID: -162342927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bushAttack_3
+      name: Player_Arms_PunchCombo_1_4
       rect:
         serializedVersion: 2
-        x: 144
+        x: 128
         y: 0
-        width: 48
+        width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.2, y: 0.2}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16aff5a8e4a5ce14fbaa2c87adb0a036
-      internalID: 1406568770
+      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
+      internalID: -486213973
       vertices: []
       indices: 
       edges: []
@@ -230,10 +251,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bushAttack_0: 235591002
-      bushAttack_1: -940753576
-      bushAttack_2: -677728264
-      bushAttack_3: 1406568770
+      Player_Arms_PunchCombo_1_0: -2044184968
+      Player_Arms_PunchCombo_1_1: 935378796
+      Player_Arms_PunchCombo_1_2: 796277372
+      Player_Arms_PunchCombo_1_3: -162342927
+      Player_Arms_PunchCombo_1_4: -486213973
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     void ReloadScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
     }
 }
