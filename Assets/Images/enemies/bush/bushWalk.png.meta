@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9608641259e36ab4ba97ae662c638640
+guid: 49d98851c7c675941b7fc070544686a2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mossKnightAttack_0
+      name: Player_Arms_PunchCombo_1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 80
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8ea986cb727c3d4ca90157d70703327
-      internalID: 269397295
+      spriteID: 0313be87fd70b7942b8a17ee56940185
+      internalID: -2044184968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mossKnightAttack_1
+      name: Player_Arms_PunchCombo_1_1
       rect:
         serializedVersion: 2
-        x: 80
+        x: 32
         y: 0
-        width: 80
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3653111ede2a65546b584adb85177c70
-      internalID: 39414940
+      spriteID: 9826960a379f49b4b8bbb891deb60f9f
+      internalID: 935378796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mossKnightAttack_2
+      name: Player_Arms_PunchCombo_1_2
       rect:
         serializedVersion: 2
-        x: 160
+        x: 64
         y: 0
-        width: 80
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +192,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f836aa921412cdd4380f2b998d6706ab
-      internalID: 1067413021
+      spriteID: 7ef98b8f14335a645bfec9b772b92032
+      internalID: 796277372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mossKnightAttack_3
+      name: Player_Arms_PunchCombo_1_3
       rect:
         serializedVersion: 2
-        x: 240
+        x: 96
         y: 0
-        width: 80
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8f826939d5eafb4e9b9e905ccc1865f
-      internalID: 1599023425
+      spriteID: bc90f3666f097a74bbdedd4e7b151fab
+      internalID: -162342927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mossKnightAttack_4
+      name: Player_Arms_PunchCombo_1_4
       rect:
         serializedVersion: 2
-        x: 320
+        x: 128
         y: 0
-        width: 80
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,8 +234,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35c763c5db06ca44689bf1f7516020be
-      internalID: 1641928225
+      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
+      internalID: -486213973
       vertices: []
       indices: 
       edges: []
@@ -251,11 +251,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      mossKnightAttack_0: 269397295
-      mossKnightAttack_1: 39414940
-      mossKnightAttack_2: 1067413021
-      mossKnightAttack_3: 1599023425
-      mossKnightAttack_4: 1641928225
+      Player_Arms_PunchCombo_1_0: -2044184968
+      Player_Arms_PunchCombo_1_1: 935378796
+      Player_Arms_PunchCombo_1_2: 796277372
+      Player_Arms_PunchCombo_1_3: -162342927
+      Player_Arms_PunchCombo_1_4: -486213973
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

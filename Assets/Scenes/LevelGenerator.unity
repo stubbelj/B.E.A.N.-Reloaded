@@ -4215,6 +4215,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &531122907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1077102368901933762, guid: 50c443f4487dcb74c9905bc4801d868e, type: 3}
+  m_PrefabInstance: {fileID: 338732222824078325}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &546303545
 GameObject:
   m_ObjectHideFlags: 0
@@ -14515,6 +14526,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7521229214315485553, guid: 50c443f4487dcb74c9905bc4801d868e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8456748159855349537, guid: 50c443f4487dcb74c9905bc4801d868e, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -14542,6 +14557,7 @@ GameObject:
   - component: {fileID: 2755116910680448604}
   - component: {fileID: 3190704878584907033}
   - component: {fileID: 7342263037321986444}
+  - component: {fileID: 7342263037321986445}
   m_Layer: 3
   m_Name: plantKnight
   m_TagString: Untagged
@@ -14693,17 +14709,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 25
   health: 25
-  hpSlider: {fileID: 0}
-  deathFX: {fileID: 0}
+  hpSlider: {fileID: 531122907}
+  deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
   lootTableID: -1
-  XPAmount: 0
-  walkSpeed: 0
+  XPAmount: 20
+  walkSpeed: 1.5
   defaultStunTime: 0.6
   stunTimeResist: 0
   knockBackLimits: {x: 0.2, y: 15}
   whiteSprite: {fileID: 0}
   flashWhiteTime: 0.1
-  debug: 0
-  flipToFacePlayer: 0
-  range: 0
+  debug: 1
+  flipToFacePlayer: 1
+  range: 7.95
   attackDamage: 0
+  attackResetTime: 0
+  attackHB: {fileID: 0}
+  anim: {fileID: 7342263037321986445}
+  AttackTrigger: ATTACK
+--- !u!95 &7342263037321986445
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507754386353103320}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 389701b1a03022d4183880430fc887c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
