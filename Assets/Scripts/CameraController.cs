@@ -7,8 +7,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector2 followSmoothness = new Vector2(0.6f, 0.05f);
     [SerializeField] float forwardOffset = 10, offsetSmoothness = 0.02f;
     float offset;
-    Transform player => FindObjectOfType<PlayerController>().transform;
+    public Transform player;
     PlayerCombat pCombat => player.GetComponent<PlayerCombat>();
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerController>().transform;
+    }
 
     private void LateUpdate()
     {

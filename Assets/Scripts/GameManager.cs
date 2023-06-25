@@ -66,6 +66,13 @@ public class GameManager : MonoBehaviour
     PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
     PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
 
+    [Space()]
+    [SerializeField] GameObject pauseMenu;
+    private bool paused = true;
+    public bool isPaused(){ return paused; }
+    [SerializeField] GameObject gameOverCanvas, openingStoryCanvas;
+    public bool gameOver = false;
+
     private void OnValidate()
     {
         for (int i = 0; i < lootPrefabs.Count; i++) {
@@ -109,20 +116,62 @@ public class GameManager : MonoBehaviour
         if (obj != null) Instantiate(obj, position, Quaternion.identity);
     }
  
+    private void Start(){
+        Resume();
+    }
+
     private void Update()
     {
-        if (pCombat.dead) ReloadScene(); 
-
-        difficultIncreaseCooldown -= Time.deltaTime;
-        if (difficultIncreaseCooldown <= 0) {
-            difficultIncreaseCooldown = difficultIncreasePeriod;
-            maxEnemies += 1;
+        if (pCombat.dead){
+            //fill in later if necessary            
         }
+
+        if(!isPaused() && !gameOver){
+            difficultIncreaseCooldown -= Time.deltaTime;
+            if (difficultIncreaseCooldown <= 0) {
+                difficultIncreaseCooldown = difficultIncreasePeriod;
+                maxEnemies += 1;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape) && !gameOver) {
+            if (isPaused()){
+                Resume();
+            } else {
+                Pause();
+            }
+        }
+    }
+
+    public void GameOver(){
+        gameOver = true;
+        gameOverCanvas.SetActive(true);
     }
 
     void ReloadScene()
     {
         SceneManager.LoadScene(1);
         SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
+    }
+
+    public void Pause()
+    {
+        paused = true;
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        paused = false;
+        pauseMenu.SetActive(false);
+        openingStoryCanvas.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void ReturnToMenu(){
+        SceneManager.LoadScene(0);
+        paused = false;
+        Time.timeScale = 1f;
     }
 }
