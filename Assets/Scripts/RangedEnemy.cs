@@ -11,19 +11,23 @@ public class RangedEnemy : BaseEnemy
 
     [SerializeField] float damage, bulletAngle = 45, bulletSpeed, bulletSpacing = 0.1f;
     float bulletCooldown;
-    [SerializeField] float reloadTime;
+    [SerializeField] float reloadTime, cheatAmount = 0.5f;
     float reloadCooldown;
-    [SerializeField] int magazineSize = 3;
+    [SerializeField] int magazineSize = 3; 
     int leftInMag;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Vector3 bulletSpawnOffset;
     [SerializeField] Color rootedColor;
-
+    bool shooting;
 
     [Header("Rooting")]
     [SerializeField] float rootTime = 1;
     float rootCooldown;
     bool rooted;
+
+    [Space()]
+    [SerializeField] Animator anim;
+    [SerializeField] string moveBool = "MOVE", attackTrigger = "ATTACK";
 
     protected override void Start()
     {
@@ -36,10 +40,7 @@ public class RangedEnemy : BaseEnemy
     protected override void Update()
     {
         base.Update();
-
-        srend.color = rooted ? rootedColor : Color.white;
-
-        if (stunTime > 0) return;
+        if (stunTime > 0 || shooting) return;
 
         if (dist > range.y) {
             UprootAndChase();
@@ -50,23 +51,24 @@ public class RangedEnemy : BaseEnemy
             return;
         }
         else Stop();
-
-        if (bulletCooldown <= 0 && reloadCooldown <= 0) Shoot();
+        if (bulletCooldown <= 0 && reloadCooldown <= 0) StartShoot();
     }
 
     void UprootAndChase()
     {
+        anim.SetBool(moveBool, true);
+
         Uproot();
         if (rooted) return;
-
         WalkTowardPlayer();
     }
 
     void UprootAndLeave()
     {
+        anim.SetBool(moveBool, true);
+
         Uproot();
         if (rooted) return;
-
         WalkAwayFromPlayer();
     }
 
@@ -88,7 +90,7 @@ public class RangedEnemy : BaseEnemy
         reloadCooldown -= Time.deltaTime;
     }
 
-    void Shoot()
+    void StartShoot()
     {
         if (!rooted) {
             Root();
@@ -100,7 +102,16 @@ public class RangedEnemy : BaseEnemy
             return;
         }
         if (!LineOfSightToTarget(range.y)) return;
+        anim.SetTrigger(attackTrigger);
 
+        bulletCooldown = bulletSpacing;
+        leftInMag -= 1;
+        shooting = true;
+    }
+
+    public void Shoot()
+    {
+        shooting = false;
         var offset = bulletSpawnOffset;
         if (srend.flipX) offset.x *= -1;
         var newBullet = Instantiate(bulletPrefab, transform.position + offset, Quaternion.identity);
@@ -108,40 +119,23 @@ public class RangedEnemy : BaseEnemy
         Vector2 dir = target.position - (transform.position + offset);
         float angle = Vector2.SignedAngle(Vector2.right, dir);
         newBullet.transform.eulerAngles = new Vector3(0, 0, angle);
+        newBullet.GetComponent<Bullet>().damage = damage;
 
-        newBullet.GetComponent<Bullet>().damage = damage; 
-        bulletCooldown = bulletSpacing;
-        leftInMag -= 1;
-
-        Vector2 force = calcBallisticVelocityVector(newBullet.transform.position, target.position, bulletAngle);
-        if (float.IsNaN(force.x) || float.IsNaN(force.y)) {
-            Destroy(newBullet);
-        }
+        bool cheatLeft = target.position.x < transform.position.x;
+        Vector3 cheatOffset = cheatAmount * (cheatLeft ? Vector2.left : Vector2.right);
+        Vector2 force = calcBallisticVelocityVector(newBullet.transform.position, target.position + cheatOffset, bulletAngle);
+        if (float.IsNaN(force.x) || float.IsNaN(force.y)) Destroy(newBullet);
         else newBullet.GetComponent<Rigidbody2D>().AddForce(force * bulletSpeed);
     }
 
     void Root()
     {
+        anim.SetBool(moveBool, false);
         rootCooldown -= Time.deltaTime;
         if (rootCooldown > 0) return;
 
         rooted = true;
         rootCooldown = rootTime;
-    }
-
-    Vector3 calcBallisticVelocityVector(Vector3 source, Vector3 target, float angle)
-    {
-        Vector3 direction = target - source;
-        float h = direction.y;
-        direction.y = 0;
-        float distance = direction.magnitude;
-        float a = angle * Mathf.Deg2Rad;
-        direction.y = distance * Mathf.Tan(a);
-        distance += h / Mathf.Tan(a);
-
-        // calculate velocity
-        float velocity = Mathf.Sqrt(distance * Physics.gravity.magnitude / Mathf.Sin(2 * a));
-        return velocity * direction.normalized;
     }
 
     void Reload()

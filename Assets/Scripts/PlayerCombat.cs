@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Stats")]
     [SerializeField] float maxHealth;
     float health;
-    [HideInInspector] public bool dead { get { return health <= 0; } }
+    [HideInInspector] public bool isDead { get { return health <= 0; } }
 
     [Space()]
     [SerializeField] KeyCode reload = KeyCode.R;
@@ -59,7 +59,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void Hit(float Damage)
     {
-        if(dead) return;
+        if(isDead) return;
         if (pMove.isDashing) return;
 
         CameraShake.i.Shake(0.3f, 0.2f);
@@ -127,7 +127,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if(gameManager.isPaused() || dead){ return; }
+        if(gameManager.isPaused() || isDead){ return; }
         DoCooldowns();
         anim.AimFrontArm();
 
@@ -144,7 +144,7 @@ public class PlayerCombat : MonoBehaviour
             if (!currentGun.IsAutomatic() && Input.GetMouseButtonDown(1)) FireCurrentGun();
         }
 
-        if (Input.GetKeyDown(KeyCode.Minus) && !dead){
+        if (Input.GetKeyDown(KeyCode.Minus) && !isDead){
             health = 0f;
             Die();
             gameManager.GameOver();

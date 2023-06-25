@@ -15,6 +15,9 @@ public class PlayerAnimator : MonoBehaviour
     [Space()]
     [SerializeField] float walkThreshold, jumpThreshold = 0.1f;
 
+    [Header("FX")]
+    [SerializeField] GameObject landDust, jumpDust, hitDust;
+
     PlayerController pMove =>GetComponent<PlayerController>();
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
     int punchStep;

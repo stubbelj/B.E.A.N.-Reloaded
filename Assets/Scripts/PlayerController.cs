@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     }
     // Update is called once per frame
     void Update(){
-        if(gameManager.isPaused() || combatScript.dead){ return; }
+        if(gameManager.isPaused() || combatScript.isDead){ return; }
 
         if (faceMouse) FaceMouse();
 

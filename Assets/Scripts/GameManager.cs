@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (pCombat.dead){
+        if (pCombat.isDead){
             //fill in later if necessary            
         }
 

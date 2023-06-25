@@ -15,19 +15,22 @@ public class EnemyManager : MonoBehaviour
         tossers.Add(newTosser);
     }
 
-    public void GetClosestTosser(Vector2 pos)
+    public Transform GetClosestTosser(Vector2 pos, float maxDist)
     {
         float closest = Mathf.Infinity;
-        Transform best = transform;
+        Transform best = null;
         for (int i = 0; i < tossers.Count; i++) {
             if (tossers[i] == null) {
                 tossers.RemoveAt(i);
                 i -= 1;
             }
-            else {
+            else if (!tossers[i].GetComponent<Tosser>().HasBomber()) {
                 var dist = Vector2.Distance(tossers[i].position, pos);
+                if (dist >= closest || dist > maxDist) continue;
+                closest = dist;
+                best = tossers[i];
             }
         }
+        return best;
     }
-
 }

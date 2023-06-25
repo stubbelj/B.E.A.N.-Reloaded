@@ -22,6 +22,7 @@ public class CameraController : MonoBehaviour
         float y = Mathf.Lerp(transform.position.y, player.position.y, followSmoothness.y);
         transform.position = new Vector3(x, y, transform.position.z);
 
+        if (pCombat == null || pCombat.isDead) return;
         var mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToViewportPoint(mousePos) * 2 - new Vector3(1, 1, 0);
         float aimPull = pCombat.GetCameraPullDistance();

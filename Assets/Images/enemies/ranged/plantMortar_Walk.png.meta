@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9cb97645522d214439ade37b821605f2
+guid: f6c6f98b3c16c594aa97cfc194db57ee
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_0
+      name: plantMortar_Walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0313be87fd70b7942b8a17ee56940185
-      internalID: -2044184968
+      spriteID: a375933f05f5b3549ba52a7e14662a13
+      internalID: -810537626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_1
+      name: plantMortar_Walk_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9826960a379f49b4b8bbb891deb60f9f
-      internalID: 935378796
+      spriteID: 0959ae4e5daf93f4bae0ead3a59e22c2
+      internalID: 1519114680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_2
+      name: plantMortar_Walk_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef98b8f14335a645bfec9b772b92032
-      internalID: 796277372
+      spriteID: ea58287d0ed6846438818b229f779052
+      internalID: -111046816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_3
+      name: plantMortar_Walk_3
       rect:
         serializedVersion: 2
         x: 96
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc90f3666f097a74bbdedd4e7b151fab
-      internalID: -162342927
+      spriteID: 3b4ee6316a7f0bf46abd58f93aee61b7
+      internalID: -1401282116
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_4
+      name: plantMortar_Walk_4
       rect:
         serializedVersion: 2
         x: 128
@@ -234,8 +234,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
-      internalID: -486213973
+      spriteID: e38d8ee46b758de41bd5804012e2efc5
+      internalID: -1396481588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plantMortar_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e9ccfbdad453b488baa00b333096ee
+      internalID: 378225939
       vertices: []
       indices: 
       edges: []
@@ -251,11 +272,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Arms_PunchCombo_1_0: -2044184968
-      Player_Arms_PunchCombo_1_1: 935378796
-      Player_Arms_PunchCombo_1_2: 796277372
-      Player_Arms_PunchCombo_1_3: -162342927
-      Player_Arms_PunchCombo_1_4: -486213973
+      plantMortar_Walk_0: -810537626
+      plantMortar_Walk_1: 1519114680
+      plantMortar_Walk_2: -111046816
+      plantMortar_Walk_3: -1401282116
+      plantMortar_Walk_4: -1396481588
+      plantMortar_Walk_5: 378225939
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

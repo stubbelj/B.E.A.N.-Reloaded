@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f6c6f98b3c16c594aa97cfc194db57ee
+guid: 9cb97645522d214439ade37b821605f2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_0
+      name: plantMortar_Uproot_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0313be87fd70b7942b8a17ee56940185
-      internalID: -2044184968
+      spriteID: 545f2be9ebe135349b771de503c38b56
+      internalID: -169215182
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_1
+      name: plantMortar_Uproot_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9826960a379f49b4b8bbb891deb60f9f
-      internalID: 935378796
+      spriteID: aa14b7acc53d51546a733fd472a32582
+      internalID: 90251367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_2
+      name: plantMortar_Uproot_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,50 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef98b8f14335a645bfec9b772b92032
-      internalID: 796277372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc90f3666f097a74bbdedd4e7b151fab
-      internalID: -162342927
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
-      internalID: -486213973
+      spriteID: 04f7fe254018abf4ea646ca2b621bce7
+      internalID: 539733625
       vertices: []
       indices: 
       edges: []
@@ -251,11 +209,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Arms_PunchCombo_1_0: -2044184968
-      Player_Arms_PunchCombo_1_1: 935378796
-      Player_Arms_PunchCombo_1_2: 796277372
-      Player_Arms_PunchCombo_1_3: -162342927
-      Player_Arms_PunchCombo_1_4: -486213973
+      plantMortar_Uproot_0: -169215182
+      plantMortar_Uproot_1: 90251367
+      plantMortar_Uproot_2: 539733625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

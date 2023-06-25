@@ -15,7 +15,7 @@ public class BaseEnemy : MonoBehaviour
     [Space()]
     [SerializeField] protected float walkSpeed;
     [SerializeField] float defaultStunTime = 0.6f, stunTimeResist;
-    [SerializeField] Vector2 knockBackLimits = new Vector2(0.2f, 15);
+    [SerializeField] Vector2 knockBackLimits = new Vector2(0.2f, 15), knockBacklimitX;
 
     [Space()]
     [SerializeField] Sprite whiteSprite;
@@ -51,6 +51,21 @@ public class BaseEnemy : MonoBehaviour
         stunTime -= Time.deltaTime;
     }
 
+    protected Vector3 calcBallisticVelocityVector(Vector3 source, Vector3 target, float angle)
+    {
+        Vector3 direction = target - source;
+        float h = direction.y;
+        direction.y = 0;
+        float distance = direction.magnitude;
+        float a = angle * Mathf.Deg2Rad;
+        direction.y = distance * Mathf.Tan(a);
+        distance += h / Mathf.Tan(a);
+
+        // calculate velocity
+        float velocity = Mathf.Sqrt(distance * Physics.gravity.magnitude / Mathf.Sin(2 * a));
+        return velocity * direction.normalized;
+    }
+
     protected bool LineOfSightToTarget(float range)
     {
         int layerMask = 1 << gameObject.layer;
@@ -76,6 +91,7 @@ public class BaseEnemy : MonoBehaviour
     public virtual void Hit(float damage, Vector3 knockBack, float stunTime = -1)
     {
         knockBack.y = Mathf.Clamp(knockBack.y, knockBackLimits.x, knockBackLimits.y);
+        knockBack.x = Mathf.Clamp(knockBack.x, knockBacklimitX.x, knockBacklimitX.y);
         if (stunTime == -1) stunTime = defaultStunTime;
         stunTime -= stunTimeResist;
         Stop();
@@ -104,7 +120,7 @@ public class BaseEnemy : MonoBehaviour
         if (anim) anim.enabled = true;
     }
 
-    protected void WalkAwayFromPlayer()
+    protected virtual void WalkAwayFromPlayer()
     {
         var targetSpeed = GetWalkTowardSpeed() * -1;
         rb.velocity = Vector2.Lerp(rb.velocity, targetSpeed, 0.25f);
@@ -116,7 +132,7 @@ public class BaseEnemy : MonoBehaviour
         return new Vector2(dir.x > 0 ? walkSpeed : -walkSpeed, rb.velocity.y);
     }
 
-    protected void WalkTowardPlayer()
+    protected virtual void WalkTowardPlayer()
     {
         var targetSpeed = GetWalkTowardSpeed();
         rb.velocity = Vector2.Lerp(rb.velocity, targetSpeed, 0.25f);

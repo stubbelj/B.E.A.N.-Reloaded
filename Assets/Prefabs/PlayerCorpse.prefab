@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3951991398373101598}
   - component: {fileID: 2659619672353306687}
   - component: {fileID: 5985544169948903180}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 6581859283262485076}
   - component: {fileID: 7639074310849134608}
   - component: {fileID: 2912773124648604589}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 480159936845715570}
   - component: {fileID: 7839914815000076394}
   - component: {fileID: 1608690330093659412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,6 +567,8 @@ MonoBehaviour:
   - {fileID: 8746190791000573819}
   XLaunchMag: 4
   YLaunchMag: 2
+  xRange: {x: -7, y: 7}
+  yRange: {x: 3, y: 8}
 --- !u!1 &7590468647007018087
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +581,7 @@ GameObject:
   - component: {fileID: 16002186635267808}
   - component: {fileID: 7581410967025889128}
   - component: {fileID: 771079980063306860}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +752,7 @@ GameObject:
   - component: {fileID: 4439538255675444058}
   - component: {fileID: 2996810310845543974}
   - component: {fileID: 6662343110990661227}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
