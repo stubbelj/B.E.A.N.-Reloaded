@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 7443600900785742479}
   - component: {fileID: 6276029047995174039}
   m_Layer: 0
-  m_Name: New Palette
+  m_Name: grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
