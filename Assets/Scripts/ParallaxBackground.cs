@@ -2,37 +2,31 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-   
+
     public float parallaxiness;
-    Camera cam;
-    Vector2 length;
+
+    Vector2 size;
     Vector3 startPos;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        cam = Camera.main;
-        startPos = transform.position;      
-        length = GetComponentInChildren<SpriteRenderer>().bounds.size;
-        //print
-        transform.position = GameObject.Find("Player").transform.position;
+    GameObject cam;
+    Vector3 oldCamPos;
+
+    void Start() {
+        cam = transform.parent.gameObject;
+        startPos = transform.position;
+        size = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 relative_pos = cam.transform.position * parallaxiness;   
-        Vector3 dist = cam.transform.position-relative_pos;
-        if(dist.x > startPos.x + length.x)
-        {
-            startPos.x += length.x;
-        }
-        if(dist.x < startPos.x - length.x)
-        {
-            startPos.x -= length.x;
-        }  
-        relative_pos.z = startPos.z;
+    void Update() {
 
-        transform.position = startPos - relative_pos;      
+        Vector2 delta = new Vector2(cam.transform.position.x * parallaxiness, cam.transform.position.y * parallaxiness);
+        transform.position = new Vector3(startPos.x + delta.x, startPos.y + delta.y, 0);
+
+        float totalDelta = cam.transform.position.x * (1 - parallaxiness);
+        if (totalDelta > startPos.x + size.x) {
+            startPos += new Vector3(size.x, 0, 0);
+        } else if (totalDelta < startPos.x - size.x) {
+            print("wrapping");
+            startPos -= new Vector3(size.x, 0, 0);
+        }
     }
 }
