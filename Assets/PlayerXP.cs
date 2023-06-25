@@ -7,6 +7,12 @@ public class PlayerXP : MonoBehaviour
     [SerializeField] float currentXP, nextThreshold;
     [SerializeField] int currentLevel;
 
+    private void Start()
+    {
+        currentLevel = 1;
+        nextThreshold = CalculateNextThreshold();
+    }
+
     public void AddXP(float amount)
     {
         currentXP += amount;
@@ -30,7 +36,7 @@ public class PlayerXP : MonoBehaviour
 
     float CalculateNextThreshold()
     {
-        return Mathf.FloorToInt(Mathf.Sqrt(currentLevel));
+        return Mathf.FloorToInt(Mathf.Sqrt(currentLevel)) * 100;
     }
 
     public float GetXPPercent()

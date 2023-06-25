@@ -130,11 +130,11 @@ public class BaseEnemy : MonoBehaviour
     public virtual void EndAttack() { }
     public virtual void StartAttck() { }
 
-    protected virtual void Die()
+    protected virtual void Die(bool playerKill = true)
     {
         if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
-        if (lootTableID != -1) GameManager.i.SpawnLoot(lootTableID, transform.position);
-        if (XPAmount > 0) GameManager.i.SpawnXP(XPAmount, transform.position);
+        if (lootTableID != -1 && playerKill) GameManager.i.SpawnLoot(lootTableID, transform.position);
+        if (XPAmount > 0 && playerKill) GameManager.i.SpawnXP(XPAmount, transform.position);
         Destroy(gameObject);
     }
 }

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: bomberExplode
+  m_Name: dashDust
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,21 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1982818332, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
+      value: {fileID: 935378796, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
     - time: 0.125
-      value: {fileID: -911299573, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
+      value: {fileID: -2044184968, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
     - time: 0.25
-      value: {fileID: -88732733, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
+      value: {fileID: 796277372, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
     - time: 0.375
-      value: {fileID: -503657147, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - time: 0.5
-      value: {fileID: -2029507097, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - time: 0.625
-      value: {fileID: -1597236401, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - time: 0.75
-      value: {fileID: 148407173, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - time: 0.875
-      value: {fileID: 1279318637, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
+      value: {fileID: -162342927, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -58,20 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1982818332, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - {fileID: -911299573, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - {fileID: -88732733, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - {fileID: -503657147, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - {fileID: -2029507097, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - {fileID: -1597236401, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - {fileID: 148407173, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
-    - {fileID: 1279318637, guid: f9a31f4efd678ce409cc6f4ddec3a8e0, type: 3}
+    - {fileID: 935378796, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
+    - {fileID: -2044184968, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
+    - {fileID: 796277372, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
+    - {fileID: -162342927, guid: a23911bf1ac2f6942aa564b76134aaa3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -92,14 +80,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.5
-    functionName: Explode
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1
-    functionName: Suicide
+    functionName: Destroy
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

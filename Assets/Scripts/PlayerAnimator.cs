@@ -8,7 +8,7 @@ public class PlayerAnimator : MonoBehaviour
 
     [Header("Punch")]
     [SerializeField] float punchComboBreakTime = 1;
-    [SerializeField] GameObject punchFXPrefabHorizontal, punchFXPrefabVertical;
+    [SerializeField] GameObject dashFX;
     [SerializeField] Vector2 fXOffsetHorizontal, FXOffsetVertical, AimArmLimits = new Vector2();
     float punchComboCooldown;
     [Space()]
@@ -55,6 +55,7 @@ public class PlayerAnimator : MonoBehaviour
     public void SetDash()
     {
         cockpit.SetTrigger("DASH");
+        Instantiate(dashFX, transform.position, transform.rotation);
     }
 
     public void ShowArms()

@@ -74,9 +74,9 @@ public class SplitterEnemy : BaseEnemy
         attackHB.EndHitting();
     }
 
-    protected override void Die()
+    protected override void Die(bool playerKill = true)
     {
-        if (nextSplitter) SpawnChild(); 
+        if (nextSplitter) SpawnChild();
         base.Die();
     }
 

@@ -17,6 +17,12 @@ public class DropRock : MonoBehaviour
         whistle.Play(transform);
     }
 
+    public void Init(GameObject enemyPrefab)
+    {
+        enemy = enemyPrefab;
+        spawner = null;
+    }
+
     public void Init(GameObject enemyPrefab, EnemySpawner spawner)
     {
         enemy = enemyPrefab;

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class xpPickup : MonoBehaviour
 {
-    [SerializeField] float waitTime = 1;
-    float value;
-    float timeLeft = 0;
+    [SerializeField] float waitTime = 1, smoothnessIncreaseMult;
+    float value, timeLeft = 0, smoothness = 0.025f;
     PlayerXP player;
 
     public void Init(PlayerXP player, float value)
@@ -19,9 +18,14 @@ public class xpPickup : MonoBehaviour
     private void Update()
     {
         timeLeft -= Time.deltaTime;
-        if (timeLeft > 0) return;
+        if (timeLeft > 0 || !player) return;
 
-        transform.position = Vector2.Lerp(transform.position, player.transform.position, 0.025f);
+        GetComponent<Collider2D>().isTrigger = true;
+        GetComponent<Rigidbody2D>().isKinematic = true;
+        gameObject.layer = 7;
+        smoothness *= smoothnessIncreaseMult;
+
+        transform.position = Vector2.Lerp(transform.position, player.transform.position, Mathf.Min(1, smoothness));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

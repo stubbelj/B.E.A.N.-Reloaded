@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -80,16 +78,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     public void SpawnXP(float amount, Vector2 pos)
     {
         while (amount > 1) {
             float _amount = Random.Range(1, amount);
             amount -= _amount;
-            var newOrb = Instantiate(xpPrefab, pos, Quaternion.identity, transform);
-            newOrb.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(xOrbSpeedRange.x, xOrbSpeedRange.y), Random.Range(yOrbSpeedRange.x, yOrbSpeedRange.y)));
-            newOrb.GetComponent<xpPickup>().Init(pXP, _amount);
+            SpawnXPorb(_amount, pos);
         }
+        SpawnXPorb(1, pos);
+    }
+
+    void SpawnXPorb(float amount, Vector2 pos)
+    {
+        var newOrb = Instantiate(xpPrefab, pos, Quaternion.identity, transform);
+        newOrb.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(xOrbSpeedRange.x, xOrbSpeedRange.y), Random.Range(yOrbSpeedRange.x, yOrbSpeedRange.y)));
+        newOrb.GetComponent<xpPickup>().Init(pXP, amount);
     }
 
     public void SpawnLoot(int lootTableID, Vector3 position)
