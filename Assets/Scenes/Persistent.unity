@@ -864,7 +864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6128036976400953445, guid: ff97e9a28055109468443fea4208a78b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6653016449130458723, guid: ff97e9a28055109468443fea4208a78b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -876,7 +876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7138458050719058665, guid: ff97e9a28055109468443fea4208a78b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 66.4
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1432,6 +1432,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4457546337318852339, guid: 61af3623639afc945b07394e5e3a02dc, type: 3}
+      propertyPath: sfxMixerG
+      value: 
+      objectReference: {fileID: 24300002, guid: 9dd439609545ba54d9bc11108ea1cf0b, type: 2}
+    - target: {fileID: 4457546337318852339, guid: 61af3623639afc945b07394e5e3a02dc, type: 3}
+      propertyPath: musicMixerG
+      value: 
+      objectReference: {fileID: 24300002, guid: f14a65b1022fca64baaaf5774c01a74d, type: 2}
     - target: {fileID: 6002374743517962687, guid: 61af3623639afc945b07394e5e3a02dc, type: 3}
       propertyPath: m_Name
       value: audioManager
