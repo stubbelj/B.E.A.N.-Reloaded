@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_0
+      name: mossKnightAttack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 80
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0313be87fd70b7942b8a17ee56940185
-      internalID: -2044184968
+      spriteID: 1f7a25bd8d542d644b62a7c17a651808
+      internalID: 1812060470
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_1
+      name: mossKnightAttack_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 80
         y: 0
-        width: 32
-        height: 32
+        width: 80
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9826960a379f49b4b8bbb891deb60f9f
-      internalID: 935378796
+      spriteID: 84c74772823d8a54bbf872426007da10
+      internalID: -987752327
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_2
+      name: mossKnightAttack_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 160
         y: 0
-        width: 32
-        height: 32
+        width: 80
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +192,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef98b8f14335a645bfec9b772b92032
-      internalID: 796277372
+      spriteID: f661b638651104f408261ef87d0d6279
+      internalID: -754719894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_3
+      name: mossKnightAttack_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 240
         y: 0
-        width: 32
-        height: 32
+        width: 80
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc90f3666f097a74bbdedd4e7b151fab
-      internalID: -162342927
+      spriteID: fc49e7f98795ff242872e6bc5800522c
+      internalID: 556992284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Arms_PunchCombo_1_4
+      name: mossKnightAttack_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 320
         y: 0
-        width: 32
-        height: 32
+        width: 80
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,8 +234,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fae3b71867eca9419839fe5f65fe7ce
-      internalID: -486213973
+      spriteID: f46f39c85b4cf304dacc7875fbb267e2
+      internalID: 1340424136
       vertices: []
       indices: 
       edges: []
@@ -251,11 +251,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Arms_PunchCombo_1_0: -2044184968
-      Player_Arms_PunchCombo_1_1: 935378796
-      Player_Arms_PunchCombo_1_2: 796277372
-      Player_Arms_PunchCombo_1_3: -162342927
-      Player_Arms_PunchCombo_1_4: -486213973
+      mossKnightAttack_0: 1812060470
+      mossKnightAttack_1: -987752327
+      mossKnightAttack_2: -754719894
+      mossKnightAttack_3: 556992284
+      mossKnightAttack_4: 1340424136
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
