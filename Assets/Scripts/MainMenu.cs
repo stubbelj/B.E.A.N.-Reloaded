@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] int PlaySceneID, PersistantSceneID;
+    [SerializeField] int PlaySceneID, PersistantSceneID, TutorialSceneID;
 
     public void Play(){
         SceneManager.LoadScene(PlaySceneID);
         SceneManager.LoadScene(PersistantSceneID, LoadSceneMode.Additive);
+    }
+
+    public void Tutorial(){
+        SceneManager.LoadScene(TutorialSceneID);
+        SceneManager.LoadScene(PersistantSceneID, LoadSceneMode.Additive); 
     }
 
     public void Quit(){

@@ -11,10 +11,10 @@ public class TargetScript : MonoBehaviour
     [SerializeField] string goalString;
     [SerializeField] GameObject linkedObject;
     
-    // Start is called before the first frame update
     void Start(){}
 
     public void Hit(string hitString){
+        print(hitString + "   " + goalString);
         if(hitString.Equals(goalString) || !tutorialTarget) {
             GameObject.Destroy(linkedObject);
             GameObject.Destroy(gameObject);
