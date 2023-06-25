@@ -8,11 +8,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] float forwardOffset = 10, offsetSmoothness = 0.02f;
     float offset;
     public Transform player;
-    PlayerCombat pCombat => player.GetComponent<PlayerCombat>();
+    PlayerCombat pCombat;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerController>().transform;
+        pCombat = player.GetComponent<PlayerCombat>();
     }
 
     private void LateUpdate()
