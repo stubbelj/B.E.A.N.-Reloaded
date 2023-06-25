@@ -116,7 +116,9 @@ public class GameManager : MonoBehaviour
  
     private void Update()
     {
-        if (pCombat.dead) ReloadScene(); 
+        if (pCombat.dead){
+            //fill in later            
+        }
 
         if(!isPaused()){
             difficultIncreaseCooldown -= Time.deltaTime;

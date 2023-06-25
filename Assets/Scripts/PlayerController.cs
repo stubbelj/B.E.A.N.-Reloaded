@@ -40,14 +40,16 @@ public class PlayerController : MonoBehaviour
     [Header("limits")]
     [SerializeField] float bulletBoostSpeedMax = 50;
 
+    private PlayerCombat combatScript;
 
     // Start is called before the first frame update
     void Start(){
         dashTimer = dashDuration;
+        combatScript = gameObject.GetComponent<PlayerCombat>();
     }
     // Update is called once per frame
     void Update(){
-        if(gameManager.isPaused()){ return; }
+        if(gameManager.isPaused() || combatScript.dead){ return; }
 
         if (faceMouse) FaceMouse();
 

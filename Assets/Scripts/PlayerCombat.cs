@@ -51,6 +51,8 @@ public class PlayerCombat : MonoBehaviour
     
     GameManager gameManager => GameObject.Find("gameManager").GetComponent<GameManager>();
 
+    [SerializeField] GameObject deathPrefab;
+
     public void AddAmmo(int magAmount, int bulletAmount)
     {
         SMGMagsLeft += magAmount;
@@ -62,6 +64,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void Hit(float Damage)
     {
+        if(dead) return;
         if (pMove.isDashing) return;
 
         CameraShake.i.Shake(0.3f, 0.2f);
@@ -80,6 +83,20 @@ public class PlayerCombat : MonoBehaviour
 
     void Die()
     {
+        var corpse = Instantiate(deathPrefab, transform.position, Quaternion.identity);
+        PlayerCorpse corpseScript = corpse.GetComponent<PlayerCorpse>();
+        corpseScript.Init(gameObject.GetComponent<Rigidbody2D>().velocity);
+        foreach(Transform child in transform){
+            child.gameObject.SetActive(false);
+        }
+        gameObject.GetComponent<Rigidbody2D>().simulated = false;
+        CameraController camera = FindObjectOfType<CameraController>();
+        camera.player = corpse.transform.Find("Bean").transform;
+
+        //Make the corpse face left or right appropriately
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10);
+        float yAngle = mousePos.x < transform.position.x ? 180 : 0;
+        corpse.transform.eulerAngles = new Vector3(transform.eulerAngles.x, yAngle, 0);
     }
 
     public float GetHealthPercent()
@@ -109,7 +126,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if(gameManager.isPaused()){ return; }
+        if(gameManager.isPaused() || dead){ return; }
         DoCooldowns();
         anim.AimFrontArm();
 
@@ -121,6 +138,11 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1)) needToRelease = false;
         if (Input.GetMouseButton(1) && !isReloading) FireCurrentGun();
+
+        if (Input.GetKeyDown(KeyCode.Minus) && !dead){
+            health = 0f;
+            Die();
+        }
 
         if (pMove.isOnGround) {
             if (slamming) LandSlam();
