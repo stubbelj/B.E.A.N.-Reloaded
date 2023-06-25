@@ -92,6 +92,8 @@ public class PlayerCombat : MonoBehaviour
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10);
         float yAngle = mousePos.x < transform.position.x ? 180 : 0;
         corpse.transform.eulerAngles = new Vector3(transform.eulerAngles.x, yAngle, 0);
+
+        gameManager.GameOver();
     }
 
     public float GetHealthPercent()
@@ -147,7 +149,6 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Minus) && !isDead){
             health = 0f;
             Die();
-            gameManager.GameOver();
         }
 
         if (pMove.isOnGround) {
