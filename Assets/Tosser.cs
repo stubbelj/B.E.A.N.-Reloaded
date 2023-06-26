@@ -70,7 +70,7 @@ public class Tosser : BaseEnemy
 
     void ThrowBomber()
     {
-        if (!LineOfSightToTarget(range.y)) return;
+        if (!LineOfSightToTarget(range.y) || heldBomber == null) return;
 
         anim.SetBool("CARRY", false);
         anim.SetTrigger("THROW");

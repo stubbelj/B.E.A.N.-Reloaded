@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemySpawnPoint : MonoBehaviour
@@ -14,14 +15,15 @@ public class EnemySpawnPoint : MonoBehaviour
     [SerializeField] GameObject dropRockPrefab;
     [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] float dropForce = 60;
-    Transform spawnPoint => transform.GetChild(0);
     Transform player => FindObjectOfType<PlayerController>().transform;
 
     private void Update()
     {
-        if (spawnIfXGreater && player.position.x > transform.position.x) SpawnEnemy();
-        if (spawnIfYGreater && player.position.y > transform.position.y) SpawnEnemy();
-        if (spawnIfYLess && player.position.y < transform.position.y) SpawnEnemy();
+        bool xGreater = player.position.x > transform.position.x || !spawnIfXGreater;
+        bool yGreater = player.position.y > transform.position.y || !spawnIfYGreater;
+        bool yLess = player.position.y < transform.position.y || !spawnIfYLess;
+
+        if (xGreater && yGreater && yLess) SpawnEnemy();
     }
     private void OnDrawGizmos()
     {
@@ -30,15 +32,17 @@ public class EnemySpawnPoint : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 0.5f);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(spawnPoint.position, 0.2f);
+        foreach (Transform child in transform) Gizmos.DrawWireSphere(child.position, 0.2f);
     }
 
     void SpawnEnemy()
     {
-        var newDropRock = Instantiate(dropRockPrefab, spawnPoint.position, Quaternion.identity);
-        newDropRock.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -dropForce));
-        newDropRock.GetComponent<DropRock>().Init(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)]);
-        Destroy(gameObject);
+        foreach (Transform child in transform) {
+            var newDropRock = Instantiate(dropRockPrefab, child.position, Quaternion.identity);
+            newDropRock.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -dropForce));
+            newDropRock.GetComponent<DropRock>().Init(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)]);
+            Destroy(gameObject);
+        }
     }
 
 }

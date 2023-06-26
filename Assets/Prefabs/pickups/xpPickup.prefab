@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8007242732099658333}
   - component: {fileID: 1636752244441361828}
   - component: {fileID: 3502331770495435004}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: xpPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

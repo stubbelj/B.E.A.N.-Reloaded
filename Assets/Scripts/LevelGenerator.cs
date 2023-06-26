@@ -6,10 +6,12 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour {
     [SerializeField] bool generate;
     [SerializeField] int sectionsToGenerate = 4;
+    int sectionsPlaced = 0;
     [SerializeField] GameObject startingSection, endingSection;
     [SerializeField] List<GameObject> sections = new List<GameObject>();
     Vector2 lastPos;
     Transform player => FindObjectOfType<PlayerController>().transform;
+    int levelNum;    
 
     private void Update()
     {
@@ -19,25 +21,41 @@ public class LevelGenerator : MonoBehaviour {
         }
     }
 
+    private void Start()
+    {
+        PlaceLevel(0);
+    }
+
     public void GenerateLevel(int levelNum)
     {
         var pos = lastPos;
         pos.x = player.transform.position.x;
         transform.position = pos;
-        PlaceLevel(levelNum);
+        this.levelNum = levelNum;
+        PlaceLevel();
     }
 
     void PlaceLevel(int levelNum = -1)
     {
         lastPos = transform.position;
         DeleteChildren();
-        
+        sectionsPlaced = 0;
+            
         lastPos = PlaceSection(startingSection);
-        for (int i = 0; i < sectionsToGenerate; i++) {
-            var chosenSection = ChoseNextSection();
-            lastPos = PlaceSection(chosenSection);
+        PlaceNextSection();        
+    }
+
+    public void PlaceNextSection()
+    {
+        if (sectionsPlaced > sectionsToGenerate) return;
+
+        var chosenSection = ChoseNextSection();
+        lastPos = PlaceSection(chosenSection);
+        sectionsPlaced += 1;
+
+        if (sectionsPlaced == sectionsToGenerate) {
+            lastPos = PlaceSection(endingSection, levelNum);
         }
-        lastPos = PlaceSection(endingSection, levelNum);
     }
 
     void DeleteChildren()
@@ -64,6 +82,9 @@ public class LevelGenerator : MonoBehaviour {
     {
         var newSection = Instantiate(prefab, lastPos, Quaternion.identity, transform);
         if (levelNum != -1) newSection.GetComponentInChildren<LevelEnd>().levelNum = levelNum;
+        newSection.GetComponent<LevelSection>().levelGen = this;
+        newSection.GetComponent<LevelSection>().player = player;
+
         return newSection.GetComponent<LevelSection>().endPoint.position;
     }
 }
