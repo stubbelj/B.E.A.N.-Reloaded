@@ -31,7 +31,8 @@ public class Grenade : MonoBehaviour
 
     void Explode()
     {
-        Instantiate(explosionFX, transform.position, Quaternion.identity);
+        var explosion = Instantiate(explosionFX, transform.position, Quaternion.identity);
+        explosion.GetComponentInChildren<HitBox>().Setup(GetComponent<Bullet>().damage, null, 0);
         explodeSound.Play();
         Destroy(gameObject);
     }
