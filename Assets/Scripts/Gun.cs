@@ -87,7 +87,10 @@ public class Gun : ScriptableObject
     {
         instancedSound = Instantiate(gunshotSound);
         magsLeft = maxMags;
-        _upgrades = new List<UpgradeOption.config>(upgrades);
+        _upgrades = new List<UpgradeOption.config>();
+        foreach (var u in upgrades) {
+            _upgrades.Add(new UpgradeOption.config(u));
+        }
 
         _damage = damage;
         _bulletSpacing = bulletSpacing;

@@ -20,6 +20,20 @@ public class UpgradeOption : MonoBehaviour
             amount *= amountMult;
             cost *= Mathf.RoundToInt(costMult);
         }
+
+        public config()
+        {}
+
+        public config(config other)
+        {
+            type = other.type;
+            title = other.title;
+            subtitle = other.subtitle;
+            cost = other.cost;
+            amount = other.amount; 
+            amountMult = other.amountMult; 
+            costMult = other.costMult;
+        }
     }
 
     public config currentStats;
