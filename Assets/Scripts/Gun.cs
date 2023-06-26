@@ -19,6 +19,7 @@ public class Gun : ScriptableObject
     [HideInInspector] public float cooldown, remainingBoostForce;
     [SerializeField] Sound gunshotSound;
     Sound instancedSound;
+    public Sprite image;
 
     [Space()]
     [SerializeField] bool automatic;

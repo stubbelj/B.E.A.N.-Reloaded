@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class WalkEnemy : BaseEnemy
 {
@@ -12,6 +13,8 @@ public class WalkEnemy : BaseEnemy
     bool attacking;
 
     public Sound bushAttack;
+
+
 
     protected override void Update()
     {
@@ -40,6 +43,12 @@ public class WalkEnemy : BaseEnemy
         flipToFacePlayer = true;
         attacking = false;
         attackHB.EndHitting();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        bushAttack = Instantiate(bushAttack);
     }
 
     public override void StartAttck()
