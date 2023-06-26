@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     [Header("Dash")]
     [SerializeField][Tooltip("Amount of time in seconds a dash lasts")] float dashDuration = 0.3f; 
     [SerializeField] float dashSpeed;
-    private float dashTimer; 
+    [SerializeField][Tooltip("Time in second between dashes")] float dashCooldown = 0.6f;
+    private float dashTimer, dashCooldownTimer; 
 
     [Header("State bools")]
     public bool isOnGround;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         dashTimer = dashDuration;
+        dashCooldownTimer = 0;
         combatScript = gameObject.GetComponent<PlayerCombat>();
     }
     // Update is called once per frame
@@ -61,6 +63,8 @@ public class PlayerController : MonoBehaviour
                 isDashing = false;
             }
         }
+        if(dashCooldownTimer > 0) dashCooldownTimer -= Time.deltaTime;
+        //print(dashCooldownTimer);
 
         if (!slamming && !anim.slamming) {
             if (Input.GetKeyDown(KeyCode.Space)) StartJump();
@@ -70,14 +74,14 @@ public class PlayerController : MonoBehaviour
         if(isJumping && Input.GetKey(KeyCode.Space) && jumpTimer > 0){
             ContinueJump();
         }
-        if(isJumping && (jumpTimer <= 0 && Input.GetKeyUp(KeyCode.Space))){
+        if(isJumping && (jumpTimer <= 0 || Input.GetKeyUp(KeyCode.Space))){
             isJumping = false;
         }
 
         busy = stepping || isDashing || slamming || anim.slamming;
         if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !busy && !pGrapple.LaunchFromGrapple()) StopMove();
 
-        if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !busy){ //Press shift while holding a movement key
+        if(Input.GetKeyDown(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !busy && dashCooldownTimer <= 0){ //Press shift while holding a movement key
             Dash();
         }
     }
@@ -107,6 +111,7 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         anim.SetDash();
         dashTimer = dashDuration;
+        dashCooldownTimer = dashCooldown;
         pSound.dash.Play();
     }
 
