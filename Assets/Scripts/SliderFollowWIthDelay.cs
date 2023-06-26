@@ -29,7 +29,7 @@ public class SliderFollowWIthDelay : MonoBehaviour
             }
         }
         else {
-            lead.value = follower.value;
+            //lead.value = follower.value;
         }
     }
 

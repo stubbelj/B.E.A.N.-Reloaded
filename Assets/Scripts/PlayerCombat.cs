@@ -11,11 +11,13 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float maxHealth;
     float health;
     [HideInInspector] public bool isDead { get { return health <= 0; } }
+    bool invincible;
 
     [Space()]
     [SerializeField] KeyCode reload = KeyCode.R;
     [SerializeField] float boostForceMult = 0.8f;
 
+    [SerializeField] List<Gun> allguns = new List<Gun>();
     [SerializeField] Gun currentGun;
     [SerializeField] Transform bulletFirePoint;
 
@@ -53,7 +55,26 @@ public class PlayerCombat : MonoBehaviour
 
     public Sound split;
 
-    
+    public void HealPercent(float percent)
+    {
+        health += maxHealth * (percent/100);
+        health = Mathf.Min(health, maxHealth);
+    }
+
+    public void SetInvincible()
+    {
+        invincible = true;
+    }
+
+    public void SetVincible()
+    {
+        invincible = false;
+    }
+
+    public void FullHeal()
+    {
+        health = maxHealth;
+    }
     public void IncreaseMaxHealth(float amount)
     {
         health += amount;
@@ -75,7 +96,7 @@ public class PlayerCombat : MonoBehaviour
     }
     public void Hit(float Damage)
     {
-        if(isDead) return;
+        if(isDead || invincible) return;
         if (pMove.isDashing) return;
 
         pSound.playerHurt.Play();
@@ -142,6 +163,8 @@ public class PlayerCombat : MonoBehaviour
     {
         health = maxHealth;
         StartReload();
+
+        if (FindObjectOfType<LevelGenerator>() != null) currentGun = allguns[Random.Range(0, allguns.Count)];
         GetNewGun(currentGun);
         split = Instantiate(split);
     }
@@ -154,6 +177,10 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         if(gameManager.isPaused() || isDead){ return; }
+
+
+        pSound.heartBeat.PercentVolume(1 - GetHealthPercent());
+
         DoCooldowns();
         anim.AimFrontArm();
 
@@ -168,11 +195,6 @@ public class PlayerCombat : MonoBehaviour
         if (!isReloading) {
             if (currentGun.IsAutomatic() && Input.GetMouseButton(1)) FireCurrentGun();
             if (!currentGun.IsAutomatic() && Input.GetMouseButtonDown(1)) FireCurrentGun();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Minus) && !isDead){
-            health = 0f;
-            Die();
         }
 
         if (pMove.isOnGround) {
@@ -194,6 +216,12 @@ public class PlayerCombat : MonoBehaviour
         if (currentGun != null && !string.Equals(newGun.displayName, currentGun.displayName)) GameManager.i.SpawnGunPickup(currentGun, transform.position);
         newGun.Init();
         currentGun = newGun;
+        currentGun.OnBulletReady.AddListener(PlayBulletReadySound);
+    }
+
+    void PlayBulletReadySound()
+    {
+        pSound.bulletReady.Play();
     }
 
     void LandSlam()
@@ -250,7 +278,9 @@ public class PlayerCombat : MonoBehaviour
 
     void DoCooldowns()
     {
+        bool ready = currentGun.cooldown <= 0;
         currentGun.cooldown -= Time.deltaTime;
+        if (!ready && currentGun.cooldown <= 0 && currentGun.GetBulletSpacing() > 0.5f) PlayBulletReadySound();
     }
     public string GetGunName()
     {

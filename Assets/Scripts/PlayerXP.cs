@@ -40,13 +40,18 @@ public class PlayerXP : MonoBehaviour
         currentLevel += 1;
         nextThreshold = CalculateNextThreshold();
         numPoints += Mathf.RoundToInt(Mathf.Sqrt(currentLevel-1));
-
-        GameManager.i.Pause(false);
+        StartCoroutine(WaitThenPause());
         OnLevelUp.Invoke();
 
         if (currentXP > nextThreshold) LevelUp();
     }
 
+    IEnumerator WaitThenPause()
+    {
+        yield return new WaitForSeconds(1.2f);
+        GameManager.i.Pause(false);
+    }
+ 
     float CalculateNextThreshold()
     {
         return Mathf.FloorToInt(Mathf.Sqrt(currentLevel)) * 100;

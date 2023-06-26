@@ -20,6 +20,7 @@ public class AnimationEventCoord : MonoBehaviour
     {
         if (enemy) enemy.EndAttack();
         if (pCombat) pCombat.EndAttack();
+        if (!enemy && !pCombat && hb) hb.EndHitting();
     }
 
     public void BigPunchCameraShake()

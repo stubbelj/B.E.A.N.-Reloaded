@@ -161,7 +161,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &-3353275296131424866
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 9058702006751196401}
   - component: {fileID: 4622966852392093758}
   - component: {fileID: 5681581633039332241}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: hitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,6 +308,7 @@ MonoBehaviour:
   hitting: 0
   hitLimit: 3
   player: 1
+  both: 1
   attackType: 
 --- !u!61 &5681581633039332241
 BoxCollider2D:

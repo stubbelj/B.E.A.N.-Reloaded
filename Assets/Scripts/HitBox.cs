@@ -11,7 +11,7 @@ public class HitBox : MonoBehaviour
     [SerializeField] int hitLimit = 3;
     List<GameObject> alreadyHit = new List<GameObject>();
     Sound hitSound;
-    [SerializeField] bool player;
+    [SerializeField] bool player, both;
     [HideInInspector] public string attackType;
 
     public void Setup(float damage, Transform knockBackSource, float knockBackStrength, float stunTime = -1, Sound hitSound = null)
@@ -63,10 +63,19 @@ public class HitBox : MonoBehaviour
         }
 
         if (player) {
+
+            if (both) {
+                var p = obj.GetComponentInParent<PlayerCombat>();
+                if (p && !alreadyHit.Contains(p.gameObject)) {
+                    alreadyHit.Add(p.gameObject);
+                    p.Hit(damage);
+                }
+            }
+
             var enemy = obj.GetComponentInParent<BaseEnemy>();
             if (!enemy || alreadyHit.Contains(enemy.gameObject)) return;
             alreadyHit.Add(enemy.gameObject);
-            enemy.Hit(damage, (enemy.transform.position - knockBackSource.position).normalized * knockBackStrength, stunTime);
+            enemy.Hit(damage, (enemy.transform.position - knockBackSource.position).normalized * knockBackStrength, stunTime);            
         }
         else {
             var p = obj.GetComponentInParent<PlayerCombat>();

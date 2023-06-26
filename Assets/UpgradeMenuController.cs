@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeMenuController : MonoBehaviour
 {
@@ -12,16 +11,45 @@ public class UpgradeMenuController : MonoBehaviour
     [SerializeField] List<UpgradeOption> weaponUpgradeOptions, chassisUpgradeOptions;
     [SerializeField] Color canAffordColor;
 
+    [Header("Sounds")]
+    [SerializeField] Sound uiButtonSound;
+    
+
+    [Header("Healing")]
+    [SerializeField] float healPercent = 20;
+    [SerializeField] float healCost = 1, healCostMult = 1.3f;
+    [SerializeField] TextMeshProUGUI healPercentText, healCostText;
+    [SerializeField] Button healButton;
+    int timesHealed;
+    int numberOfAffordableButtons;
+
     PlayerXP pXP => FindObjectOfType<PlayerXP>();
     Gun gun;
 
     private void Start()
     {
         pXP.OnLevelUp.AddListener(OpenMenu);
+        uiButtonSound = Instantiate(uiButtonSound);
+    }
+
+    public void Heal()
+    {
+        numberOfAffordableButtons -= 1;
+        pXP.numPoints -= Mathf.RoundToInt(healCost);
+        healCost *= healCostMult;
+        pXP.GetComponent<PlayerCombat>().HealPercent(healPercent);
+        timesHealed += 1;
+
+        OpenMenu();
+
+        uiButtonSound.Play();
+        if (numberOfAffordableButtons <= 0) CloseMenu();
     }
 
     void OpenMenu()
     {
+        numberOfAffordableButtons = 0;
+
         menuParent.SetActive(true);
         newLevel.text = "level " + pXP.getLevel();
 
@@ -39,21 +67,35 @@ public class UpgradeMenuController : MonoBehaviour
             chassisUpgradeOptions[i].UpdateWithCurrentConfig();
             EnableIfAffordable(chassisUpgradeOptions[i]);
         }
+
+        bool canAffordHeal = Mathf.RoundToInt(healCost) <= pXP.numPoints;
+        healCostText.text = Mathf.RoundToInt(healCost).ToString();
+        healCostText.color = canAffordHeal ? canAffordColor : Color.red;
+        healButton.enabled = canAffordHeal;
+        if (canAffordHeal) numberOfAffordableButtons += 1;
     }
 
     public void SelectWeaponUpgrade(int i)
     {
+        numberOfAffordableButtons -= 1;
         pXP.numPoints -= weaponUpgradeOptions[i].currentStats.cost;
+
         gun.ChoseOption(i);
         gun.ConfigureOption(weaponUpgradeOptions[i], i);
 
         totalPoints.text = pXP.numPoints.ToString();
-
         EnableIfAffordable(weaponUpgradeOptions[i]);
+
+        OpenMenu();
+
+        uiButtonSound.Play();
+        if (numberOfAffordableButtons <= 0) CloseMenu();
     }
 
     public void SelectChassisUpgrade(int i)
     {
+
+        numberOfAffordableButtons -= 1;
         float amount = chassisUpgradeOptions[i].currentStats.amount;
         switch (chassisUpgradeOptions[i].currentStats.type) {
             case UpgradeOption.config.effect.HEALTH:
@@ -74,10 +116,15 @@ public class UpgradeMenuController : MonoBehaviour
         chassisUpgradeOptions[i].UpdateWithCurrentConfig();
 
         EnableIfAffordable(chassisUpgradeOptions[i]);
+        OpenMenu();
+
+        uiButtonSound.Play();
+        if (numberOfAffordableButtons <= 0) CloseMenu();
     }
 
     public void CloseMenu()
     {
+        uiButtonSound.Play();
         GameManager.i.Resume();
         menuParent.SetActive(false);
     }
@@ -86,5 +133,6 @@ public class UpgradeMenuController : MonoBehaviour
     {
         bool canAfford = option.currentStats.cost <= pXP.numPoints;
         option.SetEnabled(canAfford, canAffordColor);
+        if (canAfford) numberOfAffordableButtons += 1;
     }
 }

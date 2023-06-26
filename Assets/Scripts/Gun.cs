@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
@@ -26,9 +27,16 @@ public class Gun : ScriptableObject
     [SerializeField] bool canPerfectReload = true;
     [SerializeField] float cameraPullDistance;
 
+    [HideInInspector] public UnityEvent OnBulletReady = new UnityEvent();
+
     [Header("Upgrade options")]
     [SerializeField] List<UpgradeOption.config> upgrades = new List<UpgradeOption.config>();
     List<UpgradeOption.config> _upgrades = new List<UpgradeOption.config>();
+
+    public float GetBulletSpacing()
+    {
+        return _bulletSpacing;
+    }
 
     public void Reload()
     {
@@ -97,6 +105,7 @@ public class Gun : ScriptableObject
         _reloadTime = reloadTime;
         _bulletSpeed = bulletSpeed;
         _magazineSize = magazineSize;
+        OnBulletReady = new UnityEvent();
     }
 
     public void Shoot(Vector2 firePos, Vector3 aimAngle, Transform bulletParent = null)

@@ -175,6 +175,7 @@ public class GameManager : MonoBehaviour
     {
         Pause();
         levelgen.GenerateLevel(currentLevel + 1);
+        pCombat.FullHeal();
         Resume();
     }
 
