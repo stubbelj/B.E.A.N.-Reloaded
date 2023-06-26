@@ -21,7 +21,9 @@ public class LevelGenerator : MonoBehaviour {
 
     public void GenerateLevel(int levelNum)
     {
-        transform.position = player.position + (Vector3) Vector2.down * 10;
+        var pos = lastPos;
+        pos.x = player.transform.position.x;
+        transform.position = pos;
         PlaceLevel(levelNum);
     }
 

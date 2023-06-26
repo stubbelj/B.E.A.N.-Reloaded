@@ -170,8 +170,8 @@ public class GameManager : MonoBehaviour
     void LoadNextLevel()
     {
         Pause();
-        //FindAnyObjectByType<PlayerController>().transform.position += Vector3.up;
         levelgen.GenerateLevel(currentLevel + 1);
+        Resume();
     }
 
     public void GameOver(){
