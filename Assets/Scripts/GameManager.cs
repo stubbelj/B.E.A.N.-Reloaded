@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
     PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
 
 
+    public List<GameObject> enemies;
+
     public void SpawnGunPickup(Gun gun, Vector3 pos)
     {
         var newGun = Instantiate(gunPickupPrefab, pos, Quaternion.identity);
@@ -131,6 +133,7 @@ public class GameManager : MonoBehaviour
     }
  
     private void Start(){
+        enemies = new List<GameObject>();
         Resume();
     }
 

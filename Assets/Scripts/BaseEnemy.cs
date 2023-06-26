@@ -86,6 +86,7 @@ public class BaseEnemy : MonoBehaviour
         health = maxHealth;
         target = FindObjectOfType<PlayerCombat>().transform;
         dieSound = Instantiate(dieSound);
+        GameObject.Find("gameManager").GetComponent<GameManager>().enemies.Add(gameObject);
     }
 
     public virtual void Stun(float stunTime)
@@ -158,6 +159,7 @@ public class BaseEnemy : MonoBehaviour
         if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
         if (lootTableID != -1 && playerKill) GameManager.i.SpawnLoot(lootTableID, transform.position);
         if (XPAmount > 0 && playerKill) GameManager.i.SpawnXP(XPAmount, transform.position);
+        GameObject.Find("gameManager").GetComponent<GameManager>().enemies.Remove(gameObject);
         Destroy(gameObject);
     }
 }
