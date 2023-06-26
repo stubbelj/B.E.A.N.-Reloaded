@@ -667,26 +667,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 328059879757683769, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: hitDust
-      value: 
-      objectReference: {fileID: 9139468678746473038, guid: e5eb402bc32c74748be1a1ea40eaeda6, type: 3}
-    - target: {fileID: 328059879757683769, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: jumpDust
-      value: 
-      objectReference: {fileID: 2434084426277405670, guid: 02dbd4e53e7b1704e86c522e44edbb34, type: 3}
-    - target: {fileID: 328059879757683769, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: landDust
-      value: 
-      objectReference: {fileID: 2396411922663709260, guid: ecda7245f247e2b41b223ecc9892d1cf, type: 3}
-    - target: {fileID: 1399928138636384554, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: player
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3496868200050545959, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4055653818809799196, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -734,26 +714,6 @@ PrefabInstance:
     - target: {fileID: 4514489930646763345, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925110271336631882, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: maxHealth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925110271336631882, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: currentGun
-      value: 
-      objectReference: {fileID: 11400000, guid: 62a22f9830651e1409631cc2d982250c, type: 2}
-    - target: {fileID: 4925110271336631882, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: deathPrefab
-      value: 
-      objectReference: {fileID: 7051066800202908839, guid: 43a9c565429700b499c939d12ae961ff, type: 3}
-    - target: {fileID: 4925110271336631882, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: bulletFirePoint
-      value: 
-      objectReference: {fileID: 1517855270}
-    - target: {fileID: 6262890607128480286, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3308,11 +3268,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502567661}
   m_CullTransparentMesh: 1
---- !u!4 &1517855270 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3627457512587665189, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
-  m_PrefabInstance: {fileID: 530474624}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1520289850
 GameObject:
   m_ObjectHideFlags: 0

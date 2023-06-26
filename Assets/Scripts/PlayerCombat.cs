@@ -75,6 +75,8 @@ public class PlayerCombat : MonoBehaviour
         if(isDead) return;
         if (pMove.isDashing) return;
 
+        pSound.playerHurt.Play();
+
         CameraShake.i.Shake(0.3f, 0.2f);
 
         anim.OnPlayerHit();
@@ -93,6 +95,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Die()
     {
+        pSound.playerDeath.Play();
         var corpse = Instantiate(deathPrefab, transform.position, Quaternion.identity);
         PlayerCorpse corpseScript = corpse.GetComponent<PlayerCorpse>();
         corpseScript.Init(gameObject.GetComponent<Rigidbody2D>().velocity);
@@ -208,6 +211,7 @@ public class PlayerCombat : MonoBehaviour
         if(!isReloading) return false; 
         if(GetReloadProgress() > perfectReloadStart && GetReloadProgress() < perfectReloadEnd){
             reloadTimer = reloadDur;
+            pSound.perfectReload.Play();
             FinishReload();
             return true;
         } else {
@@ -224,6 +228,7 @@ public class PlayerCombat : MonoBehaviour
 
     void FinishReload()
     {
+        pSound.reload.Play();
         isReloading = false;
         currentGun.Reload();
     }

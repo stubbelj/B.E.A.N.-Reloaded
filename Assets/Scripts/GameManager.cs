@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     [Header("restart")]
     [SerializeField] int sceneNum = 2;
+    [SerializeField] int victorySceneID = 5;
 
     PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
     PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
@@ -149,6 +150,10 @@ public class GameManager : MonoBehaviour
             } else {
                 Pause();
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Equals)){
+            SceneManager.LoadScene(victorySceneID);
         }
     }
 

@@ -6,9 +6,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour {
     [SerializeField] bool generate;
     [SerializeField] int sectionsToGenerate = 4;
-
-    GameObject startingSection, endingSection;
-
+    [SerializeField] GameObject startingSection, endingSection;
     [SerializeField] List<GameObject> sections = new List<GameObject>();
     Vector2 lastPos;
 

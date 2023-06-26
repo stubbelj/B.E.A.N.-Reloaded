@@ -35,6 +35,7 @@ public class PlayerXP : MonoBehaviour
 
     void LevelUp()
     {
+        GetComponent<PlayerSound>().levelUp.Play();
         currentXP -= nextThreshold;
         currentLevel += 1;
         nextThreshold = CalculateNextThreshold();
