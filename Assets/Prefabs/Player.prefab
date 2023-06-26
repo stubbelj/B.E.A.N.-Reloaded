@@ -100,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitting: 0
   hitLimit: 3
-  player: 0
+  player: 1
+  attackType: 
 --- !u!61 &1929456172165260397
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -221,7 +222,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 321588071
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2044184968, guid: 8e7171b865aa97b45a58cf74b6e6a942, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -564,14 +565,8 @@ MonoBehaviour:
   maxHealth: 50
   reload: 114
   boostForceMult: 0.6
-  SMGResetTime: 0.1
-  SMGReloadTime: 1
-  SMGBulletSpeed: 80
-  SMGDamage: 1
-  SMGBoostForce: 320
-  SMGMagazineSize: 60
-  SMGMagsLeft: 5
-  SMGBulletPrefab: {fileID: 8432434969716908706, guid: f7376d8beb368ff4d8ac5140f1dc5f42, type: 3}
+  currentGun: {fileID: 11400000, guid: 62a22f9830651e1409631cc2d982250c, type: 2}
+  bulletFirePoint: {fileID: 3627457512587665189}
   punchHB: {fileID: 4854961460610646553}
   punchDamage: 7
   punchKBStrength: 300
@@ -589,6 +584,10 @@ MonoBehaviour:
   perfectReloadStart: 0.5
   perfectReloadEnd: 0.6
   attempingPerfectReload: 0
+  normalPunchString: punch
+  bigPunchString: bigPunch
+  slamString: groundSlam
+  deathPrefab: {fileID: 7051066800202908839, guid: 43a9c565429700b499c939d12ae961ff, type: 3}
 --- !u!114 &328059879757683769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +610,11 @@ MonoBehaviour:
   AimArmLimits: {x: -360, y: 360}
   walkThreshold: 0
   jumpThreshold: 0.1
+  landDust: {fileID: 2396411922663709260, guid: ecda7245f247e2b41b223ecc9892d1cf, type: 3}
+  jumpDust: {fileID: 2434084426277405670, guid: 02dbd4e53e7b1704e86c522e44edbb34, type: 3}
+  hitDust: {fileID: 9139468678746473038, guid: e5eb402bc32c74748be1a1ea40eaeda6, type: 3}
+  jumpDustOffset: 0.75
+  landDustOffset: 0.6
   slamming: 0
 --- !u!114 &3609877756702823956
 MonoBehaviour:
@@ -666,6 +670,11 @@ MonoBehaviour:
   punch3WindUp: {fileID: 11400000, guid: e1bc94e245ef760418fc399a97f1f287, type: 2}
   landingSound: {fileID: 11400000, guid: 9a456b3288c04044388d2306eacd6c03, type: 2}
   dash: {fileID: 11400000, guid: ee5000977d70ed34f85c7f2e8a0fcd44, type: 2}
+  levelUp: {fileID: 11400000, guid: c18b874eaac911744a79046f53730bf4, type: 2}
+  playerHurt: {fileID: 11400000, guid: 536c843bff1c1894e9b654f8a369ee93, type: 2}
+  reload: {fileID: 11400000, guid: 5655eaae35ae9a44a9069ea7962fbfe5, type: 2}
+  perfectReload: {fileID: 11400000, guid: d278c396fc08b6744a513da6e81f60e4, type: 2}
+  playerDeath: {fileID: 11400000, guid: 8541bc7a1faf3f846a6e74716e13143e, type: 2}
   maxFallSpeed: 20
 --- !u!70 &5762742260275734781
 CapsuleCollider2D:
@@ -868,6 +877,10 @@ MonoBehaviour:
   currentXP: 0
   nextThreshold: 0
   currentLevel: 0
+  numPoints: 0
+  OnLevelUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8255883282999582387
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +982,7 @@ MonoBehaviour:
   hitting: 0
   hitLimit: 3
   player: 1
+  attackType: 
 --- !u!61 &1241127474640890111
 BoxCollider2D:
   m_ObjectHideFlags: 0

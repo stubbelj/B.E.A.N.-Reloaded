@@ -19,7 +19,7 @@ public class WalkEnemy : BaseEnemy
 
         if (dist > range && !attacking) {
             WalkTowardPlayer();
-            anim.SetBool("MOVING", true);
+            anim.SetBool("MOVE", true);
         }
         else Stop();
 
@@ -29,7 +29,7 @@ public class WalkEnemy : BaseEnemy
     protected override void Stop()
     {
         base.Stop();
-        anim.SetBool("MOVING", false);
+        anim.SetBool("MOVE", false);
     }
 
     public override void EndAttack()

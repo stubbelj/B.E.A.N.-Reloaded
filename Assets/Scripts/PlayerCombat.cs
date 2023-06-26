@@ -51,10 +51,16 @@ public class PlayerCombat : MonoBehaviour
     Transform bulletParent => FindObjectOfType<GameManager>().transform;
     GameManager gameManager => GameObject.Find("gameManager").GetComponent<GameManager>();
 
+    public void IncreaseMaxHealth(float amount)
+    {
+        health += amount;
+        maxHealth += amount;
+    }
+
     public void AddAmmo(int magAmount, int bulletAmount)
     {
-        currentGun.magsLeft += magAmount;
-        currentGun.currentAmmo = Mathf.Min(currentGun.magazineSize, currentGun.currentAmmo + bulletAmount);
+        currentGun.AddMags(magAmount);
+        currentGun.AddAmmo(bulletAmount);
 
         if (magAmount > 0) pSound.ammoPickup.Play();
         else pSound.magRefillPickup.Play();
@@ -149,7 +155,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKeyDown(reload)) ReloadInteract();
         if (Input.GetMouseButtonDown(1) && isReloading) AttemptPerfectReload();
-        if (Input.GetMouseButtonUp(1) && currentGun.currentAmmo <= 0 && !isReloading) StartReload();
+        if (Input.GetMouseButtonUp(1) && currentGun.GetCurrentAmmo() <= 0 && !isReloading) StartReload();
 
         if (Input.GetMouseButtonUp(1)) needToRelease = false;
 
@@ -224,15 +230,14 @@ public class PlayerCombat : MonoBehaviour
     {
         pSound.reload.Play();
         isReloading = false;
-        currentGun.currentAmmo = currentGun.magazineSize;
+        currentGun.Reload();
     }
 
     void StartReload()
     {
-        if (currentGun.magsLeft <= 0 || GetCurAmmo() == currentGun.magazineSize) return;
+        if (currentGun.GetMagsLeft() <= 0 || currentGun.FullMag()) return;
 
         attempingPerfectReload = currentGun.CanPerfectReload();
-        currentGun.magsLeft -= 1;
         reloadTimer = 0f;
         isReloading = true;
     }
@@ -248,21 +253,21 @@ public class PlayerCombat : MonoBehaviour
 
     public int GetMagsLeft()
     {
-        return currentGun.magsLeft;
+        return currentGun.GetMagsLeft() ;
     }
     public int GetCurAmmo()
     {
-        return currentGun.currentAmmo;
+        return currentGun.GetCurrentAmmo();
     }
 
     public int GetMagCapacity()
     {
-        return currentGun.magazineSize;
+        return currentGun.GetMagSize();
     }
 
     void FireCurrentGun()
     {
-        if (needToRelease || currentGun.cooldown > 0 || currentGun.currentAmmo <= 0) return;
+        if (needToRelease || currentGun.cooldown > 0 || currentGun.GetCurrentAmmo() <= 0) return;
         
         var aimAngle = anim.AimFrontArm();
         if (Mathf.Abs(aimAngle.z + 90) < 8f) Boost();

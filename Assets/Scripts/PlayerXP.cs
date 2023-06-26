@@ -7,6 +7,7 @@ public class PlayerXP : MonoBehaviour
 {
     [SerializeField] float currentXP, nextThreshold;
     [SerializeField] int currentLevel;
+    public int numPoints;
     [HideInInspector] public UnityEvent OnLevelUp = new UnityEvent();
 
     private void Update()
@@ -38,6 +39,8 @@ public class PlayerXP : MonoBehaviour
         currentXP -= nextThreshold;
         currentLevel += 1;
         nextThreshold = CalculateNextThreshold();
+        numPoints += Mathf.RoundToInt(Mathf.Sqrt(currentLevel-1));
+
         GameManager.i.Pause(false);
         OnLevelUp.Invoke();
 
