@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1418,12 +1418,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The year is 4023. \nYour <color=#01AA00>home </color>has been invaded
-    by a mysterious species of plant monster from a distant galaxy known as the Fabaceans.
-    \n\nYou are the last remaining pilot of the <color=#FF0101>B</color>eyond <color=#FF0101>E</color>arth
-    <color=#FF0101>A</color>rmoured <color=#FF0101>N</color>exus power armour (B.E.A.N),
-    so it's up to you to defeat the enemy forces.\n\n<b>Save your planet, or die
-    trying."
+  m_text: "The year is 4023. \nYour <color=#0f0fff>home </color>has been invaded
+    by a mysterious species of plant monster from a distant galaxy known as the <color=#01AA00>Fabaceans.
+    </color>\n\nYou are the last remaining pilot of the \n<color=#FF0101>B</color>eyond
+    <color=#FF0101>E</color>arth <color=#FF0101>A</color>rmoured <color=#FF0101>N</color>exus
+    (or <color=#FF0101>B.E.A.N</color>) \npower armour, so it's up to you to defeat
+    the enemy forces.\n\n<b>Save your planet, or die trying."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 09cabc8e31a7eee4f9e8b41ffec3be4c, type: 2}
   m_sharedMaterial: {fileID: -4903461303436851361, guid: 09cabc8e31a7eee4f9e8b41ffec3be4c, type: 2}
@@ -1450,7 +1450,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 82.9
+  m_fontSize: 75.35
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2311,7 +2311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1027937285
 MonoBehaviour:
   m_ObjectHideFlags: 0
