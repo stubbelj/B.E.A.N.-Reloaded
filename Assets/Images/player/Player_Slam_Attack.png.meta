@@ -144,7 +144,7 @@ TextureImporter:
         width: 80
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.3125}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,12 +160,12 @@ TextureImporter:
       name: Player_Slam_Attack_1
       rect:
         serializedVersion: 2
-        x: 81
+        x: 80
         y: 0
         width: 80
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.27083334}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,12 +181,12 @@ TextureImporter:
       name: Player_Slam_Attack_2
       rect:
         serializedVersion: 2
-        x: 162
+        x: 160
         y: 0
         width: 80
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.27083334}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,12 +202,12 @@ TextureImporter:
       name: Player_Slam_Attack_3
       rect:
         serializedVersion: 2
-        x: 243
+        x: 240
         y: 0
         width: 80
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.27083334}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

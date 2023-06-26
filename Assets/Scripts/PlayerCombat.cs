@@ -53,6 +53,7 @@ public class PlayerCombat : MonoBehaviour
 
     public Sound split;
 
+    
     public void IncreaseMaxHealth(float amount)
     {
         health += amount;
@@ -142,6 +143,7 @@ public class PlayerCombat : MonoBehaviour
         health = maxHealth;
         StartReload();
         GetNewGun(currentGun);
+        split = Instantiate(split);
     }
 
     public float GetCameraPullDistance()

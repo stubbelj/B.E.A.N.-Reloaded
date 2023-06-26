@@ -25,7 +25,8 @@ public class Grenade : MonoBehaviour
     {
         var enemy = collision.gameObject.GetComponentInParent<BaseEnemy>();
         if (!enemy) return;
-
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Explode();
     }
 

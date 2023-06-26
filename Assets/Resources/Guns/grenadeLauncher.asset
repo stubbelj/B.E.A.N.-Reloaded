@@ -16,13 +16,13 @@ MonoBehaviour:
   bulletSpacing: 0
   reloadTime: 4
   bulletSpeed: 450
-  damage: 0
+  damage: 20
   boostForce: 0
   magazineSize: 1
-  magsLeft: 30
+  magsLeft: 6
   maxMags: 30
   bulletPrefab: {fileID: 5221142134288874925, guid: e4b995474c61daf45a8be98f41e088c2, type: 3}
-  cooldown: -2.2104104
+  cooldown: -2.6461341
   remainingBoostForce: 0
   gunshotSound: {fileID: 11400000, guid: afc366a71029c13428d156a3da992eba, type: 2}
   image: {fileID: 0}

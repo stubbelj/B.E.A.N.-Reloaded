@@ -41,6 +41,8 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (target.GetComponent<PlayerCombat>().isDead) enabled = false;
+
         dist = Vector2.Distance(transform.position, target.position);
         Cooldowns();
 
