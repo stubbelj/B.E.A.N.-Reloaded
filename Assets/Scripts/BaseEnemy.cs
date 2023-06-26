@@ -26,6 +26,8 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] protected bool debug;
     [SerializeField] protected bool flipToFacePlayer;
 
+    public Sound dieSound;
+
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     protected SpriteRenderer srend => GetComponent<SpriteRenderer>();
     protected float stunTime;
@@ -148,6 +150,8 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual void Die(bool playerKill = true)
     {
+        dieSound.Play();
+        
         if (deathFX != null) Instantiate(deathFX, transform.position, Quaternion.identity);
         if (lootTableID != -1 && playerKill) GameManager.i.SpawnLoot(lootTableID, transform.position);
         if (XPAmount > 0 && playerKill) GameManager.i.SpawnXP(XPAmount, transform.position);
