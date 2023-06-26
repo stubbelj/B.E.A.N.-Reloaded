@@ -11,6 +11,8 @@ public class WalkEnemy : BaseEnemy
     [SerializeField] string AttackTrigger = "ATTACK";
     bool attacking;
 
+    public Sound bushAttack;
+
     protected override void Update()
     {
         base.Update();
@@ -42,6 +44,7 @@ public class WalkEnemy : BaseEnemy
 
     public override void StartAttck()
     {
+        bushAttack.Play();
         base.StartAttck();
         attackHB.StartHitting();
     }

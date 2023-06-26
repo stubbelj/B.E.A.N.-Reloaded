@@ -101,6 +101,7 @@ MonoBehaviour:
   hitting: 0
   hitLimit: 3
   player: 0
+  attackType: 
 --- !u!61 &5053317837504471268
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -320,10 +321,12 @@ MonoBehaviour:
   defaultStunTime: 0.6
   stunTimeResist: 0
   knockBackLimits: {x: 0.2, y: 15}
+  knockBacklimitX: {x: 0, y: 0}
   whiteSprite: {fileID: 21300000, guid: 226c08e22b4b43c468fc16139bef80d4, type: 3}
   flashWhiteTime: 0.1
   debug: 1
   flipToFacePlayer: 1
+  dieSound: {fileID: 11400000, guid: 7df1981b197de5647a3fc672dd70885c, type: 2}
   explodeRange: 1
   explodeTrigger: EXPLODE
   anim: {fileID: 590933995650138068}

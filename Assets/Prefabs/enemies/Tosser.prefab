@@ -211,6 +211,7 @@ MonoBehaviour:
   flashWhiteTime: 0.1
   debug: 1
   flipToFacePlayer: 1
+  dieSound: {fileID: 11400000, guid: 7df1981b197de5647a3fc672dd70885c, type: 2}
   range: {x: 3.39, y: 7.17}
   holdBomberPos: {fileID: 5255116378157029182}
   throwAngle: 45
@@ -394,6 +395,7 @@ MonoBehaviour:
   hitting: 0
   hitLimit: 3
   player: 0
+  attackType: 
 --- !u!1001 &7784448074616237665
 PrefabInstance:
   m_ObjectHideFlags: 0
