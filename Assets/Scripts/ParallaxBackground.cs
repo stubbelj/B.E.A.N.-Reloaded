@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour
@@ -17,14 +18,15 @@ public class Parallax : MonoBehaviour
         size = new Vector2(GetComponent<SpriteRenderer>().bounds.size.x, GetComponent<SpriteRenderer>().bounds.size.y);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        var camDelta = cam.position - oldCamPos;
-        oldCamPos = cam.position;
-        transform.position += camDelta * parallaxiness;
-
         var xDist = cam.position.x - (transform.position.x + xOffset);
         if (xDist > size.x) transform.position += Vector3.right * size.x;
         if (xDist < -size.x) transform.position += Vector3.left * size.x;
+
+        var camDelta = cam.position - oldCamPos;
+        oldCamPos = cam.position;
+        camDelta.y = 0;
+        transform.position += (camDelta * parallaxiness);
     }
 }
