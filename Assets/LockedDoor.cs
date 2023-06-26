@@ -35,12 +35,16 @@ public class LockedDoor : MonoBehaviour
     }
 
     void Open(){
-        sr.enabled = false;
+        //sr.enabled = false;
         collider.enabled = false;
+
+        GetComponent<Animator>().Play("DoorDown");
     }
 
     void Close(){
-        sr.enabled = true;
+        //sr.enabled = true;
         collider.enabled = true;
+
+        GetComponent<Animator>().Play("DoorUp");
     }
 }
