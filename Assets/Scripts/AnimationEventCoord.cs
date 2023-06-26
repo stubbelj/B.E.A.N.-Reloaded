@@ -9,6 +9,13 @@ public class AnimationEventCoord : MonoBehaviour
     PlayerSound pSound => GetComponentInParent<PlayerSound>();
     BaseEnemy enemy => GetComponentInParent<BaseEnemy>();
 
+    HitBox hb => GetComponentInChildren<HitBox>();
+
+    public void Hit()
+    {
+        hb.StartHitting();
+    }
+
     public void EndAttack()
     {
         if (enemy) enemy.EndAttack();

@@ -25,11 +25,12 @@ MonoBehaviour:
   cooldown: -2.2104104
   remainingBoostForce: 0
   gunshotSound: {fileID: 11400000, guid: afc366a71029c13428d156a3da992eba, type: 2}
+  image: {fileID: 0}
   automatic: 1
   canPerfectReload: 0
   cameraPullDistance: 0
   upgrades:
-  - title: 
+  - title: Damage
     subtitle: 
     cost: 0
     type: 0
