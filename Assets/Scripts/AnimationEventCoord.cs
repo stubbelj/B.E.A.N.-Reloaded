@@ -43,6 +43,11 @@ public class AnimationEventCoord : MonoBehaviour
         if (pCombat) pCombat.EndPunch();
     }
 
+    public void HideArms()
+    {
+        if (pAnim) pAnim.HideArms();
+    }
+
     public void ShowArms()
     {
         if (pAnim) pAnim.ShowArms();
