@@ -178,6 +178,7 @@ MonoBehaviour:
   flashWhiteTime: 0.1
   debug: 1
   flipToFacePlayer: 1
+  dieSound: {fileID: 11400000, guid: 7df1981b197de5647a3fc672dd70885c, type: 2}
   range: {x: 2.15, y: 14.01}
   damage: 1
   bulletAngle: 70

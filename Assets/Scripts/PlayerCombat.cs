@@ -51,6 +51,8 @@ public class PlayerCombat : MonoBehaviour
     Transform bulletParent => FindObjectOfType<GameManager>().transform;
     GameManager gameManager => GameObject.Find("gameManager").GetComponent<GameManager>();
 
+    public Sound split;
+
     public void IncreaseMaxHealth(float amount)
     {
         health += amount;
@@ -95,6 +97,8 @@ public class PlayerCombat : MonoBehaviour
 
     void Die()
     {
+        split.Play();
+        
         pSound.playerDeath.Play();
         var corpse = Instantiate(deathPrefab, transform.position, Quaternion.identity);
         PlayerCorpse corpseScript = corpse.GetComponent<PlayerCorpse>();
