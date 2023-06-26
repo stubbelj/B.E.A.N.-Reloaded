@@ -83,6 +83,12 @@ public class PlayerAnimator : MonoBehaviour
         Instantiate(dashFX, transform.position, transform.rotation);
     }
 
+    public void HideArms()
+    {
+        frontArm.gameObject.SetActive(false);
+        backArm.gameObject.SetActive(false);
+    }
+
     public void ShowArms()
     {
         frontArm.gameObject.SetActive(true);
@@ -94,8 +100,7 @@ public class PlayerAnimator : MonoBehaviour
         if (punchComboCooldown <= 0 || punchStep > 3) punchStep = 1;
 
         frontArm.transform.localEulerAngles = Vector3.zero;
-        frontArm.gameObject.SetActive(false);
-        backArm.gameObject.SetActive(false);
+        HideArms();
 
         if (punchStep == 1) cockpit.SetTrigger("PUNCH1");
         if (punchStep == 2) cockpit.SetTrigger("PUNCH2");
