@@ -804,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 4925110271336631882, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: currentGun
       value: 
-      objectReference: {fileID: 11400000, guid: 0666fa84c5e65e045b1d6dcebbe3c60e, type: 2}
+      objectReference: {fileID: 11400000, guid: 62a22f9830651e1409631cc2d982250c, type: 2}
     - target: {fileID: 5762742260275734781, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: m_Size.y
       value: 0.8413522
