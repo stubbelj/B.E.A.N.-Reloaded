@@ -134,7 +134,8 @@ public class GameManager : MonoBehaviour
  
     private void Start(){
         enemies = new List<GameObject>();
-        Resume();
+        Time.timeScale = 0;
+        openingStoryCanvas.SetActive(true);
     }
 
     private void Update()
