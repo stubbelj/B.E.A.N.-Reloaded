@@ -7,6 +7,27 @@ public class Parallax : MonoBehaviour
 
     Vector2 size;
     Vector3 startPos;
+    Transform cam;
+    Vector3 oldCamPos;
+
+    private void Start()
+    {
+        cam = Camera.main.transform;
+        oldCamPos = cam.position;
+    }
+
+    private void Update()
+    {
+        var camDelta = cam.position - oldCamPos;
+        oldCamPos = cam.position;
+
+        transform.position += camDelta * parallaxiness; 
+    }
+
+    /*public float parallaxiness;
+
+    Vector2 size;
+    Vector3 startPos;
     GameObject cam;
     Vector3 oldCamPos;
 
@@ -27,5 +48,5 @@ public class Parallax : MonoBehaviour
         } else if (totalDelta < startPos.x - size.x) {
             startPos -= new Vector3(size.x, 0, 0);
         }
-    }
+    }*/
 }

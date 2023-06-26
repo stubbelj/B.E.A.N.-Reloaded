@@ -14,7 +14,6 @@ public class TargetScript : MonoBehaviour
     void Start(){}
 
     public void Hit(string hitString){
-        print(hitString + "   " + goalString);
         if(hitString.Equals(goalString) || !tutorialTarget) {
             GameObject.Destroy(linkedObject);
             GameObject.Destroy(gameObject);

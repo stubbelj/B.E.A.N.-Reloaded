@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 451075013087376315}
   - component: {fileID: 672369785651514792}
+  - component: {fileID: 8157913609843897828}
   m_Layer: 0
   m_Name: gameManager
   m_TagString: Untagged
@@ -65,9 +66,28 @@ MonoBehaviour:
   - name: '1: medAmmoPIckup'
     ID: 1
     prefab: {fileID: 2898594361908085473, guid: d230d96c1e63ae1449f320d6e6cf2e58, type: 3}
+  gunPickupPrefab: {fileID: 0}
   xpPrefab: {fileID: 9135675617975495560, guid: cc5ce2e735639444ca6d47c020317bcf, type: 3}
   xOrbSpeedRange: {x: -200, y: 200}
   yOrbSpeedRange: {x: 200, y: 150}
   difficultIncreasePeriod: 5
   maxEnemies: 0
   sceneNum: 3
+  victorySceneID: 5
+  pauseMenu: {fileID: 0}
+  gameOverCanvas: {fileID: 0}
+  openingStoryCanvas: {fileID: 0}
+  gameOver: 0
+--- !u!114 &8157913609843897828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745657948143051385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe51a2b8fd768c442a85e5463b4094d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tossers: []

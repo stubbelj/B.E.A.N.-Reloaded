@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
         public GameObject prefab;
     }
 
-   
     public static GameManager i;
     private void Awake() {i = this; }
 
@@ -66,22 +65,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] int sceneNum = 2;
     [SerializeField] int victorySceneID = 5;
 
-    PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
-    PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
-
     [Space()]
     [SerializeField] GameObject pauseMenu;
     private bool paused = true;
     public bool isPaused(){ return paused; }
+    
+    [Header("Level and gameOver")]
     [SerializeField] GameObject gameOverCanvas, openingStoryCanvas;
     public bool gameOver = false;
+    [SerializeField] int numLevels;
+    public int currentLevel;
+
+    LevelGenerator levelgen => FindObjectOfType<LevelGenerator>();
+    PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
+    PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
+
 
     public void SpawnGunPickup(Gun gun, Vector3 pos)
     {
         var newGun = Instantiate(gunPickupPrefab, pos, Quaternion.identity);
         newGun.GetComponentInChildren<Pickup>().Init(gun, 2);
     }
-
 
     private void OnValidate()
     {
@@ -151,10 +155,22 @@ public class GameManager : MonoBehaviour
                 Pause();
             }
         }
+    }
 
-        if(Input.GetKeyDown(KeyCode.Equals)){
+    public void CompleteLevel(int levelNum)
+    {
+        currentLevel = levelNum;
+        if (levelNum == numLevels) {
             SceneManager.LoadScene(victorySceneID);
+            return;
         }
+        LoadNextLevel();
+    }
+
+    void LoadNextLevel()
+    {
+        Pause();
+        levelgen.GenerateLevel(currentLevel + 1);
     }
 
     public void GameOver(){
