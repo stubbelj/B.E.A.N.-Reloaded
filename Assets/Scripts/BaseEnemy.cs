@@ -83,6 +83,7 @@ public class BaseEnemy : MonoBehaviour
     {
         health = maxHealth;
         target = FindObjectOfType<PlayerCombat>().transform;
+        dieSound = Instantiate(dieSound);
     }
 
     public virtual void Stun(float stunTime)
