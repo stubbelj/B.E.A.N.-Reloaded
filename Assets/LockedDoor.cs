@@ -24,7 +24,7 @@ public class LockedDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        Debug.Log(Vector3.Distance(player.transform.position, gameObject.transform.position));
+        //Debug.Log(Vector3.Distance(player.transform.position, gameObject.transform.position));
         foreach(GameObject enemy in manager.enemies){
             if(Vector3.Distance(enemy.transform.position, gameObject.transform.position) < OOBRange){
                 Close();
