@@ -43,10 +43,10 @@ public class UpgradeMenuController : MonoBehaviour
 
     public void SelectWeaponUpgrade(int i)
     {
+        pXP.numPoints -= weaponUpgradeOptions[i].currentStats.cost;
         gun.ChoseOption(i);
         gun.ConfigureOption(weaponUpgradeOptions[i], i);
 
-        pXP.numPoints -= weaponUpgradeOptions[i].currentStats.cost;
         totalPoints.text = pXP.numPoints.ToString();
 
         EnableIfAffordable(weaponUpgradeOptions[i]);

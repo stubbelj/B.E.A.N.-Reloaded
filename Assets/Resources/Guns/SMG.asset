@@ -13,40 +13,41 @@ MonoBehaviour:
   m_Name: SMG
   m_EditorClassIdentifier: 
   displayName: S.M.G.
-  bulletSpacing: 0.1
+  bulletSpacing: 0.15
   reloadTime: 1
   bulletSpeed: 80
   damage: 1
   boostForce: 320
   magazineSize: 60
-  magsLeft: 13
+  magsLeft: 14
   maxMags: 15
   bulletPrefab: {fileID: 8432434969716908706, guid: f7376d8beb368ff4d8ac5140f1dc5f42, type: 3}
-  cooldown: -0.7906776
+  cooldown: -1.0658991
   remainingBoostForce: 320
   gunshotSound: {fileID: 11400000, guid: b7c543f261439a24183a42538a276bce, type: 2}
+  image: {fileID: 0}
   automatic: 1
   canPerfectReload: 1
   cameraPullDistance: 0
   upgrades:
-  - title: damage
-    subtitle: deal more damage per shot
+  - title: Damage
+    subtitle: More bullet per bullet
     cost: 1
     type: 0
     amount: 2.25
     amountMult: 1.5
-    costMult: 1.3
-  - title: fire rate
-    subtitle: more bullets = more good
-    cost: 1
+    costMult: 2
+  - title: Fire rate
+    subtitle: More faster = more good
+    cost: 2
     type: 1
-    amount: 1
+    amount: 0.045
     amountMult: 1
-    costMult: 1.5
-  - title: clip size
-    subtitle: now with more bullets!
+    costMult: 3
+  - title: Clip size
+    subtitle: Now with more bullets!
     cost: 1
     type: 2
     amount: 15
-    amountMult: 1.1
-    costMult: 1.05
+    amountMult: 1
+    costMult: 2

@@ -19,34 +19,35 @@ MonoBehaviour:
   damage: 15
   boostForce: 320
   magazineSize: 3
-  magsLeft: 30
+  magsLeft: 28
   maxMags: 30
   bulletPrefab: {fileID: 6048287828500635569, guid: ca68c77b1376587479e0f860f86187c1, type: 3}
-  cooldown: -11.1296
+  cooldown: -0.627717
   remainingBoostForce: 320
   gunshotSound: {fileID: 11400000, guid: 535e772ac2a921342990472590f9ce6f, type: 2}
+  image: {fileID: 0}
   automatic: 0
   canPerfectReload: 1
   cameraPullDistance: 0.2
   upgrades:
-  - title: 
-    subtitle: 
-    cost: 0
+  - title: Damage
+    subtitle: One shot, one kill
+    cost: 2
     type: 0
-    amount: 0
-    amountMult: 0
-    costMult: 0
-  - title: 
-    subtitle: 
-    cost: 0
-    type: 0
-    amount: 0
-    amountMult: 0
-    costMult: 0
-  - title: 
-    subtitle: 
-    cost: 0
-    type: 0
-    amount: 0
-    amountMult: 0
-    costMult: 0
+    amount: 5
+    amountMult: 2
+    costMult: 2
+  - title: Fire Rate
+    subtitle: Who has time for bolt action
+    cost: 2
+    type: 1
+    amount: 0.7
+    amountMult: 0.8
+    costMult: 2
+  - title: Clip Size
+    subtitle: More bullet
+    cost: 1
+    type: 2
+    amount: 2
+    amountMult: 1
+    costMult: 2

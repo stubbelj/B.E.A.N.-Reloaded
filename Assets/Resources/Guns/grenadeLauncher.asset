@@ -19,10 +19,10 @@ MonoBehaviour:
   damage: 20
   boostForce: 0
   magazineSize: 1
-  magsLeft: 6
+  magsLeft: 28
   maxMags: 30
   bulletPrefab: {fileID: 5221142134288874925, guid: e4b995474c61daf45a8be98f41e088c2, type: 3}
-  cooldown: -2.6461341
+  cooldown: -5.4734235
   remainingBoostForce: 0
   gunshotSound: {fileID: 11400000, guid: afc366a71029c13428d156a3da992eba, type: 2}
   image: {fileID: 0}
@@ -31,23 +31,23 @@ MonoBehaviour:
   cameraPullDistance: 0
   upgrades:
   - title: Damage
-    subtitle: 
-    cost: 0
+    subtitle: More bang for your buck
+    cost: 2
     type: 0
-    amount: 0
-    amountMult: 0
-    costMult: 0
-  - title: 
-    subtitle: 
-    cost: 0
-    type: 0
-    amount: 0
-    amountMult: 0
-    costMult: 0
-  - title: 
-    subtitle: 
-    cost: 0
-    type: 0
-    amount: 0
-    amountMult: 0
-    costMult: 0
+    amount: 8
+    amountMult: 3
+    costMult: 3
+  - title: Fire Rate
+    subtitle: One after the other
+    cost: 2
+    type: 1
+    amount: 1
+    amountMult: 1
+    costMult: 2
+  - title: Clip Size
+    subtitle: Bandolier
+    cost: 3
+    type: 2
+    amount: 1
+    amountMult: 1
+    costMult: 2
