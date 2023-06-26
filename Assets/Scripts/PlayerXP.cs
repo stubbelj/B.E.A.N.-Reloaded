@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerXP : MonoBehaviour
 {
     [SerializeField] float currentXP, nextThreshold;
     [SerializeField] int currentLevel;
+    [HideInInspector] public UnityEvent OnLevelUp = new UnityEvent();
 
     private void Update()
     {
@@ -36,6 +38,8 @@ public class PlayerXP : MonoBehaviour
         currentXP -= nextThreshold;
         currentLevel += 1;
         nextThreshold = CalculateNextThreshold();
+        GameManager.i.Pause(false);
+        OnLevelUp.Invoke();
 
         if (currentXP > nextThreshold) LevelUp();
     }

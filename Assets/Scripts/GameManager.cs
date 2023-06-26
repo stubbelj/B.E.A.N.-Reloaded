@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     [Header("restart")]
     [SerializeField] int sceneNum = 2;
+    [SerializeField] int victorySceneID = 5;
 
     PlayerCombat pCombat => FindAnyObjectByType<PlayerCombat>();
     PlayerXP pXP => FindAnyObjectByType<PlayerXP>();
@@ -150,6 +151,10 @@ public class GameManager : MonoBehaviour
                 Pause();
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.Equals)){
+            SceneManager.LoadScene(victorySceneID);
+        }
     }
 
     public void GameOver(){
@@ -163,11 +168,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
     }
 
-    public void Pause()
+    public void Pause(bool showPauseMenu = true)
     {
         paused = true;
         Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
+        if (showPauseMenu) pauseMenu.SetActive(true);
     }
 
     public void Resume()

@@ -60,6 +60,10 @@ public class PlayerCombat : MonoBehaviour
         else pSound.magRefillPickup.Play();
     }
 
+    public Gun GetCurrentGun()
+    {
+        return currentGun;
+    }
     public void Hit(float Damage)
     {
         if(isDead) return;
