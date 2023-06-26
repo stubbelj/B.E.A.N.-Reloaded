@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 5657304979896625258}
   - component: {fileID: 3717378967887482495}
   - component: {fileID: 1158132487146230803}
+  - component: {fileID: 4203652204656838813}
   m_Layer: 5
   m_Name: upgradeMenuSubButton
   m_TagString: Untagged
@@ -301,6 +302,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4203652204656838813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2221530087655533484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abf1633ed463f64b8fdb82a0acd9ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeTitle: {fileID: 3944803587691868236}
+  subtitle: {fileID: 6554371003764134287}
+  cost: {fileID: 2202201017934731002}
 --- !u!1 &2472055964703766561
 GameObject:
   m_ObjectHideFlags: 0

@@ -175,6 +175,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void IncreaseMaxJumps(float amount)
+    {
+        maxJumps += Mathf.RoundToInt(amount);
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        airMovementSpeed += amount;
+        movementSpeed += amount;
+    }
+
     private void CheckGround(){
         bool wasOnGround = isOnGround;
         isOnGround = Physics2D.BoxCast(transform.position + (Vector3) groundCheckBoxOffset, groundCheckBoxDimensions, 0f, -transform.up, 0.1f /*distance*/, platformLayer);

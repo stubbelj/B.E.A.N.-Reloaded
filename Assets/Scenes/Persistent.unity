@@ -894,6 +894,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531988662}
   m_CullTransparentMesh: 1
+--- !u!114 &585189104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+  m_PrefabInstance: {fileID: 926953962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abf1633ed463f64b8fdb82a0acd9ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &621284971 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 672369785651514792, guid: 26f6a61d3089de342a50ff5a0f7fa9b5, type: 3}
@@ -978,8 +989,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: +1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aa9f7c565b0868140b85dfe577056bf9, type: 2}
-  m_sharedMaterial: {fileID: 3357722467367768000, guid: aa9f7c565b0868140b85dfe577056bf9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2baf994f5491e6248bf46d47371e8fa6, type: 2}
+  m_sharedMaterial: {fileID: 7198780489100419627, guid: 2baf994f5491e6248bf46d47371e8fa6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1010,7 +1021,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1019,7 +1030,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1570,7 +1581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &823171419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,8 +1681,16 @@ MonoBehaviour:
   menuParent: {fileID: 1952418129}
   newLevel: {fileID: 427068852}
   pointsGained: {fileID: 661462446}
-  weaponUpgradeOptions: []
-  chassisUpgradeOptions: []
+  totalPoints: {fileID: 1520289852}
+  weaponUpgradeOptions:
+  - {fileID: 3478505747072228862}
+  - {fileID: 3478505747072228863}
+  - {fileID: 3478505747072228861}
+  chassisUpgradeOptions:
+  - {fileID: 981785198}
+  - {fileID: 585189104}
+  - {fileID: 1931847331}
+  canAffordColor: {r: 0.98039216, g: 0.79607844, b: 0.40392157, a: 1}
 --- !u!1 &923707541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,6 +1741,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: hp
       objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 823171423}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectChassisUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UpgradeMenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2799550923571180284, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_SizeDelta.x
       value: -41.5181
@@ -1750,6 +1797,34 @@ PrefabInstance:
       propertyPath: m_text
       value: +1 jump
       objectReference: {fileID: 0}
+    - target: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.cost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.title
+      value: improved armor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.amount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.costMult
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.subtitle
+      value: more health
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.amountMult
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4080521500413340948, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_text
       value: improved armour
@@ -1770,6 +1845,34 @@ PrefabInstance:
       propertyPath: m_text
       value: faster servos
       objectReference: {fileID: 0}
+    - target: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.cost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.title
+      value: faster servos
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.amount
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.costMult
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.subtitle
+      value: more speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.amountMult
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5337292492541427569, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_Color.b
       value: 0.85882354
@@ -1781,6 +1884,34 @@ PrefabInstance:
     - target: {fileID: 5337292492541427569, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_Color.r
       value: 0.41568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.cost
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.title
+      value: boost upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.costMult
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.subtitle
+      value: +1 jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: currentStats.amountMult
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5928761959074067377, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_text
@@ -1795,6 +1926,38 @@ PrefabInstance:
     - target: {fileID: 6705458697850099411, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_text
       value: tank upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 823171423}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectChassisUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UpgradeMenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7785157884894076370, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_Name
@@ -1896,6 +2059,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: jump
       objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 823171423}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectChassisUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UpgradeMenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1906,6 +2101,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8343433298399843239, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
   m_PrefabInstance: {fileID: 926953962}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &981785198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+  m_PrefabInstance: {fileID: 926953962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abf1633ed463f64b8fdb82a0acd9ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &994287089 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1552478864680754231, guid: 8efc6afb6f18d5f40b575021b333558f, type: 3}
@@ -2151,7 +2357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2181,7 +2387,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1049687205}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 823171423}
+        m_TargetAssemblyTypeName: UpgradeMenuController, Assembly-CSharp
+        m_MethodName: CloseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1049687205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3635,6 +3853,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893069910}
   m_CullTransparentMesh: 1
+--- !u!114 &1931847331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+  m_PrefabInstance: {fileID: 926953962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abf1633ed463f64b8fdb82a0acd9ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1952418129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3650,7 +3879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1952418130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4009,9 +4238,69 @@ PrefabInstance:
       propertyPath: m_Name
       value: damage
       objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 823171423}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWeaponUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UpgradeMenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165296858971539787, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2824166963718254578, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_Name
       value: gunUpgrades
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 823171423}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWeaponUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UpgradeMenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119233736059478637, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7805248503923171460, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
       propertyPath: m_text
@@ -4105,34 +4394,76 @@ PrefabInstance:
       propertyPath: m_text
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 823171423}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWeaponUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UpgradeMenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908913371841507980, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1209876762049689332, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3478505747072228862}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
---- !u!1 &3478505747072228861 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1209876762049689332, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+--- !u!114 &3478505747072228861 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5901419439026089474, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
   m_PrefabInstance: {fileID: 3478505747072228860}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3478505747072228862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3478505747072228861}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9abf1633ed463f64b8fdb82a0acd9ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeTitle: {fileID: 0}
-  subtitle: {fileID: 0}
-  cost: {fileID: 0}
+--- !u!114 &3478505747072228862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3767386645401146821, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+  m_PrefabInstance: {fileID: 3478505747072228860}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abf1633ed463f64b8fdb82a0acd9ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3478505747072228863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5226503689067724515, guid: 4ac3b5f22ba06ae4b9af3d133d417158, type: 3}
+  m_PrefabInstance: {fileID: 3478505747072228860}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abf1633ed463f64b8fdb82a0acd9ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3537130811295422333
 MonoBehaviour:
   m_ObjectHideFlags: 0
