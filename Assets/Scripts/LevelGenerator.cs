@@ -47,7 +47,7 @@ public class LevelGenerator : MonoBehaviour {
 
     public void PlaceNextSection()
     {
-        if (sectionsPlaced > sectionsToGenerate) return;
+        if (sectionsPlaced >= sectionsToGenerate) return;
 
         var chosenSection = ChoseNextSection();
         lastPos = PlaceSection(chosenSection);

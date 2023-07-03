@@ -38,6 +38,8 @@ public class PlayerGrapple : MonoBehaviour
 
     private void Update()
     {
+        Camera.main.transform.parent.GetComponent<CameraController>().lookAheadUp = point != null && point.hovered;
+
         if (Input.GetKeyDown(activateKey)) GrappleInteract(); 
         if (launchedFromGrapple && pMove.isOnGround && timeSinceGrappleEnd > 0.5f) launchedFromGrapple = false;
 

@@ -156,15 +156,20 @@ public class PlayerCombat : MonoBehaviour
     public void Punch3StartHit()
     {
         pSound.strongPunch.Play();
-        punchHB.StartHitting();
+        punchHB.StartHitting(); 
     }
 
     private void Start()
     {
         health = maxHealth;
-        StartReload();
+        FinishReload();
 
-        if (FindObjectOfType<LevelGenerator>() != null) currentGun = allguns[Random.Range(0, allguns.Count)];
+        if (FindObjectOfType<LevelGenerator>() != null) {
+            string gunName = PlayerPrefs.GetString("gun");
+            foreach (var gun in allguns) if (string.Equals(gun.displayName, gunName)) currentGun = gun;
+            //currentGun = allguns[Random.Range(0, allguns.Count)];
+        }
+        else PlayerPrefs.SetString("gun", currentGun.displayName);
         GetNewGun(currentGun);
         split = Instantiate(split);
     }
@@ -211,9 +216,9 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void GetNewGun(Gun newGun)
+    public void GetNewGun(Gun newGun, bool spawnOldGun = true)
     {
-        if (currentGun != null && !string.Equals(newGun.displayName, currentGun.displayName)) GameManager.i.SpawnGunPickup(currentGun, transform.position);
+        if (spawnOldGun && currentGun != null && !string.Equals(newGun.displayName, currentGun.displayName)) GameManager.i.SpawnGunPickup(currentGun, transform.position);
         newGun.Init();
         currentGun = newGun;
         currentGun.OnBulletReady.AddListener(PlayBulletReadySound);

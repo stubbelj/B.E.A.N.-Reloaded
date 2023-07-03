@@ -101,6 +101,7 @@ MonoBehaviour:
   hitting: 0
   hitLimit: 3
   player: 0
+  both: 0
   attackType: 
 --- !u!61 &3641670193771591135
 BoxCollider2D:
@@ -317,7 +318,7 @@ MonoBehaviour:
   hpSlider: {fileID: 6140263286204733146}
   deathFX: {fileID: 7066648327536193494, guid: f58a9b65c281deb41abe16f0e4969343, type: 3}
   lootTableID: 0
-  XPAmount: 30
+  XPAmount: 15
   walkSpeed: 0.5
   defaultStunTime: 0.6
   stunTimeResist: 1

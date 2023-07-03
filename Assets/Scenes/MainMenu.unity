@@ -6528,7 +6528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e710e7c34fcff794991e2774688a5a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlaySceneID: 3
+  PlaySceneID: 2
   PersistantSceneID: 1
   TutorialSceneID: 4
 --- !u!95 &1871452288

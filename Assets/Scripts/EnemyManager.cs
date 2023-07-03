@@ -9,6 +9,27 @@ public class EnemyManager : MonoBehaviour
     private void Awake(){ i = this; }
 
     [SerializeField] List<Transform> tossers = new List<Transform>();
+    [SerializeField] List<Transform> allEnemies = new List<Transform>();
+
+    public bool EnemyInRadius(float checkDist, Vector3 pos)
+    {
+        for (int i = 0; i < allEnemies.Count; i++) {
+            if (allEnemies[i] == null) {
+                allEnemies.RemoveAt(i);
+                i -= 1;
+            }
+        }
+        foreach (Transform t in allEnemies) {
+            float dist = Vector2.Distance(t.position, pos);
+            if (dist < checkDist) return true;
+        }
+        return false;
+    }
+
+    public void AddEnemy(Transform newEnemy)
+    {
+        allEnemies.Add(newEnemy);
+    }
 
     public void AddTosser(Transform newTosser)
     {

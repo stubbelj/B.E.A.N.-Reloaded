@@ -71,8 +71,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused(){ return paused; }
     
     [Header("Level and gameOver")]
-    [SerializeField] GameObject gameOverCanvas, openingStoryCanvas;
     public bool gameOver = false;
+    [SerializeField] GameObject gameOverCanvas, openingStoryCanvas;
     [SerializeField] int numLevels;
     public int currentLevel;
 
@@ -134,8 +134,14 @@ public class GameManager : MonoBehaviour
  
     private void Start(){
         enemies = new List<GameObject>();
-        Time.timeScale = 0;
+
+        if (FindObjectOfType<LevelGenerator>() == null) {
+            Resume();
+            return;
+        }
+
         openingStoryCanvas.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private void Update()
@@ -144,13 +150,6 @@ public class GameManager : MonoBehaviour
             //fill in later if necessary            
         }
 
-        if(!isPaused() && !gameOver){
-            difficultIncreaseCooldown -= Time.deltaTime;
-            if (difficultIncreaseCooldown <= 0) {
-                difficultIncreaseCooldown = difficultIncreasePeriod;
-                maxEnemies += 1;
-            }
-        }
 
         if(Input.GetKeyDown(KeyCode.Escape) && !gameOver) {
             if (isPaused()){
@@ -192,6 +191,7 @@ public class GameManager : MonoBehaviour
 
     public void Pause(bool showPauseMenu = true)
     {
+        print("game paused");
         paused = true;
         Time.timeScale = 0f;
         if (showPauseMenu) pauseMenu.SetActive(true);

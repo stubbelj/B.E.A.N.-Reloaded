@@ -15,6 +15,7 @@ public class MenuSound : MonoBehaviour
     }
 
     public void ButtonSound() {
+        if (!uiButton.instantialized) uiButton = Instantiate(uiButton);
         uiButton.Play();
     }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -794,6 +794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 448966706}
+  - component: {fileID: 448966707}
   m_Layer: 0
   m_Name: Minimap
   m_TagString: Untagged
@@ -817,6 +818,18 @@ Transform:
   m_Father: {fileID: 923707542}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &448966707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448966705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b466c044cacdc54c85c81456c16ad47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &530474624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -839,11 +852,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055653818809799196, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4055653818809799196, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4055653818809799196, guid: 72ed91f90e0736a41bd53b34aa8a6927, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1855,7 +1868,7 @@ MonoBehaviour:
   - {fileID: 1931847331}
   canAffordColor: {r: 0.98039216, g: 0.79607844, b: 0.40392157, a: 1}
   uiButtonSound: {fileID: 11400000, guid: 176b299ec8dd1d1478b64aa121f03583, type: 2}
-  healPercent: 20
+  healPercent: 25
   healCost: 1
   healCostMult: 1.3
   healPercentText: {fileID: 1583939745}
@@ -2311,7 +2324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1027937285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2898,6 +2911,30 @@ PrefabInstance:
     - target: {fileID: 7346379207591565602, guid: c6028665c771e824d9e2bd62bd8ce5af, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346379207591565602, guid: c6028665c771e824d9e2bd62bd8ce5af, type: 3}
+      propertyPath: maxLookAhead.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346379207591565602, guid: c6028665c771e824d9e2bd62bd8ce5af, type: 3}
+      propertyPath: maxLookAhead.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346379207591565602, guid: c6028665c771e824d9e2bd62bd8ce5af, type: 3}
+      propertyPath: maxPlayerSpeed.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346379207591565602, guid: c6028665c771e824d9e2bd62bd8ce5af, type: 3}
+      propertyPath: maxPlayerSpeed.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346379207591565602, guid: c6028665c771e824d9e2bd62bd8ce5af, type: 3}
+      propertyPath: lookAheadSmoothness
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346379207591565602, guid: c6028665c771e824d9e2bd62bd8ce5af, type: 3}
+      propertyPath: downFollowSmoothness
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

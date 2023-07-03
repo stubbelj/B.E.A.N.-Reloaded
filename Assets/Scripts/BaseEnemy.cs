@@ -86,7 +86,7 @@ public class BaseEnemy : MonoBehaviour
         health = maxHealth;
         target = FindObjectOfType<PlayerCombat>().transform;
         dieSound = Instantiate(dieSound);
-        GameObject.Find("gameManager").GetComponent<GameManager>().enemies.Add(gameObject);
+        EnemyManager.i.AddEnemy(transform);
     }
 
     public virtual void Stun(float stunTime)

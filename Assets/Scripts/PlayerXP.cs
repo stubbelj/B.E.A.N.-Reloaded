@@ -40,7 +40,9 @@ public class PlayerXP : MonoBehaviour
         currentLevel += 1;
         nextThreshold = CalculateNextThreshold();
         numPoints += Mathf.RoundToInt(Mathf.Sqrt(currentLevel-1));
+
         StartCoroutine(WaitThenPause());
+        GetComponent<PlayerCombat>().SetInvincible();
         OnLevelUp.Invoke();
 
         if (currentXP > nextThreshold) LevelUp();
@@ -49,6 +51,7 @@ public class PlayerXP : MonoBehaviour
     IEnumerator WaitThenPause()
     {
         yield return new WaitForSeconds(1.2f);
+        GetComponent<PlayerCombat>().SetVincible();
         GameManager.i.Pause(false);
     }
  
